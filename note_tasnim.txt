@@ -1,0 +1,59 @@
+1/ Today sells - multiple image for single column store problem
+3/ Blog - Tags field stort problem
+
+
+---------------- frontend ----------------
+** multiple image show korano hoy ni
+** today_sale - multiple image set upload kora jacche na 
+** today_sale -  gallery image set kora niye shomossa
+** property cad - taka , image, video add problem hoche  (count add korte hobe abong link korte hobe )
+** property add problem - textarea is toooo long . need to change type 
+** property video image not included into database . gallary image is shown temporaly
+** Testimonial add problem - textarea is toooo long . need to change type 
+** about us edit problem - if  image change temp image path upload hoy .
+
+
+
+---------------- frontend problem ----------------
+** bannere video upload size problem . boro vidio upload kora jacche na .
+** bannere video edit korle  "/tmp/phpfP84EG" path store hocche . howar kotha uploads/videos/ ... erokom
+
+
+** aboutUs edit korle shokol image  "/tmp/phpfP84EG" path store hocche . howar kotha uploads/videos/ ... erokom
+** at_a_glance edit korle shokol image  "/tmp/phpfP84EG" path store hocche . howar kotha uploads/videos/ ... erokom
+** ourteam edit korle shokol image  "/tmp/phpfP84EG" path store hocche . howar kotha uploads/videos/ ... erokom
+
+
+** todaysele video_url store  niye kaj kora hoy ni . embeded kora hoy ni .
+** todaysele image single nicche ,multipke korte hobe. multiple store  niye kaj kora hoy ni .
+** todaysele edit niye kaj kora hoy ni . json data edit -e show korche na .
+** todaysele edit korle shokol image  "/tmp/phpfP84EG" path store hocche . howar kotha uploads/videos/ ... erokom
+
+
+** property store problem . multiple image store problem
+** property edit problem . edit descriptin and detail is probleming.
+** property store url niye kaj kora hoy ni . prise niye frontend-e kaj kora hoy ni.
+** property store price niye kaj kora hoy ni . price store hocche na .
+** property store Add floor plan details er shathe flore plane linked kora hoy ni  .
+** property thumbnail image store kora niye kaj kora hoyni
+
+**image gallery edit problem
+
+** small screen side nave when open hamburger cross is not work
+** Search Blogs is not functionality.
+
+
+---------------- new problem ----------------
+** image and video gallery te property slug nite hobe . <h2 class="product-title"><a href="product-details.html">{{$image?->title}}</a></h2>
+
+
+---------------- data upload facing inconvenient / problem ----------------
+** banner -e video upload hote shomoy lage . kintu eta bujha jay na . submit holeo bujha jay na , na holeo jay na.
+** 6 second 4mb er video upload hocche na .
+
+** About us - e "Select page type" bujhiye dite hobe . na hoy bujhbe na. 
+** About us - our mission and our vission just need description and image , but there is taking all thet is included about us.
+** About us - our mission and our vission description need textarea just but here input type text unsing.
+
+** property - map er link ki embade korte hoy?
+** property - From Our Gallery - te design thik korte hobe.
