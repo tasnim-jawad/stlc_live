@@ -1,29 +1,25 @@
 <template>
-    <div id="container">
+  <body class="">
+    <!-- header -->
+    <Header />
+    <!-- / end tag #header -->
 
-        <!-- header -->
-        <Header />
-        <!-- / end tag #header -->
-        <!-- content holder -->
-        <slot />
-        <!-- / end div .content_holder -->
-    </div>
+    <!-- content holder -->
+    <slot />
+    <!-- / end div .content_holder -->
+
+    <!-- footer -->
     <Footer />
-    <!-- <div>
-        
-        <div class="main-wrapper">
-            
-        </div>
-        
-    </div> -->
+    <!-- / end tag #footer -->
+  </body>
 </template>
 
 <script>
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
 export default {
-    name: "Layout",
-    components: { Header, Footer },
+  name: "Layout",
+  components: { Header, Footer },
 };
 </script>
 

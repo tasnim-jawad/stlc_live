@@ -1,220 +1,345 @@
 <template>
-  <!-- mobile actions -->
-  <section id="mobile_bar" class="clearfix">
-    <div class="mobile_menu_control icon-menu"></div>
-    <div class="top_bar_control icon-cog"></div>
-  </section>
-  <!-- / end section #mobile_bar -->
-  <!-- top bar -->
-
-  <!-- / end section #top_bar -->
-  <!-- header -->
-  <header id="header">
-    <!-- header contents -->
-    <section id="header_contents" class="clearfix">
-      <section class="section_widget first one"></section>
-      <!-- end section .section_widget -->
-      <section class="section_logo logo_center one">
-        <!-- logo -->
-        <section id="logo">
-          <Link href="/" title="Unique Construction &amp; Contracting LLC"
-            ><img
-              src="/assets/frontend/wp-content/uploads/2016/01/logo-banner.png"
-              alt="Unique Construction &amp; Contracting LLC"
-              data-retina="/assets/frontend/wp-content/uploads/2015/02/logo-banner.png"
-          /></Link>
-        </section>
-        <!-- end section #logo -->
-      </section>
-      <!-- end section #logo -->
-      <section class="section_widget second one">
-        <section id="slogan_text" class="right_side"></section>
-      </section>
-      <!-- end section .section_widget -->
-    </section>
-    <!-- end section #header_contents -->
-    <!-- navigation -->
-    <div class="nav_shadow sticky">
-      <div class="nav_border">
-        <nav id="navigation_bar" class="navigation with_small_logo">
-          <div id="sticky_logo">
-            <Link href="/" title="Unique Construction &amp; Contracting LLC"
-              ><img
-                src="/uploads/stc_image/logo.jpeg"
-                alt="Unique Construction &amp; Contracting LLC"
-            /></Link>
-          </div>
-          <ul id="navigation" class="menu">
-            <li
-              id="menu-item-2210"
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2205 current_page_item top-level-0"
-              data-column-size="0"
-            >
-              <Link class="icon-home" href="/">HOME</Link>
-            </li>
-            <li
-              id="menu-item-1566"
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hasSubMenu top-level-1"
-              data-column-size="0"
-            >
-              <Link href="/about-us">ABOUT US</Link>
-              <!-- <ul class="sub-menu">
-                <li
-                  id="menu-item-3698"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="chairmans-message/index.html"
-                    >Chairman&#8217;s Message</a
-                  >
-                </li>
-                <li
-                  id="menu-item-3757"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="mission-vision/index.html">Mission &#038; Vision</a>
-                </li>
-                <li
-                  id="menu-item-3756"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="health-and-safety/index.html">Health and Safety</a>
-                </li>
-                <li
-                  id="menu-item-3755"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="quality-policy/index.html">Quality Policy</a>
-                </li>
-              </ul> -->
-            </li>
-            <li
-              id="menu-item-1565"
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hasSubMenu top-level-2"
-              data-column-size="0"
-            >
-              <Link href="/portfolio">PORTFOLIO</Link>
-              <!-- <ul class="sub-menu">
-                <li
-                  id="menu-item-2895"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="key-projects/index.html">Key Projects</a>
-                </li>
-                <li
-                  id="menu-item-2898"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="on-going-projects/index.html">On Going Projects</a>
-                </li>
-                <li
-                  id="menu-item-2902"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="major-completed-projects/index.html"
-                    >Major Completed Projects</a
-                  >
-                </li>
-                <li
-                  id="menu-item-3463"
-                  class="menu-item menu-item-type-custom menu-item-object-custom"
-                >
-                  <a
-                    href="https://www.uniqueom.com/wp-content/uploads/FINAL UNIQUE BROCHURE FROM TIMES.pdf"
-                    >Unique Catalogue</a
-                  >
-                </li>
-              </ul> -->
-            </li>
-            <li
-              id="menu-item-2621"
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children hasSubMenu top-level-3"
-              data-column-size="0"
-            >
-              <Link href="/gallery">Gallery</Link>
-              <ul class="sub-menu">
-                <li
-                  id="menu-item-2648"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <Link href="/gallery/images">Images</Link>
-                </li>
-                <li
-                  id="menu-item-2743"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <Link href="/gallery/videos">Videos</Link>
-                </li>
-                <!-- <li
-                  id="menu-item-2746"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="waterproofing-division/index.html"
-                    >Waterproofing Division</a
-                  >
-                </li>
-                <li
-                  id="menu-item-3688"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="rebar-division/index.html">Rebar Division</a>
-                </li>
-                <li
-                  id="menu-item-3689"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="ms-fabrication-division/index.html"
-                    >MS Fabrication Division</a
-                  >
-                </li>
-                <li
-                  id="menu-item-3690"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="gypsum-decorations/index.html">Gypsum Decorations</a>
-                </li>
-                <li
-                  id="menu-item-3691"
-                  class="menu-item menu-item-type-post_type menu-item-object-page"
-                >
-                  <a href="aluminium-division/index.html">Aluminium Division</a>
-                </li> -->
-              </ul>
-            </li>
-            <li
-              id="menu-item-3994"
-              class="menu-item menu-item-type-post_type menu-item-object-page top-level-4"
-              data-column-size="0"
-            >
-              <Link href="/blog">Blog</Link>
-            </li>
-            <li
-              id="menu-item-2734"
-              class="menu-item menu-item-type-post_type menu-item-object-page top-level-5"
-              data-column-size="0"
-            >
-              <Link href="/team">Board of Directors</Link>
-            </li>
-            <li
-              id="menu-item-2206"
-              class="menu-item menu-item-type-post_type menu-item-object-page top-level-6"
-              data-column-size="0"
-            >
-              <Link href="/contact">CONTACT</Link>
-            </li>
-            <li
-              id="menu-item-3481-ar"
-              class="lang-item lang-item-85 lang-item-ar menu-item menu-item-type-custom menu-item-object-custom top-level-7"
-              data-column-size="0"
-            >
-              <a href="/login">Login</a>
-            </li>
-          </ul>
-        </nav>
+  <div class="preloader">
+    <button class="th-btn preloaderCls">Cancel Preloader</button>
+    <div id="preloader" class="preloader-inner">
+      <div class="txt-loading">
+        <span data-text-preloader="P" class="letters-loading">S </span
+        ><span data-text-preloader="I" class="letters-loading">T </span
+        ><span data-text-preloader="L" class="letters-loading">L </span
+        ><span data-text-preloader="L" class="letters-loading">C </span
       </div>
     </div>
-    <!-- / navigation  -->
+  </div>
+  <div class="color-scheme">
+    <button class="switchIcon"><i class="fa-solid fa-palette"></i></button>
+    <h4 class="color-scheme-title">
+      <i class="far fa-palette"></i> Color Switcher
+    </h4>
+    <p class="color-scheme-text">Check template with your color</p>
+    <div class="color-switch-btns">
+      <button data-color="#6240CF">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+      <button data-color="#068FFF">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+      <button data-color="#044DBC">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+      <button data-color="#FFAF00">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+      <button data-color="#F80000">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+      <button data-color="#231E7A">
+        <i class="fa-solid fa-droplet"></i>
+      </button>
+    </div>
+    <p class="color-scheme-text">Or custom color..</p>
+    <input type="color" id="thcolorpicker" value="#068FFF" />
+  </div>
+  <div class="sidemenu-wrapper sidemenu-cart d-none d-lg-block">
+    <div class="sidemenu-content">
+      <button class="closeButton sideMenuCls">
+        <i class="far fa-times"></i>
+      </button>
+      <div class="widget woocommerce widget_shopping_cart">
+        <h3 class="widget_title">Shopping cart</h3>
+        <div class="widget_shopping_cart_content">
+          <ul class="woocommerce-mini-cart cart_list product_list_widget">
+            <li class="woocommerce-mini-cart-item mini_cart_item">
+              <a href="#" class="remove remove_from_cart_button"
+                ><i class="far fa-times"></i
+              ></a>
+              <a href="#"
+                ><img
+                  src="/assets/frontend/img/product/product_1_1.png"
+                  alt="Cart Image"
+                />Bosco Apple Fruit</a
+              >
+              <span class="quantity"
+                >1 ×
+                <span class="woocommerce-Price-amount amount"
+                  ><span class="woocommerce-Price-currencySymbol">$</span
+                  >940.00</span
+                ></span
+              >
+            </li>
+            <li class="woocommerce-mini-cart-item mini_cart_item">
+              <a href="#" class="remove remove_from_cart_button"
+                ><i class="far fa-times"></i
+              ></a>
+              <a href="#"
+                ><img
+                  src="/assets/frontend/img/product/product_1_2.png"
+                  alt="Cart Image"
+                />Green Cauliflower</a
+              >
+              <span class="quantity"
+                >1 ×
+                <span class="woocommerce-Price-amount amount"
+                  ><span class="woocommerce-Price-currencySymbol">$</span
+                  >899.00</span
+                ></span
+              >
+            </li>
+            <li class="woocommerce-mini-cart-item mini_cart_item">
+              <a href="#" class="remove remove_from_cart_button"
+                ><i class="far fa-times"></i
+              ></a>
+              <a href="#"
+                ><img
+                  src="/assets/frontend/img/product/product_1_3.png"
+                  alt="Cart Image"
+                />Mandarin orange</a
+              >
+              <span class="quantity"
+                >1 ×
+                <span class="woocommerce-Price-amount amount"
+                  ><span class="woocommerce-Price-currencySymbol">$</span
+                  >756.00</span
+                ></span
+              >
+            </li>
+            <li class="woocommerce-mini-cart-item mini_cart_item">
+              <a href="#" class="remove remove_from_cart_button"
+                ><i class="far fa-times"></i
+              ></a>
+              <a href="#"
+                ><img
+                  src="/assets/frontend/img/product/product_1_4.png"
+                  alt="Cart Image"
+                />Shallot Red onion</a
+              >
+              <span class="quantity"
+                >1 ×
+                <span class="woocommerce-Price-amount amount"
+                  ><span class="woocommerce-Price-currencySymbol">$</span
+                  >723.00</span
+                ></span
+              >
+            </li>
+            <li class="woocommerce-mini-cart-item mini_cart_item">
+              <a href="#" class="remove remove_from_cart_button"
+                ><i class="far fa-times"></i
+              ></a>
+              <a href="#"
+                ><img
+                  src="/assets/frontend/img/product/product_1_5.png"
+                  alt="Cart Image"
+                />Sour Red Cherry</a
+              >
+              <span class="quantity"
+                >1 ×
+                <span class="woocommerce-Price-amount amount"
+                  ><span class="woocommerce-Price-currencySymbol">$</span
+                  >1080.00</span
+                ></span
+              >
+            </li>
+          </ul>
+          <p class="woocommerce-mini-cart__total total">
+            <strong>Subtotal:</strong>
+            <span class="woocommerce-Price-amount amount"
+              ><span class="woocommerce-Price-currencySymbol">$</span
+              >4398.00</span
+            >
+          </p>
+          <p class="woocommerce-mini-cart__buttons buttons">
+            <a href="cart.html" class="th-btn wc-forward">View cart</a>
+            <a href="checkout.html" class="th-btn checkout wc-forward"
+              >Checkout</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="popup-search-box d-none d-lg-block">
+    <button class="searchClose"><i class="fal fa-times"></i></button>
+    <form action="#">
+      <input type="text" placeholder="What are you looking for?" />
+      <button type="submit"><i class="fal fa-search"></i></button>
+    </form>
+  </div>
+  <div class="th-menu-wrapper">
+    <div class="th-menu-area text-center">
+      <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
+      <div class="mobile-logo">
+        <a href="index.html"
+          ><img src="/assets/frontend/img/logo.svg" alt="Piller-html"
+        /></a>
+      </div>
+      <div class="th-mobile-menu">
+        <ul>
+          <li class="menu-item-has-children active">
+            <a href="index.html">Home</a>
+          </li>
+          <li><a href="/about-us">About Us</a></li>
+          <li class="menu-item-has-children">
+            <a href="#">Property</a>
+            <ul class="sub-menu">
+              <li><a href="property.html">Properties</a></li>
+              <li><a href="property-details.html">Properties Details</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="#">Agencies</a>
+            <ul class="sub-menu">
+              <li><a href="agency.html">Agencies</a></li>
+              <li><a href="agency-details.html">Agency Details</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="#">Pages</a>
+            <ul class="sub-menu">
+              <li class="menu-item-has-children">
+                <a href="#">Shop</a>
+                <ul class="sub-menu">
+                  <li><a href="shop.html">Shop</a></li>
+                  <li><a href="shop-details.html">Shop Details</a></li>
+                  <li><a href="cart.html">Cart Page</a></li>
+                  <li><a href="checkout.html">Checkout</a></li>
+                  <li><a href="wishlist.html">Wishlist</a></li>
+                </ul>
+              </li>
+              <li><a href="team.html">Agents Page</a></li>
+              <li><a href="team-details.html">Agent Details</a></li>
+              <li><a href="gallery.html">Gallery Page</a></li>
+              <li><a href="service.html">Service Page</a></li>
+              <li>
+                <a href="service-right-sidebar.html">Service with sidebar</a>
+              </li>
+              <li><a href="service-details.html">Service Details</a></li>
+              <li><a href="pricing.html">Pricing Plan</a></li>
+              <li>
+                <a href="neighborhood-guide.html">Neighborhood Guide</a>
+              </li>
+              <li><a href="faq.html">Faq Page</a></li>
+              <li><a href="error.html">Error Page</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="#">Blog</a>
+            <ul class="sub-menu">
+              <li><a href="blog.html">Blog Grid</a></li>
+              <li>
+                <a href="blog-grid-right-sidebar.html"
+                  >Blog Grid With Right Sidebar</a
+                >
+              </li>
+              <li>
+                <a href="blog-grid-left-sidebar.html"
+                  >Blog Grid With Left Sidebar</a
+                >
+              </li>
+              <li><a href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <header class="th-header header-default header-layout1">
+    <div class="header-top">
+      <div class="container">
+        <div
+          class="row justify-content-center justify-content-lg-between align-items-center gy-2"
+        >
+          <div class="col-auto d-none d-lg-block">
+            <div class="header-links">
+              <ul>
+                <li>
+                  <i class="fa-solid fa-envelope"></i>
+                  <a href="mailto:infomailexample@mail.com"
+                    >infomailexample@mail.com</a
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-phone"></i>
+                  <a href="tel:+0012345678900">+00 (123) 456 789 00</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="header-links">
+              <ul>
+                <li>
+                  <div class="th-social">
+                    <a href="https://www.facebook.com/"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a>
+                    <a href="https://www.twitter.com/"
+                      ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a href="https://www.linkedin.com/"
+                      ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <a href="https://www.whatsapp.com/"
+                      ><i class="fab fa-whatsapp"></i
+                    ></a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-wrapper">
+      <div class="menu-area">
+        <div class="container">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+              <div class="header-logo">
+                <a href="/"
+                  ><img
+                    style="height: 80px; width: auto"
+                    src="/assets/frontend/img/logo.jpeg"
+                    alt="Piller-html"
+                /></a>
+              </div>
+            </div>
+            <div class="col-auto">
+              <nav class="main-menu d-none d-lg-inline-block">
+                <ul>
+                  <li class="active">
+                    <a href="/">Home</a>
+                  </li>
+                  <li><a href="/about-us">About Us</a></li>
+                  <li><a href="/team">Our Team</a></li>
+                  <li>
+                    <a href="/portfolio">Property</a>
+                  </li>
+                  <li><a href="/gallery">Gallery </a></li>
+                  <li><a href="/blog">STC Blog</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
+                </ul>
+              </nav>
+              <button type="button" class="th-menu-toggle d-block d-lg-none">
+                <i class="far fa-bars"></i>
+              </button>
+            </div>
+            <div class="col-auto d-none d-xl-block">
+              <div class="header-button">
+                <a href="contact.html" class="th-btn outline pill text-white"
+                  ><i class="fa-regular fa-house-chimney me-2"></i> Add Listing </a
+                ><button
+                  type="button"
+                  class="icon-btn searchBoxToggler text-white"
+                >
+                  <i class="far fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
-  <!-- end tag #header -->
 </template>
 
 <script>

@@ -1,103 +1,169 @@
 <template>
- <div class="content_holder">
-
-		<section class="top_content header-334065 clearfix"><div class="google_map_holder" data-scope="#map-334065-636412" data-bw="">
-
-			<div id="map-334065-636412" class="google_map"></div>
-		
-
-		</div></section>		
-			<div class="content_second_background">
-				<div class="content_area clearfix"> 
-		
-
-													 
-	<div id="row-334065-1" class="content_block_background template_builder "> 
-			<section class="content_block clearfix"><section id="row-334065-1-content" class="content full  clearfix"><section class="info_bar clearfix only_breadcrumb"><section class="breadcrumb"><div itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="icon-home" href="../index.html" itemprop="url"><span itemprop="title" title="Unique Construction &amp; Contracting LLC">Home</span></a> <span class="icon-angle-right"></span> 
-<div itemscope itemprop="child" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title" title="Contact Us">Contact Us</span>
-						<meta itemprop="name" content="Contact Us">
-						<meta itemprop="url" content="https://uniqueom.com/contact-us-2/">
-						</div></div></section></section><div class="row clearfix"><div class="box three ">	 
-	 
-		<h3 class="featured_article_title">HEAD OFFICE</h3><div class="space margin-b20"></div>
-		<ul class="with_icons default " data-rt-animation-group="group">
-		 <li class="box one first last" data-rt-animate="animate" data-rt-animation-type="fadeInDown"><span class="icon-home icon"></span> <p>MOD PF BUILDING (Khimji's Building),  Building NO-782, Way NO- 2911 PO BOX-3289 PC- 112 Rex Road next to Pizza hut, near muscat bakery.</p></li> <li class="box one first last" data-rt-animate="animate" data-rt-animation-type="fadeInDown"><span class="icon-mail icon"></span> <p><a href="../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="fb92959d94bb8e95928a8e9e9496d5989496">[email&#160;protected]</a></p></li> <li class="box one first last" data-rt-animate="animate" data-rt-animation-type="fadeInDown"><span class="icon-phone icon"></span> <p>+968-24782898</p></li> <li class="box one first last" data-rt-animate="animate" data-rt-animation-type="fadeInDown"><span class="icon-print-1 icon"></span> <p>+968-24782899 </p></li>
-		</ul>
-	</div><div class="box two-three "><div class="clear"></div><h3 class="featured_article_title">Contact Form</h3><div class="space margin-b20"></div><p><i class="decs_text">Description</i></p>
-		<!-- contact form -->
-		<div class="contact_form dynamic-class-177448" data-rt-animate="animate" data-rt-animation-type="fadeInDown" data-rt-animation-group="single">
-		<div class="clear"></div><div class="result"></div>
-			<form action="#" name="contact_form" class="validate_form rt_form" method="post" role="form" >
-				<ul>
-					<li><label for="name">Your Name: (*)</label><input id="name" type="text" name="name" value="" class="required" /> </li>
-					<li><label for="email">Your Email: (*)</label><input id="email" type="text" name="email" value="" class="required email" /> </li>
-					<li><label for="message">Your Message: (*)</label><textarea id="message" name="message" rows="8" cols="40" class="required"></textarea></li>
-					<li class="security-question"><label class="math_label" for="math">Security Question:</label>5 + 35 = <input id="math" placeholder="?" type="text" name="math" value="" class="required" /></li>
-					<li>
-					<input type="hidden" name="your_email" value="cm9iaW5AdW5pcXVlb20uY29t">
-					<input type="hidden" name="dynamic_class" value="dynamic-class-177448">
-					<input type="hidden" name="rt_form_data" value="NDA=">
-					<input type="submit" class="button" value="Send"  /><span class="loading"></span></li>
-				</ul>
-			</form>
-		</div><div class="clear"></div>
-		<!-- /contact form -->
-	 </div></div></section></section></div>
-							
-	
-				</div><!-- / end div .content_area -->  
-
-				<div class="content_footer footer_widgets_holder footer-334065"><section class="footer_widgets clearfix footer-widgets-334065 clearfix"><div class="row clearfix footer_widgets_row"><div id="footer-column-1" class="box three"></div><div id="footer-column-2" class="box three"><div class="box one footer clearfix widget widget_text">			<div class="textwidget"></div>
-		</div></div><div id="footer-column-3" class="box three"></div></div></section></div>
-
-	        </div><!-- / end div .content_second_background -->  
-	    </div>
+  <div
+    class="breadcumb-wrapper"
+    data-bg-src="assets/frontend/img/bg/breadcrumb-bg.jpg"
+    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+  >
+    <div class="container">
+      <div class="breadcumb-content">
+        <h1 class="breadcumb-title">Contact</h1>
+        <ul class="breadcumb-menu">
+          <li><a href="index.html">Home</a></li>
+          <li>Contact with Us</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="contact-area-2 space-top" id="contact-sec">
+    <div class="container">
+      <div class="row gy-4 justify-content-center">
+        <div class="col-xl-4 col-lg-6 contact-feature-wrap">
+          <div class="contact-feature">
+            <div class="contact-feature-icon">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="media-body">
+              <p class="contact-feature_label">Mosque Address</p>
+              <a href="https://www.google.com/maps" class="contact-feature_link"
+                >123 Academic Way City, State, 1234, New York City.</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 contact-feature-wrap">
+          <div class="contact-feature">
+            <div class="contact-feature-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="media-body">
+              <p class="contact-feature_label">Phone Number</p>
+              <a href="tel:+011123234567890" class="contact-feature_link"
+                >+011 (123) 234 567 890</a
+              >
+              <a href="tel:+09456876543210" class="contact-feature_link"
+                >+09 (456) 876 543 210</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 contact-feature-wrap">
+          <div class="contact-feature">
+            <div class="contact-feature-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="media-body">
+              <p class="contact-feature_label">Email Address</p>
+              <a href="mailto:info@examplemail.edu" class="contact-feature_link"
+                >info@examplemail.edu</a
+              >
+              <a
+                href="mailto:admission@examplemail.edu"
+                class="contact-feature_link"
+                >admission@examplemail.edu</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form-area">
+    <div class="container">
+      <div class="row gx-0">
+        <div class="col-xl-12">
+          <div class="contact-all-wrapper">
+            <div class="contact-form-wrap">
+              <form
+                action="https://html.themeholy.com/piller/demo/mail.php"
+                method="POST"
+                class="contact-form ajax-contact"
+              >
+                <h3 class="form-title">Do you have questions? Contact Us</h3>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      id="name"
+                      placeholder="Name *"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      name="number"
+                      id="number"
+                      placeholder="Phone *"
+                    />
+                  </div>
+                  <div class="form-group col-md-12">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Email Address *"
+                    />
+                  </div>
+                  <div class="form-group col-md-12">
+                    <select name="subject" id="subject" class="orderby">
+                      <option value="" disabled="" selected="" hidden="">
+                        Select Subject
+                      </option>
+                      <option value="Apartment">Apartment</option>
+                      <option value="House">House</option>
+                      <option value="Villa">Villa</option>
+                      <option value="Land">Land</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-12">
+                    <textarea
+                      name="Your Messsage*"
+                      id="message"
+                      cols="30"
+                      rows="3"
+                      class="form-control"
+                      placeholder="Your Message *"
+                    ></textarea>
+                  </div>
+                  <div class="form-btn text-start col-12">
+                    <button class="th-btn radius">Send message</button>
+                  </div>
+                </div>
+                <p class="form-messages mb-0 mt-3"></p>
+              </form>
+            </div>
+            <div class="contact-form-thumb overflow-hidden">
+              <img
+                src="assets/frontend/img/contact/contact-page-thumb.jpg"
+                alt="img"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="space-top">
+    <div class="container-fluid p-0">
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.7310056272386!2d89.2286059153658!3d24.00527418490799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe9b97badc6151%3A0x30b048c9fb2129bc!2sAngfuztheme!5e0!3m2!1sen!2sbd!4v1651028958211!5m2!1sen!2sbd"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+        <div class="contact-icon">
+          <img src="assets/frontend/img/icon/con-location-dot.svg" alt="img" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  mounted() {
-    this.$nextTick(() => {
-      // Initialize FlexSlider (moved from inline script inside template)
-      try {
-        jQuery("#slider-562252").flexslider({
-          animation: "slide",
-          controlsContainer: "#slider-562252 .flex-nav-container",
-          slideshow: true,
-          slideshowSpeed: 8 * 1000,
-          smoothHeight: true,
-          directionNav: true,
-          controlNav: false,
-          prevText: '<span class="icon-left-open"></span>',
-          nextText: '<span class="icon-right-open"></span>',
-          start: function (slider) {
-            slider.parents(".flex-container:eq(0)").removeAttr("style");
-            if (typeof jQuery.waypoints === "function")
-              jQuery.waypoints("refresh");
-          },
-          after: function () {
-            if (typeof jQuery.waypoints === "function")
-              jQuery.waypoints("refresh");
-          },
-        });
-      } catch (e) {
-        // ignore if flexslider not available yet
-      }
-
-      // Initialize testimonial carousel (moved from inline script inside template)
-      try {
-        if (jQuery("#testimonial-carousel-166114-155252").length) {
-          jQuery("#testimonial-carousel-166114-155252").rt_start_carousels(
-            1,
-            ""
-          );
-        }
-      } catch (e) {
-        // ignore if carousel plugin not available yet
-      }
-    });
-  },
-};
+export default {};
 </script>
 
 <style></style>

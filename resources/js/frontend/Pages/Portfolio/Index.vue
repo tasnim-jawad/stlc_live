@@ -1,391 +1,3467 @@
 <template>
-  <div class="portfolio-wrapper">
-    <!-- Header Section -->
-    <header class="portfolio-header">
-      <div class="header-overlay"></div>
-      <div class="container">
-        <div class="header-content">
-          <!-- Breadcrumb -->
-          <nav class="breadcrumb">
-            <Link href="/" class="breadcrumb-link">Home</Link>
-            <span class="breadcrumb-separator">/</span>
-            <span class="breadcrumb-current">Portfolio</span>
-          </nav>
-
-          <h1 class="page-title">Our Portfolio</h1>
-          <p class="page-subtitle">
-            Discover our exceptional construction projects showcasing quality,
-            innovation, and architectural excellence
-          </p>
-
-          <div class="header-stats">
-            <div class="stat-badge">
-              <span class="stat-number">{{ properties.length }}</span>
-              <span class="stat-label">Projects</span>
-            </div>
-            <div class="stat-badge">
-              <span class="stat-number">{{ uniqueCategories.length }}</span>
-              <span class="stat-label">Categories</span>
-            </div>
-            <div class="stat-badge">
-              <span class="stat-number">{{
-                Math.ceil(filteredProperties.length / itemsPerPage)
-              }}</span>
-              <span class="stat-label">Pages</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Filter Section -->
-    <section class="filter-section">
-      <div class="container">
-        <div class="filter-wrapper">
-          <div class="filter-title">
-            <h3>Filter by Category</h3>
-          </div>
-
-          <div class="filter-tabs">
-            <button
-              @click="activeFilter = 'all'"
-              :class="['filter-btn', { active: activeFilter === 'all' }]"
-            >
-              All Projects
-            </button>
-            <button
-              v-for="category in uniqueCategories"
-              :key="category"
-              @click="activeFilter = category"
-              :class="['filter-btn', { active: activeFilter === category }]"
-            >
-              {{ category }}
-            </button>
-          </div>
-
-          <div class="view-toggle">
-            <button
-              @click="viewMode = 'grid'"
-              :class="['view-btn', { active: viewMode === 'grid' }]"
-              title="Grid View"
-            >
-              ⊞
-            </button>
-            <button
-              @click="viewMode = 'list'"
-              :class="['view-btn', { active: viewMode === 'list' }]"
-              title="List View"
-            >
-              ☰
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="portfolio-section">
-      <div class="container">
-        <!-- Portfolio Grid -->
-        <div :class="['portfolio-grid', viewMode]">
-          <div
-            v-for="property in paginatedProperties"
-            :key="property.id"
-            class="portfolio-card"
-            @click="openPropertyModal(property)"
-          >
-            <div class="card-image">
-              <img
-                :src="property.banner_image[0]"
-                :alt="property.name"
-                class="property-image"
-              />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <span class="property-category">{{ property.category }}</span>
-                  <a
-                    v-if="property.video_url"
-                    :href="property.video_url"
-                    class="play-video-btn video-popup-link"
-                    @click.stop
-                  >
-                    <i class="fas fa-play"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-content">
-              <h3 class="property-name">{{ property.name }}</h3>
-              <p class="property-address">
-                <i class="fas fa-map-marker-alt"></i>
-                {{ property.address }}
-              </p>
-
-              <div class="property-features">
-                <span
-                  v-for="feature in property.facts_features.slice(0, 3)"
-                  :key="feature.title"
-                  class="feature-tag"
-                >
-                  <i :class="feature.icon"></i>
-                  {{ feature.title }}
-                </span>
-              </div>
-
-              <div class="card-actions">
-                <button
-                  class="view-details-btn"
-                  @click.stop="openPropertyModal(property)"
-                >
-                  View Details
-                </button>
-                <a
-                  v-if="property.map_location_url"
-                  :href="property.map_location_url"
-                  target="_blank"
-                  class="map-btn"
-                  @click.stop
-                  title="View on Map"
-                >
-                  <i class="fas fa-map"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination-wrapper">
-          <div class="pagination">
-            <button
-              @click="goToPage(currentPage - 1)"
-              :disabled="currentPage === 1"
-              class="pagination-btn"
-            >
-              ← Previous
-            </button>
-
-            <div class="pagination-numbers">
-              <button
-                v-for="page in visiblePages"
-                :key="page"
-                @click="goToPage(page)"
-                :class="['pagination-number', { active: currentPage === page }]"
-              >
-                {{ page }}
-              </button>
-            </div>
-
-            <button
-              @click="goToPage(currentPage + 1)"
-              :disabled="currentPage === totalPages"
-              class="pagination-btn"
-            >
-              Next →
-            </button>
-          </div>
-
-          <div class="pagination-info">
-            Showing {{ startIndex + 1 }}-{{
-              Math.min(endIndex, filteredProperties.length)
-            }}
-            of {{ filteredProperties.length }} projects
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Property Modal -->
-    <div
-      v-if="showPropertyModal"
-      class="modal-overlay"
-      @click="closePropertyModal"
-    >
-      <div class="modal-content" @click.stop>
-        <button @click="closePropertyModal" class="modal-close">×</button>
-
-        <div class="modal-body">
-          <!-- Image Gallery -->
-          <div class="modal-gallery">
-            <div class="main-image">
-              <img
-                :src="selectedProperty?.banner_image[currentImageIndex]"
-                :alt="selectedProperty?.name"
-                class="gallery-image"
-              />
-              <div
-                class="gallery-nav"
-                v-if="selectedProperty?.banner_image.length > 1"
-              >
-                <button @click="previousImage" class="nav-btn">←</button>
-                <button @click="nextImage" class="nav-btn">→</button>
-              </div>
-            </div>
-            <div
-              class="thumbnail-strip"
-              v-if="selectedProperty?.banner_image.length > 1"
-            >
-              <img
-                v-for="(image, index) in selectedProperty?.banner_image"
-                :key="index"
-                :src="image"
-                @click="currentImageIndex = index"
-                :class="['thumbnail', { active: currentImageIndex === index }]"
-              />
-            </div>
-          </div>
-
-          <!-- Property Info -->
-          <div class="modal-info">
-            <div class="property-header">
-              <h2 class="property-title">{{ selectedProperty?.name }}</h2>
-              <span class="property-category-badge">{{
-                selectedProperty?.category
-              }}</span>
-            </div>
-
-            <div class="property-location">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>{{ selectedProperty?.address }}</span>
-              <a
-                v-if="selectedProperty?.map_location_url"
-                :href="selectedProperty?.map_location_url"
-                target="_blank"
-                class="location-link"
-              >
-                View on Map
-              </a>
-            </div>
-
-            <!-- Video Section -->
-            <div class="video-section" v-if="selectedProperty?.video_url">
-              <h4>Project Video</h4>
-              <div class="video-player">
-                <a
-                  :href="selectedProperty?.video_url"
-                  class="video-popup-link modal-video-link"
-                  :data-poster="selectedProperty?.video_thumbnail"
-                >
-                  <img
-                    :src="
-                      selectedProperty?.video_thumbnail ||
-                      selectedProperty?.banner_image[0]
-                    "
-                    :alt="selectedProperty?.name + ' video'"
-                    class="video-thumbnail-image"
-                  />
-                  <div class="video-play-overlay">
-                    <i class="fas fa-play play-icon-large"></i>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <!-- Facts and Features -->
-            <div
-              class="facts-section"
-              v-if="selectedProperty?.facts_features?.length"
-            >
-              <h4>Facts & Features</h4>
-              <div class="facts-grid">
-                <div
-                  v-for="fact in selectedProperty.facts_features"
-                  :key="fact.title"
-                  class="fact-item"
-                >
-                  <div class="fact-icon">
-                    <i :class="fact.icon"></i>
-                  </div>
-                  <div class="fact-content">
-                    <h5>{{ fact.title }}</h5>
-                    <p>{{ fact.description }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Amenities -->
-            <div
-              class="amenities-section"
-              v-if="selectedProperty?.amenities?.length"
-            >
-              <h4>Amenities</h4>
-              <div class="amenities-grid">
-                <div
-                  v-for="amenity in selectedProperty.amenities"
-                  :key="amenity.title"
-                  :class="['amenity-item', { available: amenity.available }]"
-                >
-                  <i
-                    :class="amenity.available ? 'fas fa-check' : 'fas fa-times'"
-                  ></i>
-                  <span>{{ amenity.title }}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Gallery Section -->
-            <div
-              class="gallery-section"
-              v-if="selectedProperty?.gallery?.length"
-            >
-              <h4>Gallery</h4>
-              <div class="gallery-grid">
-                <img
-                  v-for="(image, index) in selectedProperty.gallery"
-                  :key="index"
-                  :src="image"
-                  @click="openGalleryLightbox(index)"
-                  class="gallery-thumb"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gallery Lightbox -->
-    <div
-      v-if="showGalleryLightbox"
-      class="lightbox-overlay"
-      @click="closeGalleryLightbox"
-    >
-      <div class="lightbox-content" @click.stop>
-        <button @click="closeGalleryLightbox" class="lightbox-close">×</button>
-        <div class="lightbox-navigation">
-          <button @click="previousGalleryImage" class="nav-btn">←</button>
-          <button @click="nextGalleryImage" class="nav-btn">→</button>
-        </div>
-        <img
-          :src="selectedProperty?.gallery[currentGalleryIndex]"
-          class="lightbox-image"
-        />
-      </div>
-    </div>
-
-    <!-- Video Modal -->
-    <div
-      v-if="showVideoModal"
-      class="video-modal-overlay"
-      @click="closeVideoModal"
-    >
-      <div class="video-modal-content" @click.stop>
-        <button @click="closeVideoModal" class="modal-close">×</button>
-        <video
-          ref="videoPlayer"
-          :src="selectedVideoProperty?.video_url"
-          :poster="selectedVideoProperty?.video_thumbnail"
-          controls
-          autoplay
-          class="modal-video"
-        >
-          Your browser does not support the video tag.
-        </video>
+  <div
+    class="breadcumb-wrapper background-image"
+    style="background-image: url('assets/frontend/img/blog/breadcrumb-bg.jpg')"
+  >
+    <div class="container">
+      <div class="breadcumb-content">
+        <h1 class="breadcumb-title mt-5">Properties</h1>
+        <ul class="breadcumb-menu">
+          <li><a href="index.html">Home</a></li>
+          <li>Properties</li>
+        </ul>
       </div>
     </div>
   </div>
+  <section class="th-blog-wrapper space-top space-extra-bottom">
+    <div class="container">
+      <div class="th-sort-bar property-style">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md">
+            <h4
+              class="box-title text-start fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+              style="
+                visibility: visible;
+                animation-duration: 1.5s;
+                animation-delay: 0.1s;
+                animation-name: fadeinup;
+              "
+            >
+              Property Listing
+            </h4>
+          </div>
+          <div class="col-md-auto">
+            <div
+              class="sorting-filter-wrap fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+              style="
+                visibility: visible;
+                animation-duration: 1.5s;
+                animation-delay: 0.3s;
+                animation-name: fadeinup;
+              "
+            >
+              <div class="nav" role="tablist">
+                <a
+                  class="active"
+                  href="#"
+                  id="tab-shop-list"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-list"
+                  role="tab"
+                  aria-controls="tab-grid"
+                  aria-selected="false"
+                  ><i class="fa-solid fa-list"></i
+                ></a>
+                <a
+                  href="#"
+                  id="tab-shop-grid"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab-grid"
+                  role="tab"
+                  aria-controls="tab-grid"
+                  aria-selected="true"
+                  ><i class="fa-light fa-grid-2"></i
+                ></a>
+              </div>
+              <form class="woocommerce-ordering" method="get">
+                <select name="orderby" class="orderby" aria-label="Shop order">
+                  <option value="menu_order" selected="selected">
+                    Default Sorting
+                  </option>
+                  <option value="popularity">Sort by popularity</option>
+                  <option value="rating">Sort by average rating</option>
+                  <option value="date">Sort by latest</option>
+                  <option value="price">Sort by price: low to high</option>
+                  <option value="price-desc">Sort by price: high to low</option>
+                </select>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="nav-tabContent">
+        <div
+          class="tab-pane fade"
+          id="tab-grid"
+          role="tabpanel"
+          aria-labelledby="tab-shop-grid"
+        >
+          <div class="row gy-40">
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-a3733fa910d9a109a"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-1.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-1.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-2.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-2.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-a3733fa910d9a109a"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-a3733fa910d9a109a"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Charming Beach House</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$179,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-82dc1e18b9cb91030"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-2.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-2.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-3.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-3.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-82dc1e18b9cb91030"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-82dc1e18b9cb91030"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Contemporary Loft</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$335,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-6417b9101d7975e2a"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-3.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-3.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-4.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-4.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-6417b9101d7975e2a"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-6417b9101d7975e2a"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Cozy Cottage</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$250,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-5fde869e14a1d975"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-4.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-4.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-5.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-5.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-5fde869e14a1d975"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-5fde869e14a1d975"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Modern Beach House</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$189,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-bf6e765518ac1755"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-5.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-5.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-6.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-6.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-bf6e765518ac1755"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-bf6e765518ac1755"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Cozy Mountain Cabin</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$179,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-8e067cef4783d776"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-6.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-6.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-7.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-7.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-8e067cef4783d776"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-8e067cef4783d776"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Modern Apartment</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$132,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-d3eaacf527fad108d"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-7.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-7.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-8.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-8.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-d3eaacf527fad108d"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-d3eaacf527fad108d"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Seaside Villa 5078</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$245,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-ede653da607c56101"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-8.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-8.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-9.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-9.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-ede653da607c56101"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-ede653da607c56101"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Ranch Style Home</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$415,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-35627911c79102b44"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-9.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-9.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-10.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-10.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-35627911c79102b44"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-35627911c79102b44"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Charming Beach House</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$179,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-5c4c99338d10f9551"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-10.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-10.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-11.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-11.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-5c4c99338d10f9551"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-5c4c99338d10f9551"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Contemporary Loft</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$179,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-7b6296715684aa18"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-11.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-11.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-12.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-12.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-7b6296715684aa18"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-7b6296715684aa18"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Cozy Cottage</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$132,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
+              style="visibility: visible; animation-name: fadeinup"
+            >
+              <div class="popular-list-1 grid-style">
+                <div class="thumb-wrapper">
+                  <div
+                    class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+                    data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      id="swiper-wrapper-a33dccad30cf425d"
+                      aria-live="polite"
+                      style="
+                        transition-duration: 0ms;
+                        transition-delay: 0ms;
+                        height: 0px;
+                      "
+                    >
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-12.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-12.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a
+                          class="popular-popup-image"
+                          href="assets/frontend/img/popular/popular-1-4.jpg"
+                          ><img
+                            src="assets/frontend/img/popular/popular-1-4.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="icon-wrap">
+                      <button
+                        class="slider-arrow slider-prev"
+                        tabindex="0"
+                        aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-a33dccad30cf425d"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-left"></i>
+                      </button>
+                      <button
+                        class="slider-arrow slider-next"
+                        tabindex="0"
+                        aria-label="Next slide"
+                        aria-controls="swiper-wrapper-a33dccad30cf425d"
+                        aria-disabled="false"
+                      >
+                        <i class="far fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <span
+                      class="swiper-notification"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                    ></span>
+                  </div>
+                  <div class="actions">
+                    <a href="wishlist.html" class="icon-btn"
+                      ><i class="fas fa-heart"></i
+                    ></a>
+                  </div>
+                  <div class="actions-style-2-wrapper">
+                    <div class="actions style-2">
+                      <a href="#" class="icon-btn"
+                        ><span class="action-text">Add To Favorite</span>
+                        <i class="fa-solid fa-bookmark"></i> </a
+                      ><a
+                        href="assets/frontend/img/popular/popular-1-1.jpg"
+                        class="icon-btn popular-popup-image"
+                        ><span class="action-text">View all img</span>
+                        <i class="fa-solid fa-camera"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="popular-badge">
+                    <img
+                      src="assets/frontend/img/icon/sell_rent_icon.svg"
+                      alt="icon"
+                    />
+                    <p>For Sale</p>
+                  </div>
+                </div>
+                <div class="property-content">
+                  <div class="media-body">
+                    <h3 class="box-title">
+                      <a href="property-details.html">Modern Beach House</a>
+                    </h3>
+                    <div class="box-text">
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/popular-location.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      39581 Rohan Estates, New York
+                    </div>
+                  </div>
+                  <ul class="property-featured">
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bed.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bed 4
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/bath.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      Bath 2
+                    </li>
+                    <li>
+                      <div class="icon">
+                        <img
+                          src="assets/frontend/img/icon/sqft.svg"
+                          alt="icon"
+                        />
+                      </div>
+                      1500 sqft
+                    </li>
+                  </ul>
+                  <div class="property-bottom">
+                    <h6 class="box-title">$245,800.00</h6>
+                    <a
+                      class="th-btn sm style3 pill"
+                      href="property-details.html"
+                      >View More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="th-pagination text-center pt-4">
+              <ul>
+                <li>
+                  <a href="blog.html"><i class="far fa-arrow-left"></i></a>
+                </li>
+                <li><a href="blog.html">1</a></li>
+                <li><a href="blog.html">2</a></li>
+                <li><a href="blog.html">3</a></li>
+                <li>
+                  <a class="next-page" href="blog.html"
+                    >Next <i class="far fa-arrow-right"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade active show"
+          id="tab-list"
+          role="tabpanel"
+          aria-labelledby="tab-shop-list"
+        >
+          <div class="row gy-40 justify-content-center">
+            <div class="col-xl-8 col-lg-12">
+              <div class="row gy-30">
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: visible; animation-name: fadeinup"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-7f7ecfd0cf6105b46"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-1.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-1.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-2.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-2.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-7f7ecfd0cf6105b46"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-7f7ecfd0cf6105b46"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html"
+                            >Charming Beach House</a
+                          >
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$179,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: visible; animation-name: fadeinup"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-87fded6a7951ef9e"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-2.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-2.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-3.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-3.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-87fded6a7951ef9e"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-87fded6a7951ef9e"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Contemporary Loft</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$335,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-cbacb53afb02b2b5"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-3.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-3.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-4.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-4.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-cbacb53afb02b2b5"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-cbacb53afb02b2b5"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Cozy Cottage</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$250,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-11927ef299de384d"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-4.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-4.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-5.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-5.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-11927ef299de384d"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-11927ef299de384d"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Modern Beach House</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$189,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-81172cca7134ab1c"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-5.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-5.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-6.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-6.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-81172cca7134ab1c"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-81172cca7134ab1c"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html"
+                            >Cozy Mountain Cabin</a
+                          >
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$179,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-eaf010c34834d20b3"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-6.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-6.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-7.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-7.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-eaf010c34834d20b3"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-eaf010c34834d20b3"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Modern Apartment</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$132,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-48081bec4172d95d"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-7.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-7.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-9.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-9.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-48081bec4172d95d"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-48081bec4172d95d"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Seaside Villa 5078</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$245,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-xl-12 fadeinup wow"
+                  style="visibility: hidden; animation-name: none"
+                >
+                  <div class="popular-list-1 list-style">
+                    <div class="thumb-wrapper">
+                      <div
+                        class="th-slider swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress swiper-backface-hidden"
+                        data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+                      >
+                        <div
+                          class="swiper-wrapper"
+                          id="swiper-wrapper-cc728e210104be5b83"
+                          aria-live="polite"
+                          style="height: 290px"
+                        >
+                          <div
+                            class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                            role="group"
+                            aria-label="1 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 1;
+                              transform: translate3d(0px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-9.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-9.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                          <div
+                            class="swiper-slide swiper-slide-next"
+                            role="group"
+                            aria-label="2 / 2"
+                            style="
+                              width: 412px;
+                              opacity: 0;
+                              transform: translate3d(-412px, 0px, 0px);
+                            "
+                          >
+                            <a
+                              class="popular-popup-image"
+                              href="assets/frontend/img/popular/popular-1-10.jpg"
+                              ><img
+                                src="assets/frontend/img/popular/popular-1-10.jpg"
+                                alt="Image"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="icon-wrap">
+                          <button
+                            class="slider-arrow slider-prev swiper-button-disabled"
+                            disabled=""
+                            tabindex="-1"
+                            aria-label="Previous slide"
+                            aria-controls="swiper-wrapper-cc728e210104be5b83"
+                            aria-disabled="true"
+                          >
+                            <i class="far fa-arrow-left"></i>
+                          </button>
+                          <button
+                            class="slider-arrow slider-next"
+                            tabindex="0"
+                            aria-label="Next slide"
+                            aria-controls="swiper-wrapper-cc728e210104be5b83"
+                            aria-disabled="false"
+                          >
+                            <i class="far fa-arrow-right"></i>
+                          </button>
+                        </div>
+                        <span
+                          class="swiper-notification"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                        ></span>
+                      </div>
+                      <div class="actions">
+                        <a href="wishlist.html" class="icon-btn"
+                          ><i class="fas fa-heart"></i
+                        ></a>
+                      </div>
+                      <div class="actions-style-2-wrapper">
+                        <div class="actions style-2">
+                          <a href="#" class="icon-btn"
+                            ><span class="action-text">Add To Favorite</span>
+                            <i class="fa-solid fa-bookmark"></i> </a
+                          ><a
+                            href="assets/frontend/img/popular/popular-1-1.jpg"
+                            class="icon-btn popular-popup-image"
+                            ><span class="action-text">View all img</span>
+                            <i class="fa-solid fa-camera"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="popular-badge">
+                        <img
+                          src="assets/frontend/img/icon/sell_rent_icon.svg"
+                          alt="icon"
+                        />
+                        <p>For Sale</p>
+                      </div>
+                    </div>
+                    <div class="property-content">
+                      <div class="media-body">
+                        <h3 class="box-title">
+                          <a href="property-details.html">Ranch Style Home</a>
+                        </h3>
+                        <div class="box-text">
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/popular-location.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          39581 Rohan Estates, New York
+                        </div>
+                      </div>
+                      <ul class="property-featured">
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bed.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bed 4
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/bath.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          Bath 2
+                        </li>
+                        <li>
+                          <div class="icon">
+                            <img
+                              src="assets/frontend/img/icon/sqft.svg"
+                              alt="icon"
+                            />
+                          </div>
+                          1500 sqft
+                        </li>
+                      </ul>
+                      <div class="property-bottom">
+                        <h6 class="box-title">$415,800.00</h6>
+                        <a
+                          class="th-btn sm style3 pill"
+                          href="property-details.html"
+                          >View More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="th-pagination text-center pt-4">
+                  <ul>
+                    <li>
+                      <a href="blog.html"><i class="far fa-arrow-left"></i></a>
+                    </li>
+                    <li><a href="blog.html">1</a></li>
+                    <li><a href="blog.html">2</a></li>
+                    <li><a href="blog.html">3</a></li>
+                    <li>
+                      <a class="next-page" href="blog.html"
+                        >Next <i class="far fa-arrow-right"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-6">
+              <aside class="sidebar-area">
+                <div class="widget widget_search">
+                  <h3 class="widget_title">search</h3>
+                  <form class="search-form">
+                    <input type="text" placeholder="Enter Keyword" />
+                    <button type="submit">
+                      <i class="far fa-search"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="widget">
+                  <h3 class="widget_title">Featured Listings</h3>
+                  <div class="recent-post-wrap featured-listing">
+                    <div class="recent-post">
+                      <div class="media-img">
+                        <a href="property-details.html"
+                          ><img
+                            src="assets/frontend/img/blog/featured-listing-sidebar-1-1.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="post-title">
+                          <a class="text-inherit" href="property-details.html"
+                            >Cometes contabesco audacia aeneus tui canonicus</a
+                          >
+                        </h4>
+                        <div class="property-features-wrap">
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bed.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bed 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bath.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bath 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/sqft.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">1599 sqft</h5>
+                          </div>
+                        </div>
+                        <div class="recent-post-meta">
+                          <a href="property-details.html">$9850,00</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="recent-post">
+                      <div class="media-img">
+                        <a href="property-details.html"
+                          ><img
+                            src="assets/frontend/img/blog/featured-listing-sidebar-1-2.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="post-title">
+                          <a class="text-inherit" href="property-details.html"
+                            >Cometes contabesco audacia aeneus tui canonicus</a
+                          >
+                        </h4>
+                        <div class="property-features-wrap">
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bed.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bed 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bath.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bath 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/sqft.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">1599 sqft</h5>
+                          </div>
+                        </div>
+                        <div class="recent-post-meta">
+                          <a href="property-details.html">$9850,00</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="recent-post">
+                      <div class="media-img">
+                        <a href="property-details.html"
+                          ><img
+                            src="assets/frontend/img/blog/featured-listing-sidebar-1-3.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="post-title">
+                          <a class="text-inherit" href="property-details.html"
+                            >Cometes contabesco audacia aeneus tui canonicus</a
+                          >
+                        </h4>
+                        <div class="property-features-wrap">
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bed.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bed 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bath.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bath 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/sqft.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">1599 sqft</h5>
+                          </div>
+                        </div>
+                        <div class="recent-post-meta">
+                          <a href="property-details.html">$8850,00</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="recent-post">
+                      <div class="media-img">
+                        <a href="property-details.html"
+                          ><img
+                            src="assets/frontend/img/blog/featured-listing-sidebar-1-4.jpg"
+                            alt="Image"
+                        /></a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="post-title">
+                          <a class="text-inherit" href="property-details.html"
+                            >Cometes contabesco audacia aeneus tui canonicus</a
+                          >
+                        </h4>
+                        <div class="property-features-wrap">
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bed.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bed 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/bath.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">Bath 2</h5>
+                          </div>
+                          <div class="divider"></div>
+                          <div class="property-features-item">
+                            <div class="thumb">
+                              <img
+                                src="assets/frontend/img/icon/sqft.svg"
+                                alt="icon"
+                              />
+                            </div>
+                            <h5 class="feature-title">1599 sqft</h5>
+                          </div>
+                        </div>
+                        <div class="recent-post-meta">
+                          <a href="property-details.html">$7850,00</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="widget sidebar-contact-form">
+                  <h3 class="widget_title">Contact Us</h3>
+                  <div class="contact-form-widget">
+                    <form action="#" class="newsletter-form">
+                      <div class="form-group">
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Your Name"
+                          required=""
+                        />
+                      </div>
+                      <div class="form-group">
+                        <input
+                          class="form-control"
+                          type="email"
+                          placeholder="Your Email"
+                          required=""
+                        />
+                      </div>
+                      <div class="form-group">
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Your Phone"
+                          required=""
+                        />
+                      </div>
+                      <div class="form-group mb-4">
+                        <textarea
+                          name="Your message"
+                          id="message"
+                          cols="30"
+                          rows="3"
+                          class="form-control"
+                          placeholder="Your Message"
+                        ></textarea>
+                      </div>
+                      <div class="form-btn pt-2">
+                        <button type="submit" class="th-btn radius">
+                          Send Us
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div
+                  class="widget widget_banner background-image"
+                  style="
+                    background-image: url('assets/frontend/img/bg/widget_banner.jpg');
+                  "
+                >
+                  <div class="widget-banner">
+                    <h2 class="title">
+                      We can help you to find real estate agency
+                    </h2>
+                    <a href="contact.html" class="th-btn radius"
+                      >Contact with Agent</a
+                    >
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -409,8 +3485,7 @@ export default {
         address: "Al Khuwair, Muscat, Oman",
         map_location_url: "https://maps.google.com/maps?q=Al+Khuwair+Muscat",
         video_url: "https://www.youtube.com/watch?v=uXdiJfAH6kk",
-        video_thumbnail:
-          "/uploads/property/banner_image/2025/06/image_1.jpg",
+        video_thumbnail: "/uploads/property/banner_image/2025/06/image_1.jpg",
         banner_image: [
           "/uploads/property/banner_image/2025/06/image_1.jpg",
           "/uploads/property/banner_image/2025/06/image_2.jpg",
@@ -955,7 +4030,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("/uploads/property_dark/property_dark_16.jpeg") top center no-repeat;
+  background: url("/uploads/property_dark/property_dark_16.jpeg") top center
+    no-repeat;
   background-size: contain;
   opacity: 0.3;
   z-index: 1;

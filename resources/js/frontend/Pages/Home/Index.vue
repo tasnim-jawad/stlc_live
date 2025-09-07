@@ -1,234 +1,159 @@
 <template>
-  <div class="homepage">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <!-- Hero Slides -->
-      <div class="hero-slider">
-        <div
-          v-for="(slide, index) in heroSlides"
-          :key="index"
-          class="hero-slide"
-          :class="{ active: currentSlide === index }"
-          :style="{ backgroundImage: `url(${slide.backgroundImage})` }"
-        >
-          <div class="hero-overlay"></div>
-          <div class="hero-content">
+  <div class="th-hero-wrapper hero-1" id="hero">
+    <div class="hero-img-shape-1">
+      <div class="logo-icon-wrap">
+        <a
+          href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"
+          class="logo-icon popup-video"
+          ><i class="fa-sharp fa-solid fa-play"></i
+        ></a>
+        <div class="logo-icon-wrap__text">
+          <span class="logo-animation"
+            >PILLAR REAL ESTATE HOME * REAL ESTATE</span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="swiper th-slider"
+      id="heroSlider1"
+      data-slider-options='{"effect":"fade", "loop":true, "autoplay":true, "autoHeight": "false"}'
+    >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div
+            class="hero-inner hero-style1"
+            :style="{
+              backgroundImage: `url('/assets/frontend/img/hero/hero_bg_1_1.jpg')`,
+            }"
+          >
             <div class="container">
-              <div class="hero-text">
-                <div class="hero-badge">
-                  <i :class="slide.badgeIcon"></i>
-                  <span>{{ slide.badge }}</span>
-                </div>
-                <h1 class="hero-title">
-                  {{ slide.title.main }}<br />
-                  <span class="highlight">{{ slide.title.highlight }}</span>
-                </h1>
-                <p class="hero-subtitle">{{ slide.subtitle }}</p>
-                <div class="hero-actions">
-                  <button
-                    class="btn-primary"
-                    @click="handlePrimaryAction(slide.primaryAction)"
-                  >
-                    <i :class="slide.primaryAction.icon"></i>
-                    {{ slide.primaryAction.text }}
-                  </button>
-                  <button
-                    class="btn-secondary"
-                    @click="handleSecondaryAction(slide.secondaryAction)"
-                  >
-                    <i :class="slide.secondaryAction.icon"></i>
-                    {{ slide.secondaryAction.text }}
-                  </button>
-                </div>
-              </div>
-              <!-- <div class="hero-stats">
-                <div
-                  class="stat-item"
-                  v-for="stat in slide.stats"
-                  :key="stat.label"
-                >
-                  <div class="stat-number">{{ stat.number }}</div>
-                  <div class="stat-label">{{ stat.label }}</div>
-                </div>
-              </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Navigation -->
-      <div class="hero-navigation">
-        <div class="container">
-          <!-- Slide Indicators -->
-          <div class="slide-indicators">
-            <button
-              v-for="(slide, index) in heroSlides"
-              :key="index"
-              class="slide-indicator"
-              :class="{ active: currentSlide === index }"
-              @click="changeSlide(index)"
-              :aria-label="`Go to slide ${index + 1}`"
-            >
-              <span class="indicator-number">{{ index + 1 }}</span>
-              <span class="indicator-label">{{ slide.navLabel }}</span>
-            </button>
-            <!-- Debug info -->
-            <div class="debug-info" style="color: white; margin-left: 20px">
-              Current: {{ currentSlide }}
-            </div>
-          </div>
-
-          <!-- Navigation Arrows -->
-          <div class="slide-arrows">
-            <button
-              class="arrow-btn prev"
-              @click="previousSlide"
-              aria-label="Previous slide"
-            >
-              <i class="icon-left-open"></i>
-            </button>
-            <button
-              class="arrow-btn next"
-              @click="nextSlide"
-              aria-label="Next slide"
-            >
-              <i class="icon-right-open"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Progress Bar -->
-      <div class="hero-progress">
-        <div class="progress-bar" :style="{ width: progressWidth + '%' }"></div>
-      </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section class="about-section" id="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text">
-            <div class="section-header">
-              <span class="section-tag">About STC</span>
-              <h2 class="section-title">Building Bangladesh's Future</h2>
-            </div>
-            <p class="about-description">
-              Since 2017, STC Building & Properties has been at the forefront of
-              Bangladesh's construction industry. We specialize in residential,
-              commercial, and industrial projects, delivering quality
-              craftsmanship that exceeds expectations.
-            </p>
-            <div class="about-features">
-              <div class="feature-item">
-                <i class="icon-ok-circled"></i>
-                <span>Licensed & Insured Contractors</span>
-              </div>
-              <div class="feature-item">
-                <i class="icon-ok-circled"></i>
-                <span>Quality Materials & Equipment</span>
-              </div>
-              <div class="feature-item">
-                <i class="icon-ok-circled"></i>
-                <span>On-Time Project Delivery</span>
-              </div>
-              <div class="feature-item">
-                <i class="icon-ok-circled"></i>
-                <span>24/7 Customer Support</span>
-              </div>
-            </div>
-            <button class="btn-primary">Learn More About Us</button>
-          </div>
-          <div class="about-image">
-            <div class="image-card">
-              <img
-                src="/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg"
-                alt="STC Construction Team"
-              />
-              <div class="image-overlay">
-                <div class="play-button">
-                  <i class="icon-play"></i>
+              <div class="row gy-50 gx-40 align-items-center">
+                <div class="col-xxl-7 col-xl-7 col-lg-8">
+                  <div class="hero-1-content pe-xl-4">
+                    <h1
+                      class="hero-title"
+                      data-ani="slideinup"
+                      data-ani-delay="0.2s"
+                    >
+                      Constructing
+                      <span class="title2 text-theme">Excellence</span>
+                    </h1>
+                    <p>
+                      Every project we take on is executed with precision,
+                      dedication, and a commitment to surpass expectations.
+                    </p>
+                    <div
+                      class="btn-group justify-content-center"
+                      data-ani="slideinup"
+                      data-ani-delay="0.4s"
+                    >
+                      <a href="property.html" class="th-btn style2 pill"
+                        >Start Your Journey Today</a
+                      >
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section" id="services">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Our Services</span>
-          <h2 class="section-title">Complete Construction Solutions</h2>
-          <p class="section-subtitle">
-            From concept to completion, we handle every aspect of your
-            construction project
-          </p>
-        </div>
-        <div class="services-grid">
+        <div class="swiper-slide">
           <div
-            class="service-card"
-            v-for="service in services"
-            :key="service.id"
+            class="hero-inner hero-style1"
+            :style="{
+              backgroundImage: `url('assets/frontend/img/hero/hero_bg_1_2.jpg')`,
+            }"
           >
-            <div class="service-icon">
-              <i :class="service.icon"></i>
+            <div class="container">
+              <div class="row gy-50 gx-40 align-items-center">
+                <div class="col-xxl-7 col-xl-7 col-lg-8">
+                  <div class="hero-1-content pe-xl-4">
+                    <h1
+                      class="hero-title"
+                      data-ani="slideinup"
+                      data-ani-delay="0.2s"
+                    >
+                      Find Your Perfect Place to
+                      <span class="title2 text-theme">Call Home</span>
+                    </h1>
+                    <div
+                      class="btn-group justify-content-center"
+                      data-ani="slideinup"
+                      data-ani-delay="0.4s"
+                    >
+                      <a href="property.html" class="th-btn style2 pill"
+                        >Explore Property</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="service-title">{{ service.title }}</h3>
-            <p class="service-description">{{ service.description }}</p>
-            <a href="#" class="service-link">
-              Learn More <i class="icon-right-open"></i>
-            </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Projects Portfolio Section -->
-    <section class="portfolio-section" id="portfolio">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Our Portfolio</span>
-          <h2 class="section-title">Featured Projects</h2>
-          <p class="section-subtitle">
-            Showcasing our finest construction achievements
-          </p>
-        </div>
-        <div class="portfolio-filter">
-          <button class="filter-btn active" @click="filterProjects('all')">
-            All Projects
-          </button>
-          <button class="filter-btn" @click="filterProjects('residential')">
-            Residential
-          </button>
-          <button class="filter-btn" @click="filterProjects('commercial')">
-            Commercial
-          </button>
-          <button class="filter-btn" @click="filterProjects('industrial')">
-            Industrial
-          </button>
-        </div>
-        <div class="portfolio-grid">
+        <div class="swiper-slide">
           <div
-            class="portfolio-item"
-            v-for="project in filteredProjects"
-            :key="project.id"
+            class="hero-inner hero-style1"
+            :style="{
+              backgroundImage: `url('/assets/frontend/img/hero/hero_bg_1_3.jpg')`,
+            }"
           >
-            <div class="project-image">
-              <img :src="project.image" :alt="project.title" />
-              <div class="project-overlay">
-                <div class="project-info">
-                  <h3 class="project-title">{{ project.title }}</h3>
-                  <p class="project-category">{{ project.category }}</p>
-                  <div class="project-actions">
-                    <button class="btn-icon">
-                      <i class="icon-search"></i>
-                    </button>
-                    <button class="btn-icon">
-                      <i class="icon-link"></i>
-                    </button>
+            <div class="container">
+              <div class="row gy-50 gx-40 align-items-center">
+                <div class="col-xxl-7 col-xl-7 col-lg-8">
+                  <div class="hero-1-content pe-xl-4">
+                    <h1
+                      class="hero-title"
+                      data-ani="slideinup"
+                      data-ani-delay="0.2s"
+                    >
+                      Experience Real Estate
+                      <span class="title2 text-theme">Never Before</span>
+                    </h1>
+                    <div
+                      class="btn-group justify-content-center"
+                      data-ani="slideinup"
+                      data-ani-delay="0.4s"
+                    >
+                      <a href="property.html" class="th-btn style2 pill"
+                        >Explore Property</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div
+            class="hero-inner hero-style1"
+            :style="{
+              backgroundImage: `url('assets/frontend/img/hero/hero_bg_1_4.jpg')`,
+            }"
+          >
+            <div class="container">
+              <div class="row gy-50 gx-40 align-items-center">
+                <div class="col-xxl-7 col-xl-7 col-lg-8">
+                  <div class="hero-1-content pe-xl-4">
+                    <h1
+                      class="hero-title"
+                      data-ani="slideinup"
+                      data-ani-delay="0.2s"
+                    >
+                      Constructing Excellence
+                      <span class="title2 text-theme">Dream Home</span>
+                    </h1>
+                    <div
+                      class="btn-group justify-content-center"
+                      data-ani="slideinup"
+                      data-ani-delay="0.4s"
+                    >
+                      <a href="property.html" class="th-btn style2 pill"
+                        >Explore Property</a
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -236,1695 +161,3064 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-section">
+      <div class="slider-pagination"></div>
+      <div class="slider-pagination-wrapper">
+        <button
+          data-slider-prev="#heroSlider1"
+          class="slider-arrow default slider-prev style-2"
+        >
+          prev
+        </button>
+        <div class="slider-pagination2"></div>
+        <div class="line"></div>
+        <button
+          data-slider-next="#heroSlider1"
+          class="slider-arrow default style-2"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="search-area">
+    <form action="https://html.themeholy.com/submit-form">
       <div class="container">
-        <div class="why-choose-content">
-          <div class="why-choose-text">
-            <div class="section-header">
-              <span class="section-tag">Why Choose STC</span>
-              <h2 class="section-title">Your Trusted Construction Partner</h2>
-            </div>
-            <div class="benefits-grid">
-              <div
-                class="benefit-item"
-                v-for="benefit in benefits"
-                :key="benefit.id"
-              >
-                <div class="benefit-icon">
-                  <i :class="benefit.icon"></i>
-                </div>
-                <div class="benefit-content">
-                  <h3 class="benefit-title">{{ benefit.title }}</h3>
-                  <p class="benefit-description">{{ benefit.description }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="why-choose-stats">
-            <div class="stats-card">
-              <div class="stat-circle">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Customer Satisfaction</div>
-              </div>
-              <div class="stat-circle">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Completed Projects</div>
-              </div>
-              <div class="stat-circle">
-                <div class="stat-number">7+</div>
-                <div class="stat-label">Years in Business</div>
-              </div>
+        <div class="row justify-content-center">
+          <div class="col-xl-10">
+            <div class="search-wrap">
+              <h5>
+                “Constructing Excellence” – this is not just our slogan, it is
+                our promise. Every project we take on is executed with
+                precision, dedication, and a commitment to surpass expectations.
+              </h5>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </form>
+  </div>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section" id="testimonials">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Client Reviews</span>
-          <h2 class="section-title">What Our Clients Say</h2>
-        </div>
-        <div class="testimonials-slider">
+  <div class="about-1-wrapper space overflow-hidden" id="about-sec">
+    <div class="shape-mockup" data-bottom="0" data-left="0">
+      <img src="/assets/frontend/img/icon/about-2-shape.png" alt="img" />
+    </div>
+    <div
+      class="shape-mockup jump d-none d-lg-block"
+      data-bottom="11%"
+      data-left="5%"
+    >
+      <img src="/assets/frontend/img/icon/about-inner-shape.png" alt="img" />
+    </div>
+    <div class="container">
+      <div class="row gy-40 gx-70 justify-content-center">
+        <div class="col-xl-7">
           <div
-            class="testimonial-card"
-            v-for="testimonial in testimonials"
-            :key="testimonial.id"
+            class="img-box1 about-1 fadeinup wow"
+            data-wow-duration="1.5s"
+            data-wow-delay="0.3s"
           >
-            <div class="testimonial-content">
-              <div class="quote-icon">
-                <i class="icon-quote-left"></i>
+            <div class="about-logo-wrap-2">
+              <div class="logo-icon-wrap">
+                <div class="logo-icon">
+                  <img
+                    src="/assets/frontend/img/icon/logo-circle-icon.png"
+                    alt="img"
+                  />
+                </div>
+                <div class="logo-icon-wrap__text">
+                  <span class="logo-animation"
+                    >PILLAR REAL ESTATE HOME * REAL ESTATE</span
+                  >
+                </div>
               </div>
-              <p class="testimonial-text">{{ testimonial.text }}</p>
-              <div class="testimonial-author">
-                <div class="author-avatar">
-                  <img :src="testimonial.avatar" :alt="testimonial.name" />
-                </div>
-                <div class="author-info">
-                  <h4 class="author-name">{{ testimonial.name }}</h4>
-                  <p class="author-title">{{ testimonial.title }}</p>
-                </div>
+            </div>
+            <div class="about-left">
+              <div class="img-box">
+                <img
+                  src="/assets/frontend/img/about/about-1-left-1.jpg"
+                  alt="Image"
+                />
+              </div>
+              <div class="img-box small">
+                <img
+                  src="/assets/frontend/img/about/about-1-left-2.jpg"
+                  alt="Image"
+                />
+              </div>
+            </div>
+            <div class="about-middle">
+              <img
+                class="tilt-active"
+                src="/assets/frontend/img/about/about-1-middle.jpg"
+                alt="Image"
+              />
+            </div>
+            <div class="about-right">
+              <div class="img-box small">
+                <img
+                  src="/assets/frontend/img/about/about-1-right-1.jpg"
+                  alt="Image"
+                />
+              </div>
+              <div class="img-box big">
+                <img
+                  src="/assets/frontend/img/about/about-1-right-2.jpg"
+                  alt="Image"
+                />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- CTA Banner Section -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-content">
-          <div class="cta-text">
-            <h2 class="cta-title">Ready to Start Your Construction Project?</h2>
-            <p class="cta-subtitle">
-              Get a free consultation and quote from our expert team today.
+        <div class="col-xl-5">
+          <div class="title-area text-left mb-50">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> About Us
+            </p>
+            <h2
+              class="sec-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              Discover Our Luxury Property, with Full Amenities
+            </h2>
+            <p
+              class="sec-text fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.5s"
+            >
+              STC Building & Properties has been a trusted name in construction
+              since 2017. With nearly a decade of experience in the construction
+              industry, we are committed to delivering quality projects that
+              maximize the value of your land. STC stays true to its commitment,
+              guaranteeing on-time or even ahead of schedule handover.
             </p>
           </div>
-          <div class="cta-actions">
-            <button class="btn-primary">
-              <i class="icon-phone"></i>
-              Call Now: +880 1234-567890
-            </button>
-            <button class="btn-secondary">
-              <i class="icon-mail"></i>
-              Get Free Quote
-            </button>
+          <div class="row gy-4 gx-60 mb-4">
+            <div class="col-lg-6 col-md-6 fadeinup wow">
+              <div class="about-1-item">
+                <div class="icon">
+                  <img
+                    src="/assets/frontend/img/icon/about-1-1.svg"
+                    alt="icon"
+                  />
+                </div>
+                <div class="content">
+                  <h3 class="box-title">Quality Services</h3>
+                  <p class="box-text">
+                    Deals with issues in the exhaust system, ensuring
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 fadeinup wow">
+              <div class="about-1-item">
+                <div class="icon">
+                  <img
+                    src="/assets/frontend/img/icon/about-1-2.svg"
+                    alt="icon"
+                  />
+                </div>
+                <div class="content">
+                  <h3 class="box-title">Clients Feedback</h3>
+                  <p class="box-text">
+                    Ensuring the exhaust system deals issues properly.
+                  </p>
+                  <p class="box-text"></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 fadeinup wow">
+              <div class="about-1-item">
+                <div class="icon">
+                  <img
+                    src="/assets/frontend/img/icon/about-1-3.svg"
+                    alt="icon"
+                  />
+                </div>
+                <div class="content">
+                  <h3 class="box-title">Space Belongings</h3>
+                  <p class="box-text">
+                    Ensuring that issues in the system are dealt with.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 fadeinup wow">
+              <div class="about-1-item">
+                <div class="icon">
+                  <img
+                    src="/assets/frontend/img/icon/about-1-4.svg"
+                    alt="icon"
+                  />
+                </div>
+                <div class="content">
+                  <h3 class="box-title">Personal Liability</h3>
+                  <p class="box-text">
+                    Exhaust system deals with all issues efficiency.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="about-bottom-wrap fadeinup wow">
+                <a href="/about-us" class="th-btn bg-black pill"
+                  >More About Us</a
+                >
+                <div class="about1-call-wrapper">
+                  <div class="icon"><i class="fa-regular fa-phone"></i></div>
+                  <div class="content">
+                    <p>Free Consulting</p>
+                    <a href="tel:+00(123)45678900" class="link"
+                      >+00 (123) 456789 00</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
+
+  <section class="team-area-1 space overflow-hidden">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7">
+          <div class="title-area text-center">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span>Team Members
+            </p>
+            <h2
+              class="sec-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              Meet Our Team Members
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="slider-area mb-20">
+        <div
+          class="swiper th-slider has-shadow"
+          id="teamSlider1"
+          data-slider-options='{"autoplay":true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"4"}}, "autoHeight": "true"}'
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_1.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">Bernice Roberts</a>
+                  </h3>
+                  <span class="team-desig">Real Estate Manager</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_2.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">Mr. Raul Hirthe</a>
+                  </h3>
+                  <span class="team-desig">Listing Coordinator</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_3.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">Michel John</a>
+                  </h3>
+                  <span class="team-desig">Property Developer</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_4.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">William Bins</a>
+                  </h3>
+                  <span class="team-desig">Leasing Consultant</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_1.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">Bernice Roberts</a>
+                  </h3>
+                  <span class="team-desig">Real Estate Manager</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="team-card">
+                <div
+                  class="team-img"
+                  data-bg-src="/assets/frontend/img/shape/team-bg-pattern.png"
+                >
+                  <img
+                    src="/assets/frontend/img/team/team_1_2.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <h3 class="box-title">
+                    <a href="team-details.html">Mr. Raul Hirthe</a>
+                  </h3>
+                  <span class="team-desig">Listing Coordinator</span>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://facebook.com/"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                      <a target="_blank" href="https://twitter.com/"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          data-slider-prev="#teamSlider1"
+          class="slider-arrow slider-prev"
+        >
+          <i class="far fa-arrow-left"></i>
+        </button>
+        <button
+          data-slider-next="#teamSlider1"
+          class="slider-arrow slider-next"
+        >
+          <i class="far fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="row gy-40 justify-content-center">
+        <div class="col-xl-8">
+          <p class="chat-text-wrap text-center pe-xl-5 ps-xl-5 mb-0">
+            Explore Property agents are here to help with all your buying,
+            renting and selling goals. Find the home of your dreams with an
+            expert you can trust.
+            <a class="text-theme" href="contact.html"> Let’s chat</a>
+          </p>
+        </div>
+        <div class="col-12">
+          <div class="text-center">
+            <a class="th-btn pill bg-black" href="team.html"
+              >Find Your Location Agent <i class="fas fa-search"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="popular-sec-1 space">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7">
+          <div class="title-area text-center mb-2">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.2s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> Popular Properties
+            </p>
+            <h2
+              class="sec-title mb-4 fadeinup wow"
+              data-wow-duration="1.3s"
+              data-wow-delay="0.3s"
+            >
+              Best Properties Sale
+            </h2>
+            <div
+              class="filter-menu indicator-active filter-menu-active mt-2 justify-content-center fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.5s"
+            >
+              <button
+                data-filter="*"
+                class="th-btn tab-btn active"
+                type="button"
+              >
+                View All
+              </button>
+              <button data-filter=".cat1" class="th-btn tab-btn" type="button">
+                Apartment
+              </button>
+              <button data-filter=".cat2" class="th-btn tab-btn" type="button">
+                Commercial
+              </button>
+              <button data-filter=".cat3" class="th-btn tab-btn" type="button">
+                Land or Plot
+              </button>
+              <button data-filter=".cat4" class="th-btn tab-btn" type="button">
+                Farm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row gy-30 justify-content-center filter-active">
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat3 cat1">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-1.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-1.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-2.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-2.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-1.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-1.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-2.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-2.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Charming Beach House</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$179,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat3 cat2 cat1"
+        >
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-2.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-2.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-3.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-3.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-2.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-2.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-3.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-3.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Contemporary Loft</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$335,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat4 cat3 cat2"
+        >
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-3.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-3.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-4.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-4.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-3.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-3.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-4.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-4.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Cozy Cottage</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$250,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat1">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-4.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-4.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-5.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-5.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-4.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-4.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-5.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-5.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Modern Beach House</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$189,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat3 cat4">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-5.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-5.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-6.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-6.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-5.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-5.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-6.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-6.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Cozy Mountain Cabin</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$179,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat2 cat1">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-6.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-6.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-7.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-7.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-6.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-6.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-7.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-7.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Modern Apartment</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$132,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat4">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-7.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-7.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-8.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-8.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-7.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-7.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-8.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-8.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Seaside Villa 5078</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$245,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat2 cat4">
+          <div class="popular-list-1">
+            <div class="thumb-wrapper">
+              <div
+                class="th-slider"
+                data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+              >
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-8.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-8.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-9.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-9.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-8.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-8.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a
+                      class="popular-popup-image"
+                      href="/assets/frontend/img/popular/popular-1-9.jpg"
+                      ><img
+                        src="/assets/frontend/img/popular/popular-1-9.jpg"
+                        alt="Image"
+                    /></a>
+                  </div>
+                </div>
+                <div class="icon-wrap">
+                  <button class="slider-arrow slider-prev">
+                    <i class="far fa-arrow-left"></i>
+                  </button>
+                  <button class="slider-arrow slider-next">
+                    <i class="far fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="wishlist.html" class="icon-btn"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </div>
+              <div class="actions-style-2-wrapper">
+                <div class="actions style-2">
+                  <a href="#" class="icon-btn"
+                    ><span class="action-text">Add To Favorite</span>
+                    <i class="fa-solid fa-bookmark"></i> </a
+                  ><a
+                    href="/assets/frontend/img/popular/popular-1-1.jpg"
+                    class="icon-btn popular-popup-image"
+                    ><span class="action-text">View all img</span>
+                    <i class="fa-solid fa-camera"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="popular-badge">
+                <img
+                  src="/assets/frontend/img/icon/sell_rent_icon.svg"
+                  alt="icon"
+                />
+                <p>For Sale</p>
+              </div>
+            </div>
+            <div class="property-content">
+              <div class="media-body">
+                <h3 class="box-title">
+                  <a href="property-details.html">Ranch Style Home</a>
+                </h3>
+                <div class="box-text">
+                  <div class="icon">
+                    <img
+                      src="/assets/frontend/img/icon/popular-location.svg"
+                      alt="icon"
+                    />
+                  </div>
+                  39581 Rohan Estates, New York
+                </div>
+              </div>
+              <ul class="property-featured">
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bed.svg" alt="icon" />
+                  </div>
+                  Bed 4
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/bath.svg" alt="icon" />
+                  </div>
+                  Bath 2
+                </li>
+                <li>
+                  <div class="icon">
+                    <img src="/assets/frontend/img/icon/sqft.svg" alt="icon" />
+                  </div>
+                  1500 sqft
+                </li>
+              </ul>
+              <div class="property-bottom">
+                <h6 class="box-title">$415,800.00</h6>
+                <a class="th-btn sm style3 pill" href="property-details.html"
+                  >View More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom">
+    <div class="container">
+      <div class="row gx-60">
+        <div class="col-xxl-12 col-lg-12">
+          <div class="row gy-30 gx-30 justify-content-center mb-60">
+            <div class="col-xxl-5 col-xl-12">
+              <div
+                class="team-card style-2 me-xxl-4 background-image"
+                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+              >
+                <div class="team-img">
+                  <img
+                    src="/assets/frontend/img/team/team_2_3.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <div class="left-contet">
+                    <h3 class="box-title">
+                      <a href="team-details.html">Zulia Era</a>
+                    </h3>
+                    <span class="team-desig">Listing Coordinator</span>
+                  </div>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fa-solid fa-envelope"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-7 col-xl-12">
+              <div class="team-wrap">
+                <div class="top-wrap">
+                  <div class="title-wrap">
+                    <h3 class="team-about_title">Our Mission</h3>
+                  </div>
+                </div>
+                <p class="team-about_text">
+                  Zulia Era is one of the best online resources for learning
+                  about technology in the medical sphere. There’s a real sense
+                  skepticiesm cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p class="team-about_text mb-40">
+                  Real estate agents play a critical role in solving various
+                  problems within the real estate community. Their expertise not
+                  only helps individual buyers and sellers but also positively
+                  impacts the overall housing market, local economy, and
+                  community development. Below are key problems agents solve and
+                  how their work improves the real estate community.
+                </p>
+                <a href="agency.html" class="th-btn radius bg-theme"
+                  >Contact With Agent</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="box-title">
+                Problem solved for real estate community
+              </h4>
+              <div class="check-list mb-50">
+                <ul>
+                  <li>Diversity investigation for royal been.</li>
+                  <li>Finding the Right Home or Buyer</li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>Negotiation Challenges.</li>
+                  <li>Financing and Mortgage Assistance</li>
+                </ul>
+              </div>
+              <h4 class="box-title">Impact</h4>
+              <p class="team-about_text mb-40">
+                Real estate agents play a critical role in solving various
+                problems within the real estate community. Their expertise not
+                only helps individual buyers and sellers but also positively
+                impacts the overall housing market, local economy, and community
+                development. Below are key problems agents solve and how their
+                work improves the real estate community.
+              </p>
+              <div class="check-list">
+                <ul>
+                  <li>
+                    Prevents overpricing and underpricing, maintaining property
+                    values.
+                  </li>
+                  <li>
+                    Ensures a balanced housing market, avoiding price crashes or
+                    overinflation.
+                  </li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>
+                    Helps maintain neighborhood stability and property values..
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom">
+    <div class="container">
+      <div class="row gx-60">
+        <div class="col-xxl-12 col-lg-12">
+          <div class="row gy-30 gx-30 justify-content-center mb-60">
+            <div class="col-xxl-5 col-xl-12">
+              <div
+                class="team-card style-2 me-xxl-4 background-image"
+                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+              >
+                <div class="team-img">
+                  <img
+                    src="/assets/frontend/img/team/team_2_3.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <div class="left-contet">
+                    <h3 class="box-title">
+                      <a href="team-details.html">Zulia Era</a>
+                    </h3>
+                    <span class="team-desig">Listing Coordinator</span>
+                  </div>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fa-solid fa-envelope"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-7 col-xl-12">
+              <div class="team-wrap">
+                <div class="top-wrap">
+                  <div class="title-wrap">
+                    <h3 class="team-about_title">Our Vision</h3>
+                  </div>
+                </div>
+                <p class="team-about_text">
+                  Zulia Era is one of the best online resources for learning
+                  about technology in the medical sphere. There’s a real sense
+                  skepticiesm cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p class="team-about_text mb-40">
+                  Real estate agents play a critical role in solving various
+                  problems within the real estate community. Their expertise not
+                  only helps individual buyers and sellers but also positively
+                  impacts the overall housing market, local economy, and
+                  community development. Below are key problems agents solve and
+                  how their work improves the real estate community.
+                </p>
+                <a href="agency.html" class="th-btn radius bg-theme"
+                  >Contact With Agent</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="box-title">
+                Problem solved for real estate community
+              </h4>
+              <div class="check-list mb-50">
+                <ul>
+                  <li>Diversity investigation for royal been.</li>
+                  <li>Finding the Right Home or Buyer</li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>Negotiation Challenges.</li>
+                  <li>Financing and Mortgage Assistance</li>
+                </ul>
+              </div>
+              <h4 class="box-title">Impact</h4>
+              <p class="team-about_text mb-40">
+                Real estate agents play a critical role in solving various
+                problems within the real estate community. Their expertise not
+                only helps individual buyers and sellers but also positively
+                impacts the overall housing market, local economy, and community
+                development. Below are key problems agents solve and how their
+                work improves the real estate community.
+              </p>
+              <div class="check-list">
+                <ul>
+                  <li>
+                    Prevents overpricing and underpricing, maintaining property
+                    values.
+                  </li>
+                  <li>
+                    Ensures a balanced housing market, avoiding price crashes or
+                    overinflation.
+                  </li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>
+                    Helps maintain neighborhood stability and property values..
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom">
+    <div class="container">
+      <div class="row gx-60">
+        <div class="col-xxl-12 col-lg-12">
+          <div class="row gy-30 gx-30 justify-content-center mb-60">
+            <div class="col-xxl-5 col-xl-12">
+              <div
+                class="team-card style-2 me-xxl-4 background-image"
+                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+              >
+                <div class="team-img">
+                  <img
+                    src="/assets/frontend/img/team/team_2_3.png"
+                    alt="Team"
+                  />
+                </div>
+                <div class="team-content">
+                  <div class="left-contet">
+                    <h3 class="box-title">
+                      <a href="team-details.html">Zulia Era</a>
+                    </h3>
+                    <span class="team-desig">Listing Coordinator</span>
+                  </div>
+                  <div class="team-social">
+                    <div class="th-social">
+                      <a target="_blank" href="https://instagram.com/"
+                        ><i class="fab fa-linkedin-in"></i
+                      ></a>
+                      <a target="_blank" href="https://linkedin.com/"
+                        ><i class="fa-solid fa-envelope"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-7 col-xl-12">
+              <div class="team-wrap">
+                <div class="top-wrap">
+                  <div class="title-wrap">
+                    <h3 class="team-about_title">Our Core Values</h3>
+                  </div>
+                </div>
+                <p class="team-about_text">
+                  Zulia Era is one of the best online resources for learning
+                  about technology in the medical sphere. There’s a real sense
+                  skepticiesm cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p class="team-about_text mb-40">
+                  Real estate agents play a critical role in solving various
+                  problems within the real estate community. Their expertise not
+                  only helps individual buyers and sellers but also positively
+                  impacts the overall housing market, local economy, and
+                  community development. Below are key problems agents solve and
+                  how their work improves the real estate community.
+                </p>
+                <a href="agency.html" class="th-btn radius bg-theme"
+                  >Contact With Agent</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="box-title">
+                Problem solved for real estate community
+              </h4>
+              <div class="check-list mb-50">
+                <ul>
+                  <li>Diversity investigation for royal been.</li>
+                  <li>Finding the Right Home or Buyer</li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>Negotiation Challenges.</li>
+                  <li>Financing and Mortgage Assistance</li>
+                </ul>
+              </div>
+              <h4 class="box-title">Impact</h4>
+              <p class="team-about_text mb-40">
+                Real estate agents play a critical role in solving various
+                problems within the real estate community. Their expertise not
+                only helps individual buyers and sellers but also positively
+                impacts the overall housing market, local economy, and community
+                development. Below are key problems agents solve and how their
+                work improves the real estate community.
+              </p>
+              <div class="check-list">
+                <ul>
+                  <li>
+                    Prevents overpricing and underpricing, maintaining property
+                    values.
+                  </li>
+                  <li>
+                    Ensures a balanced housing market, avoiding price crashes or
+                    overinflation.
+                  </li>
+                  <li>Navigating Legal & Paperwork Issues</li>
+                  <li>
+                    Helps maintain neighborhood stability and property values..
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div
+    class="why-sec-1 space"
+    id="why-sec"
+    data-bg-src="/assets/frontend/img/why/why-choose-1-bg.jpg"
+  >
+    <div class="container">
+      <div
+        class="row justify-content-xl-between justify-content-center align-items-start"
+      >
+        <div class="col-xl-6">
+          <div
+            class="title-area text-center text-xl-start text-left white mb-4"
+          >
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> Why Choose Us
+            </p>
+            <h2
+              class="sec-title text-white mb-0 fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              Trusted by 100+ Million Buyers
+            </h2>
+          </div>
+        </div>
+        <div class="col-xl-auto">
+          <div
+            class="why-right-review-wrap sec-btn fadeinup wow"
+            data-wow-duration="1.5s"
+            data-wow-delay="0.3s"
+          >
+            <div class="trust-content">
+              <div class="icon">
+                <img src="/assets/frontend/img/icon/star-icon.svg" alt="img" />
+              </div>
+              <h4 class="box-title">Trustipilot</h4>
+            </div>
+            <div class="client">
+              <div class="avatar">
+                <img
+                  src="/assets/frontend/img/hero/heror-1-avator-group.png"
+                  alt="img"
+                />
+              </div>
+              <div class="content">
+                <div class="th-social">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <h4 class="review-title">
+                  <span class="number"
+                    ><span class="counter-number">19</span>k+</span
+                  >
+                  clients
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row gy-30 align-items-center justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-1.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Find your home</h3>
+              <p class="box-text">
+                Altus cedo tantillus video patrocinor valeo carus subseco
+                vestrum credo virtus.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Find a Home</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-2.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Sell a Property</h3>
+              <p class="box-text">
+                Tantillus certe patrocinor video adipisci valeo carus. Subseco
+                vestrum taedium.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Sell a Home</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-3.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Rent a Home</h3>
+              <p class="box-text">
+                Velox surgo clarus tantillus confido carus video lumen cedo
+                virtus spes decerno.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Rent a Home</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-1.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Find your home</h3>
+              <p class="box-text">
+                Altus cedo tantillus video patrocinor valeo carus subseco
+                vestrum credo virtus.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Find a Home</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-2.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Sell a Property</h3>
+              <p class="box-text">
+                Tantillus certe patrocinor video adipisci valeo carus. Subseco
+                vestrum taedium.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Sell a Home</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="why-card-1">
+            <div class="hover-icon">
+              <img
+                src="/assets/frontend/img/icon/why-hover-icon-1.png"
+                alt="img"
+              />
+            </div>
+            <div class="why-card-1__icon">
+              <img
+                src="/assets/frontend/img/icon/why-icon-1-3.svg"
+                alt="image"
+              />
+            </div>
+            <div class="why-card-1__content">
+              <h3 class="box-title">Rent a Home</h3>
+              <p class="box-text">
+                Velox surgo clarus tantillus confido carus video lumen cedo
+                virtus spes decerno.
+              </p>
+            </div>
+            <div class="why-card-1__bottom">
+              <a
+                class="th-btn style3 pill bg-white"
+                href="property-details.html"
+                >Rent a Home</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section
+    class="testi-card-area-1 bg-smoke space bg-smoke overflow-hidden"
+    data-bg-src="/assets/frontend/img/bg/property-values-bg-shape.png"
+  >
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-xl-7">
+          <div class="title-area text-center">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span>Testimonials
+            </p>
+            <h2
+              class="sec-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              What Our Client Says
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="row gy-4 justify-content-center">
+        <div class="testi-card-slide">
+          <div
+            class="swiper has-shadow th-slider"
+            id="testiSlide1"
+            data-slider-options='{"centeredSlides":true,"paginationType": "progressbar","loop":true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"2"}, "1300":{"slidesPerView":"2.6"},"1500":{"slidesPerView":"3.6"}}}'
+          >
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-1.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Perfect place for a business trip! The location was
+                      convenient, and the Wi-Fi was reliable. I had everything I
+                      needed, from a quiet workspace in the room to a great
+                      breakfast in the morning.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Marshell Jack</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.7</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-2.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Ideal business accommodation! I loved the fast Wi-Fi,
+                      peaceful room with a desk and other, strong coffee in the
+                      on morning, my trip super and the breakfast kept me
+                      throughout the trip.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Walter Deckow</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.9</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-3.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      Experience business base! no any options The location
+                      helped with meetings, the Wi-Fi never dropped once, and on
+                      in the workspace was spot-on. Great too with fresh and
+                      options.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Carlos Bauch</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_3.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.7</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-1.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Great experience for a work traveler! Everything from
+                      hours is our part the central location to the quiet desk,
+                      supportive staff, ok but it and reliable Wi-Fi on was just
+                      right for working hours.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Julia Era</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.8</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-2.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Perfect place for a business trip! The location was
+                      convenient, and the Wi-Fi was reliable. I had everything I
+                      needed, from a quiet workspace in the room to a great
+                      breakfast in the morning.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Carlos Bauch</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.9</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-3.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Ideal business accommodation! I loved the fast Wi-Fi,
+                      peaceful room with a desk and other, strong coffee in the
+                      on morning, my trip super and the breakfast kept me
+                      throughout the trip.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Julia Era</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_3.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.6</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-1.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      Experience business base! no any options The location
+                      helped with meetings, the Wi-Fi never dropped once, and on
+                      in the workspace was spot-on. Great too with fresh and
+                      options.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Julia Era</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.5</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="testi-block" dir="ltr">
+                  <div class="top-wrap">
+                    <div class="quote">
+                      <img
+                        src="/assets/frontend/img/icon/quote.svg"
+                        alt="quote"
+                      />
+                    </div>
+                    <div class="logo">
+                      <img
+                        src="/assets/frontend/img/icon/brand-logo-2.png"
+                        alt="Team"
+                      />
+                    </div>
+                  </div>
+                  <div class="testi-content">
+                    <p class="box-text">
+                      “Great experience for a work traveler! Everything from
+                      hours is our part the central location to the quiet desk,
+                      supportive staff, ok but it and reliable Wi-Fi on was just
+                      right for working hours.”
+                    </p>
+                  </div>
+                  <div class="bottom-wrap">
+                    <div class="content">
+                      <h3 class="box-title">Carlos Bauch</h3>
+                      <p class="text">Property owner</p>
+                    </div>
+                    <div class="team-img">
+                      <img
+                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
+                        alt="Team"
+                      />
+                      <div class="box-review">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <div class="rating"><span>4.9</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slider-controller container-width">
+              <button
+                data-slider-prev="#testiSlide1"
+                class="slider-arrow default slider-prev"
+              >
+                <i class="far fa-arrow-left"></i>
+              </button>
+              <div
+                class="slider-pagination"
+                data-slider-id="#testiSlider1"
+              ></div>
+              <button
+                data-slider-next="#testiSlide1"
+                class="slider-arrow default slider-next"
+              >
+                <i class="far fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="space overflow-hidden" id="blog-sec">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7">
+          <div class="title-area text-center">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> latest News
+            </p>
+            <h2
+              class="sec-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              Helpful Real Estate Articles
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="slider-area">
+        <div
+          class="swiper th-slider has-shadow"
+          id="blogSlider1"
+          data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"2"},"1300":{"slidesPerView":"3"}}, "autoHeight": "true"}'
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_1.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>22</span> <span>Feb</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-user"></i> Emma</a
+                    >
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> No Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >Building gains into housing stocks and how to trade the
+                      sector</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_2.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>23</span> <span>Feb</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-user"></i> Michel</a
+                    >
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> 2 Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >92% of millennial homebuyers say has impacted their
+                      plans</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_3.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>24</span> <span>Feb</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-user"></i> Oliver</a
+                    >
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> No Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >Exploring the impact of climate change on global
+                      markets</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_4.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>26</span> <span>Feb</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-user"></i> Elena</a
+                    >
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> 5 Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >The future of city living and its influence on of the in
+                      design</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_5.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>27</span> <span>Feb</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"><i class="fa-solid fa-user"></i> Sam</a>
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> No Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >Exploring innovative architecture trends and their
+                      impact</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="blog-card style-2">
+                <div class="blog-img">
+                  <a href="blog-details.html"
+                    ><img
+                      src="/assets/frontend/img/blog/blog_1_6.jpg"
+                      alt="Image"
+                  /></a>
+                  <div class="date">
+                    <a href="blog.html"><span>16</span> <span>Mar</span></a>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-user"></i> David</a
+                    >
+                    <a href="blog.html"
+                      ><i class="fa-solid fa-comments"></i> 8 Comments</a
+                    >
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html"
+                      >Breaking down latest tech trends and investment
+                      opportunity</a
+                    >
+                  </h3>
+                  <a href="blog-details.html" class="th-btn pill style3"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          data-slider-prev="#blogSlider1"
+          class="slider-arrow slider-prev"
+        >
+          <i class="far fa-arrow-left"></i>
+        </button>
+        <button
+          data-slider-next="#blogSlider1"
+          class="slider-arrow slider-next"
+        >
+          <i class="far fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
+import { onMounted, nextTick } from "vue";
+
 export default {
   name: "HomePage",
-  data() {
-    return {
-      currentSlide: 0,
-      autoSlideInterval: null,
-      progressWidth: 0,
-      activeFilter: "all",
-      heroSlides: [
-        {
-          navLabel: "Residential",
-          badge: "Premium Homes",
-          badgeIcon: "icon-home",
-          title: {
-            main: "Building Dreams,",
-            highlight: "Constructing Excellence",
-          },
-          subtitle:
-            "With over 7 years of experience, STC Building & Properties delivers premium construction solutions that stand the test of time.",
-          backgroundImage:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-          primaryAction: {
-            text: "Get Free Quote",
-            icon: "icon-phone",
-            action: "contact",
-          },
-          secondaryAction: {
-            text: "View Our Work",
-            icon: "icon-play",
-            action: "portfolio",
-          },
-          stats: [
-            { number: "500+", label: "Projects Completed" },
-            { number: "7+", label: "Years Experience" },
-            { number: "100%", label: "Client Satisfaction" },
-          ],
-        },
-        {
-          navLabel: "Commercial",
-          badge: "Business Solutions",
-          badgeIcon: "icon-building",
-          title: {
-            main: "Commercial Excellence,",
-            highlight: "Business Growth",
-          },
-          subtitle:
-            "From office buildings to retail spaces, we create commercial environments that drive success and inspire productivity.",
-          backgroundImage:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-          primaryAction: {
-            text: "Discuss Project",
-            icon: "icon-chat",
-            action: "contact",
-          },
-          secondaryAction: {
-            text: "Commercial Portfolio",
-            icon: "icon-briefcase",
-            action: "portfolio",
-          },
-          stats: [
-            { number: "200+", label: "Commercial Projects" },
-            { number: "50+", label: "Business Clients" },
-            { number: "99%", label: "On-Time Delivery" },
-          ],
-        },
-        {
-          navLabel: "Industrial",
-          badge: "Industrial Power",
-          badgeIcon: "icon-industry",
-          title: {
-            main: "Industrial Innovation,",
-            highlight: "Maximum Efficiency",
-          },
-          subtitle:
-            "Specialized in warehouses, factories, and industrial facilities designed for operational excellence and future growth.",
-          backgroundImage:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-          primaryAction: {
-            text: "Plan Industrial Project",
-            icon: "icon-cog",
-            action: "contact",
-          },
-          secondaryAction: {
-            text: "Industrial Cases",
-            icon: "icon-industry",
-            action: "portfolio",
-          },
-          stats: [
-            { number: "150+", label: "Industrial Projects" },
-            { number: "25+", label: "Factory Builds" },
-            { number: "95%", label: "Efficiency Boost" },
-          ],
-        },
-        {
-          navLabel: "Renovation",
-          badge: "Transform & Upgrade",
-          badgeIcon: "icon-wrench",
-          title: {
-            main: "Renovation Mastery,",
-            highlight: "Space Transformation",
-          },
-          subtitle:
-            "Breathe new life into existing spaces with our expert renovation and remodeling services that exceed expectations.",
-          backgroundImage:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-          primaryAction: {
-            text: "Start Renovation",
-            icon: "icon-hammer",
-            action: "contact",
-          },
-          secondaryAction: {
-            text: "Before & After",
-            icon: "icon-picture",
-            action: "portfolio",
-          },
-          stats: [
-            { number: "300+", label: "Renovations Done" },
-            { number: "90%", label: "Cost Savings" },
-            { number: "100%", label: "Design Satisfaction" },
-          ],
-        },
-      ],
-      services: [
-        {
-          id: 1,
-          icon: "icon-home",
-          title: "Residential Construction",
-          description:
-            "Custom homes, apartments, and residential complexes built to your specifications.",
-        },
-        {
-          id: 2,
-          icon: "icon-building",
-          title: "Commercial Building",
-          description:
-            "Office buildings, retail spaces, and commercial complexes for your business needs.",
-        },
-        {
-          id: 3,
-          icon: "icon-industry",
-          title: "Industrial Projects",
-          description:
-            "Warehouses, factories, and industrial facilities designed for maximum efficiency.",
-        },
-        {
-          id: 4,
-          icon: "icon-wrench",
-          title: "Renovation & Remodeling",
-          description:
-            "Transform existing spaces with our expert renovation and remodeling services.",
-        },
-        {
-          id: 5,
-          icon: "icon-chart-line",
-          title: "Project Management",
-          description:
-            "Comprehensive project management from planning to completion.",
-        },
-        {
-          id: 6,
-          icon: "icon-cog",
-          title: "Consulting Services",
-          description:
-            "Expert advice and consulting for all your construction needs.",
-        },
-      ],
-      projects: [
-        {
-          id: 1,
-          title: "Modern Residential Complex",
-          category: "residential",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 2,
-          title: "Corporate Office Building",
-          category: "commercial",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 3,
-          title: "Industrial Warehouse",
-          category: "industrial",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 4,
-          title: "Luxury Villa Project",
-          category: "residential",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 5,
-          title: "Shopping Mall Complex",
-          category: "commercial",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 6,
-          title: "Manufacturing Plant",
-          category: "industrial",
-          image:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-      ],
-      benefits: [
-        {
-          id: 1,
-          icon: "icon-award",
-          title: "Quality Assurance",
-          description:
-            "We maintain the highest standards of quality in every project we undertake.",
-        },
-        {
-          id: 2,
-          icon: "icon-clock",
-          title: "Timely Delivery",
-          description:
-            "We respect your time and ensure all projects are completed on schedule.",
-        },
-        {
-          id: 3,
-          icon: "icon-dollar",
-          title: "Competitive Pricing",
-          description:
-            "Get the best value for your investment with our transparent pricing.",
-        },
-        {
-          id: 4,
-          icon: "icon-users",
-          title: "Expert Team",
-          description:
-            "Our skilled professionals bring years of experience to every project.",
-        },
-      ],
-      testimonials: [
-        {
-          id: 1,
-          name: "Ahmed Rahman",
-          title: "Homeowner",
-          text: "STC Building & Properties exceeded our expectations in building our dream home. Their attention to detail and quality workmanship is outstanding.",
-          avatar:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 2,
-          name: "Sarah Khan",
-          title: "Business Owner",
-          text: "Our office building project was completed on time and within budget. The team was professional and delivered exactly what we envisioned.",
-          avatar:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-        {
-          id: 3,
-          name: "Mohammad Ali",
-          title: "Developer",
-          text: "Working with STC has been a pleasure. Their expertise in commercial construction is evident in the quality of their work.",
-          avatar:
-            "/assets/frontend/wp-content/uploads/2015/02/IMG-20150204-WA0006.jpg",
-        },
-      ],
-    };
-  },
-  computed: {
-    filteredProjects() {
-      if (this.activeFilter === "all") {
-        return this.projects;
-      }
-      return this.projects.filter(
-        (project) => project.category === this.activeFilter
-      );
-    },
-  },
-  mounted() {
-    this.startAutoSlide();
-  },
-  beforeUnmount() {
-    this.stopAutoSlide();
-  },
-  methods: {
-    changeSlide(index) {
-      console.log("Changing to slide:", index); // Debug log
-      this.currentSlide = index;
-      this.resetProgress();
-    },
-    nextSlide() {
-      const nextIndex = (this.currentSlide + 1) % this.heroSlides.length;
-      console.log("Next slide:", nextIndex); // Debug log
-      this.currentSlide = nextIndex;
-      this.resetProgress();
-    },
-    previousSlide() {
-      const prevIndex =
-        this.currentSlide === 0
-          ? this.heroSlides.length - 1
-          : this.currentSlide - 1;
-      console.log("Previous slide:", prevIndex); // Debug log
-      this.currentSlide = prevIndex;
-      this.resetProgress();
-    },
-    startAutoSlide() {
-      this.stopAutoSlide();
-      this.progressWidth = 0;
+  setup() {
+    onMounted(async () => {
+      await nextTick(); // Wait for DOM to be fully rendered
 
-      // Auto-advance slides every 6 seconds
-      this.autoSlideInterval = setInterval(() => {
-        this.nextSlide();
-      }, 6000);
+      // Multiple initialization attempts to ensure sliders work
+      setTimeout(() => initializeSliders(), 100);
+      setTimeout(() => initializeSliders(), 500);
+      setTimeout(() => initializeSliders(), 1000);
+    });
 
-      // Progress bar animation
-      this.progressInterval = setInterval(() => {
-        this.progressWidth += 100 / 600; // 6 seconds = 600 intervals of 10ms
-        if (this.progressWidth >= 100) {
-          this.progressWidth = 0;
+    const initializeSliders = () => {
+      // Method 1: Use theme's built-in slider initialization
+      if (typeof window.sliderInit === "function") {
+        try {
+          window.sliderInit();
+          return;
+        } catch (e) {
+          console.log("Theme slider init failed, trying alternative methods");
         }
-      }, 10);
-    },
-    stopAutoSlide() {
-      if (this.autoSlideInterval) {
-        clearInterval(this.autoSlideInterval);
-        this.autoSlideInterval = null;
       }
-      if (this.progressInterval) {
-        clearInterval(this.progressInterval);
-        this.progressInterval = null;
+
+      // Method 2: Initialize specific sliders using data attributes
+      initDataAttributeSliders();
+
+      // Method 3: Fallback to manual Swiper initialization
+      if (window.Swiper) {
+        initSwiperSliders();
       }
-    },
-    resetProgress() {
-      this.progressWidth = 0;
-      this.stopAutoSlide();
-      // Restart auto-slide after a short delay
+
+      // Method 4: Force refresh pagination after initialization
       setTimeout(() => {
-        this.startAutoSlide();
-      }, 100);
-    },
-    handlePrimaryAction(action) {
-      switch (action.action) {
-        case "contact":
-          // Scroll to contact section or open contact form
-          this.scrollToSection("#contact");
-          break;
-        case "portfolio":
-          this.scrollToSection("#portfolio");
-          break;
-        default:
-          console.log("Primary action:", action);
+        document.querySelectorAll(".swiper").forEach((slider) => {
+          if (slider.swiper) {
+            slider.swiper.update();
+            if (slider.swiper.pagination) {
+              slider.swiper.pagination.render();
+              slider.swiper.pagination.update();
+            }
+          }
+        });
+      }, 200);
+
+      // Method 5: Try to call any other theme initialization functions
+      ["initSliders", "sliderInit", "initializeSliders", "themeInit"].forEach(
+        (funcName) => {
+          if (typeof window[funcName] === "function") {
+            try {
+              window[funcName]();
+            } catch (e) {
+              // Silent fail
+            }
+          }
+        }
+      );
+    };
+
+    const initDataAttributeSliders = () => {
+      // Initialize sliders based on data attributes (theme's approach)
+      document.querySelectorAll("[data-slider-options]").forEach((slider) => {
+        try {
+          const options = JSON.parse(
+            slider.getAttribute("data-slider-options")
+          );
+
+          if (window.Swiper && !slider.swiper) {
+            // Add pagination configuration if not present
+            if (
+              !options.pagination &&
+              slider.querySelector(".slider-pagination")
+            ) {
+              options.pagination = {
+                el: slider.querySelector(".slider-pagination"),
+                clickable: true,
+                type: "bullets",
+              };
+            }
+
+            // Add navigation configuration if not present
+            if (!options.navigation) {
+              const nextBtn = document.querySelector(
+                `[data-slider-next="#${slider.id}"]`
+              );
+              const prevBtn = document.querySelector(
+                `[data-slider-prev="#${slider.id}"]`
+              );
+
+              if (nextBtn && prevBtn) {
+                options.navigation = {
+                  nextEl: `[data-slider-next="#${slider.id}"]`,
+                  prevEl: `[data-slider-prev="#${slider.id}"]`,
+                };
+              }
+            }
+
+            // Initialize the swiper
+            const swiperInstance = new window.Swiper(slider, options);
+
+            // Store reference to prevent re-initialization
+            slider.swiper = swiperInstance;
+          }
+        } catch (e) {
+          console.log("Failed to initialize slider with data attributes:", e);
+        }
+      });
+    };
+
+    const initSwiperSliders = () => {
+      try {
+        // Hero Slider
+        const heroSlider = document.querySelector("#heroSlider1");
+        if (heroSlider && !heroSlider.swiper) {
+          new window.Swiper("#heroSlider1", {
+            effect: "fade",
+            loop: true,
+            autoplay: {
+              delay: 5000,
+              disableOnInteraction: false,
+            },
+            autoHeight: false,
+            pagination: {
+              el: ".slider-pagination",
+              clickable: true,
+              type: "bullets",
+            },
+            navigation: {
+              nextEl: '[data-slider-next="#heroSlider1"]',
+              prevEl: '[data-slider-prev="#heroSlider1"]',
+            },
+          });
+        }
+
+        // Team Slider
+        const teamSlider = document.querySelector("#teamSlider1");
+        if (teamSlider && !teamSlider.swiper) {
+          new window.Swiper("#teamSlider1", {
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            breakpoints: {
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              992: { slidesPerView: 2 },
+              1200: { slidesPerView: 3 },
+              1400: { slidesPerView: 4 },
+            },
+            autoHeight: true,
+            navigation: {
+              nextEl: '[data-slider-next="#teamSlider1"]',
+              prevEl: '[data-slider-prev="#teamSlider1"]',
+            },
+          });
+        }
+
+        // Testimonial Slider
+        const testiSlider = document.querySelector("#testiSlide1");
+        if (testiSlider && !testiSlider.swiper) {
+          new window.Swiper("#testiSlide1", {
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            breakpoints: {
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 1 },
+              768: { slidesPerView: 1 },
+              992: { slidesPerView: 2 },
+              1200: { slidesPerView: 2 },
+              1300: { slidesPerView: 2.6 },
+              1500: { slidesPerView: 3.6 },
+            },
+            pagination: {
+              el: '[data-slider-id="#testiSlider1"]',
+              type: "progressbar",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: '[data-slider-next="#testiSlide1"]',
+              prevEl: '[data-slider-prev="#testiSlide1"]',
+            },
+          });
+        }
+
+        // Blog Slider
+        const blogSlider = document.querySelector("#blogSlider1");
+        if (blogSlider && !blogSlider.swiper) {
+          new window.Swiper("#blogSlider1", {
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            breakpoints: {
+              0: { slidesPerView: 1 },
+              576: { slidesPerView: 1 },
+              768: { slidesPerView: 1 },
+              992: { slidesPerView: 2 },
+              1200: { slidesPerView: 2 },
+              1300: { slidesPerView: 3 },
+            },
+            autoHeight: true,
+            navigation: {
+              nextEl: '[data-slider-next="#blogSlider1"]',
+              prevEl: '[data-slider-prev="#blogSlider1"]',
+            },
+          });
+        }
+
+        // Property Sliders
+        document.querySelectorAll(".th-slider").forEach((slider) => {
+          if (
+            slider.swiper ||
+            slider.id === "heroSlider1" ||
+            slider.id === "teamSlider1" ||
+            slider.id === "testiSlide1" ||
+            slider.id === "blogSlider1"
+          )
+            return;
+
+          new window.Swiper(slider, {
+            loop: false,
+            autoplay: false,
+            autoHeight: true,
+            effect: "fade",
+            pagination: {
+              el: slider.querySelector(".swiper-pagination"),
+              clickable: true,
+              type: "bullets",
+            },
+            navigation: {
+              nextEl: slider.querySelector(".slider-next"),
+              prevEl: slider.querySelector(".slider-prev"),
+            },
+          });
+        });
+      } catch (error) {
+        console.error("Error initializing Swiper sliders:", error);
       }
-    },
-    handleSecondaryAction(action) {
-      switch (action.action) {
-        case "portfolio":
-          this.scrollToSection("#portfolio");
-          break;
-        case "contact":
-          this.scrollToSection("#contact");
-          break;
-        default:
-          console.log("Secondary action:", action);
-      }
-    },
-    scrollToSection(selector) {
-      const element = document.querySelector(selector);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    },
-    filterProjects(category) {
-      this.activeFilter = category;
-      // Update active state for filter buttons
-      document
-        .querySelectorAll(".filter-btn")
-        .forEach((btn) => btn.classList.remove("active"));
-      event.target.classList.add("active");
-    },
+    };
+
+    return {};
   },
 };
 </script>
 
 <style scoped>
-/* CSS Variables for consistent theming */
-:root {
-  --primary-dark: #1a1a1a;
-  --primary-darker: #0a0a0a;
-  --accent-yellow: #ffd700;
-  --accent-orange: #ff8c00;
-  --text-light: #ffffff;
-  --text-gray: #cccccc;
-  --text-muted: #888888;
-  --border-dark: #333333;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+/* Ensure pagination dots are visible */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 20px;
 }
 
-/* Global Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: #ccc !important;
+  opacity: 1 !important;
+  margin: 0 5px !important;
 }
 
-.homepage {
-  background-color: var(--primary-darker);
-  color: var(--text-light);
-  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
+.swiper-pagination-bullet-active {
+  background: #007bff !important;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+.slider-pagination {
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* Button Styles */
-.btn-primary,
-.btn-secondary {
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  color: var(--primary-dark);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text-light);
-  border: 2px solid var(--glass-border);
-}
-
-.btn-secondary:hover {
-  background: var(--glass-bg);
-  border-color: var(--accent-yellow);
-}
-
-/* Section Headers */
-.section-header {
-  margin-bottom: 50px;
-}
-
-.section-tag {
+.slider-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
   display: inline-block;
-  padding: 8px 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  color: var(--accent-yellow);
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-light);
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-gray);
-  max-width: 600px;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-center .section-subtitle {
-  margin: 0 auto;
-}
-
-/* Hero Section */
-.hero-section {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-slider {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.hero-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(1.1);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  display: flex;
-  align-items: center;
-  z-index: 1;
-}
-
-.hero-slide.active {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  z-index: 2;
-}
-
-.hero-slide::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 26, 0.7) 0%,
-    rgba(10, 10, 10, 0.5) 100%
-  );
-  z-index: 2;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  padding: 100px 0 120px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideContentIn 0.8s ease-out 0.4s forwards;
-}
-
-.hero-slide.active .hero-content {
-  opacity: 1;
-  transform: translateY(0);
-  animation: slideContentIn 0.8s ease-out 0.2s forwards;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 25px;
-  color: var(--accent-yellow);
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 25px;
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideInUp 0.6s ease-out 0.3s forwards;
-}
-
-.hero-slide.active .hero-badge {
-  animation: slideInUp 0.6s ease-out 0.1s forwards;
-}
-
-.hero-title {
-  font-size: 4rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 25px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideInUp 0.8s ease-out 0.5s forwards;
-}
-
-.hero-slide.active .hero-title {
-  animation: slideInUp 0.8s ease-out 0.2s forwards;
-}
-
-.hero-subtitle {
-  font-size: 1.3rem;
-  color: var(--text-gray);
-  margin-bottom: 40px;
-  line-height: 1.7;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideInUp 0.8s ease-out 0.7s forwards;
-}
-
-.hero-slide.active .hero-subtitle {
-  animation: slideInUp 0.8s ease-out 0.3s forwards;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideInUp 0.8s ease-out 0.9s forwards;
-}
-
-.hero-slide.active .hero-actions {
-  animation: slideInUp 0.8s ease-out 0.4s forwards;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideInUp 0.8s ease-out 1.1s forwards;
-}
-
-.hero-badge i {
-  font-size: 16px;
-}
-
-.hero-text {
-  max-width: 700px;
-  margin-bottom: 60px;
-}
-
-.highlight {
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-
-.highlight::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  border-radius: 2px;
-  animation: expandWidth 1s ease-out 1.3s both;
-}
-
-.stat-item {
-  text-align: center;
-  position: relative;
-  padding: 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease;
-}
-
-.stat-item:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-yellow);
-}
-
-.stat-number {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: var(--accent-yellow);
-  margin-bottom: 8px;
-  position: relative;
-}
-
-.stat-label {
-  font-size: 0.95rem;
-  color: var(--text-gray);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
-
-/* Hero Navigation */
-.hero-navigation {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 4;
-  background: linear-gradient(
-    to top,
-    rgba(10, 10, 10, 0.9) 0%,
-    transparent 100%
-  );
-  backdrop-filter: blur(10px);
-}
-
-.slide-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 30px 0;
-  flex-wrap: wrap;
-}
-
-.slide-indicator {
-  background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 15px 25px;
+  margin: 0 5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
 }
 
-.slide-indicator::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 215, 0, 0.1),
-    transparent
-  );
-  transition: left 0.6s ease;
+.slider-pagination .swiper-pagination-bullet-active {
+  background: #007bff;
 }
 
-.slide-indicator:hover::before {
-  left: 100%;
+/* Progress bar for testimonial slider */
+.swiper-pagination-progressbar {
+  background: rgba(255, 255, 255, 0.3) !important;
+  height: 4px !important;
 }
 
-.slide-indicator:hover,
-.slide-indicator.active {
-  border-color: var(--accent-yellow);
-  background: rgba(255, 215, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.indicator-number {
-  width: 25px;
-  height: 25px;
-  background: var(--accent-yellow);
-  color: var(--primary-dark);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.slide-indicator.active .indicator-number {
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  animation: pulse 2s infinite;
-}
-
-.indicator-label {
-  color: var(--text-light);
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.slide-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-  pointer-events: none;
-}
-
-.arrow-btn {
-  width: 60px;
-  height: 60px;
-  background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
-  border-radius: 50%;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  backdrop-filter: blur(10px);
-  pointer-events: auto;
-}
-
-.arrow-btn:hover {
-  border-color: var(--accent-yellow);
-  background: rgba(255, 215, 0, 0.1);
-  transform: scale(1.1);
-}
-
-.arrow-btn:active {
-  transform: scale(0.95);
-}
-
-/* Progress Bar */
-.hero-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 5;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  transition: width 0.1s linear;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-/* Animations */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideContentIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes expandWidth {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* About Section */
-.about-section {
-  padding: 100px 0;
-  background: var(--primary-dark);
-}
-
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.about-description {
-  font-size: 1.1rem;
-  color: var(--text-gray);
-  margin-bottom: 30px;
-  line-height: 1.8;
-}
-
-.about-features {
-  margin-bottom: 40px;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  color: var(--text-gray);
-}
-
-.feature-item i {
-  color: var(--accent-yellow);
-  font-size: 1.2rem;
-}
-
-.about-image {
-  position: relative;
-}
-
-.image-card {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.image-card img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.image-card:hover .image-overlay {
-  opacity: 1;
-}
-
-.play-button {
-  width: 80px;
-  height: 80px;
-  background: var(--accent-yellow);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-dark);
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.play-button:hover {
-  transform: scale(1.1);
-}
-
-/* Services Section */
-.services-section {
-  padding: 100px 0;
-  background: var(--primary-darker);
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.service-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 15px;
-  padding: 40px 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--accent-yellow);
-  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
-}
-
-.service-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 25px;
-  color: var(--primary-dark);
-  font-size: 2rem;
-}
-
-.service-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 15px;
-}
-
-.service-description {
-  color: var(--text-gray);
-  margin-bottom: 25px;
-  line-height: 1.6;
-}
-
-.service-link {
-  color: var(--accent-yellow);
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.3s ease;
-}
-
-.service-link:hover {
-  color: var(--accent-orange);
-}
-
-/* Portfolio Section */
-.portfolio-section {
-  padding: 100px 0;
-  background: var(--primary-dark);
-}
-
-.portfolio-filter {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  padding: 12px 25px;
-  background: transparent;
-  border: 2px solid var(--border-dark);
-  border-radius: 25px;
-  color: var(--text-gray);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: var(--accent-yellow);
-  border-color: var(--accent-yellow);
-  color: var(--primary-dark);
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.portfolio-item {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.project-image {
-  position: relative;
-}
-
-.project-image img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.portfolio-item:hover .project-image img {
-  transform: scale(1.1);
-}
-
-.project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 30px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.portfolio-item:hover .project-overlay {
-  opacity: 1;
-}
-
-.project-info {
-  width: 100%;
-}
-
-.project-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 5px;
-}
-
-.project-category {
-  color: var(--accent-yellow);
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-}
-
-.project-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--accent-yellow);
-  border: none;
-  border-radius: 50%;
-  color: var(--primary-dark);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-icon:hover {
-  transform: scale(1.1);
-}
-
-/* Why Choose Us Section */
-.why-choose-section {
-  padding: 100px 0;
-  background: var(--primary-darker);
-}
-
-.why-choose-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.benefits-grid {
-  display: grid;
-  gap: 30px;
-}
-
-.benefit-item {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.benefit-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-dark);
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.benefit-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 10px;
-}
-
-.benefit-description {
-  color: var(--text-gray);
-  line-height: 1.6;
-}
-
-.stats-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.stat-circle {
-  text-align: center;
-  padding: 20px;
-  border: 2px solid var(--accent-yellow);
-  border-radius: 50%;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.stat-circle .stat-number {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--accent-yellow);
-  margin-bottom: 5px;
-}
-
-.stat-circle .stat-label {
-  font-size: 0.8rem;
-  color: var(--text-gray);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Testimonials Section */
-.testimonials-section {
-  padding: 100px 0;
-  background: var(--primary-dark);
-}
-
-.testimonials-slider {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.testimonial-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-}
-
-.quote-icon {
-  font-size: 2.5rem;
-  color: var(--accent-yellow);
-  margin-bottom: 20px;
-}
-
-.testimonial-text {
-  font-size: 1.1rem;
-  color: var(--text-gray);
-  line-height: 1.8;
-  margin-bottom: 30px;
-  font-style: italic;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.author-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--accent-yellow);
-}
-
-.author-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.author-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 5px;
-}
-
-.author-title {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-/* CTA Section */
-.cta-section {
-  padding: 80px 0;
-  background: linear-gradient(
-    135deg,
-    var(--accent-yellow),
-    var(--accent-orange)
-  );
-}
-
-.cta-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.cta-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 15px;
-}
-
-.cta-subtitle {
-  font-size: 1.1rem;
-  color: var(--primary-dark);
-  opacity: 0.8;
-}
-
-.cta-actions {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.cta-section .btn-primary {
-  background: var(--primary-dark);
-  color: var(--text-light);
-}
-
-.cta-section .btn-secondary {
-  background: transparent;
-  color: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
-
-.cta-section .btn-secondary:hover {
-  background: var(--primary-dark);
-  color: var(--text-light);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.8rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .hero-stats {
-    gap: 20px;
-    justify-content: center;
-  }
-
-  .stat-item {
-    padding: 15px;
-    min-width: 120px;
-  }
-
-  .hero-badge {
-    font-size: 12px;
-    padding: 8px 16px;
-  }
-
-  .slide-indicators {
-    gap: 10px;
-    padding: 20px 0;
-  }
-
-  .slide-indicator {
-    padding: 12px 20px;
-    gap: 8px;
-  }
-
-  .indicator-number {
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-  }
-
-  .indicator-label {
-    font-size: 12px;
-  }
-
-  .arrow-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1rem;
-  }
-
-  .slide-arrows {
-    padding: 0 20px;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .about-content,
-  .why-choose-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .hero-actions,
-  .cta-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cta-content {
-    text-align: center;
-    flex-direction: column;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .services-grid,
-  .portfolio-grid,
-  .testimonials-slider {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
-  }
-
-  .hero-title {
-    font-size: 2.2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .hero-content {
-    padding: 80px 0 100px;
-  }
-
-  .hero-actions {
-    gap: 15px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 12px 24px;
-    font-size: 14px;
-  }
-
-  .slide-indicators {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .slide-indicator {
-    width: 100%;
-    max-width: 200px;
-    justify-content: center;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .stat-item {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  .section-title {
-    font-size: 1.8rem;
-  }
-
-  .service-card,
-  .testimonial-card {
-    padding: 30px 20px;
-  }
-
-  .portfolio-filter {
-    gap: 10px;
-  }
-
-  .filter-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
+.swiper-pagination-progressbar-fill {
+  background: #007bff !important;
 }
 </style>

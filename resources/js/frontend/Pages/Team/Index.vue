@@ -1,213 +1,288 @@
 <template>
-  <div class="team-wrapper">
-    <!-- Header Section -->
-    <header class="team-header">
-      <div class="header-overlay"></div>
-      <div class="container">
-        <div class="header-content">
-          <!-- Breadcrumb -->
-          <nav class="breadcrumb">
-            <Link href="/" class="breadcrumb-link">Home</Link>
-            <span class="breadcrumb-separator">/</span>
-            <span class="breadcrumb-current">Our Team</span>
-          </nav>
-
-          <h1 class="page-title">Meet Our Team</h1>
-          <p class="page-subtitle">
-            Dedicated professionals committed to delivering excellence in
-            construction and building solutions
-          </p>
-
-          <div class="header-stats">
-            <div class="stat-badge">
-              <span class="stat-number">{{ teamMembers.length }}</span>
-              <span class="stat-label">Team Members</span>
-            </div>
-            <div class="stat-badge">
-              <span class="stat-number">{{ experienceYears }}</span>
-              <span class="stat-label">Years Experience</span>
-            </div>
-          </div>
-        </div>
+  <div
+    class="breadcumb-wrapper background-image"
+    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+  >
+    <div class="container">
+      <div class="breadcumb-content">
+        <h1 class="breadcumb-title mt-5">Our Board of Directory</h1>
+        <ul class="breadcumb-menu">
+          <li><a href="index.html">Home</a></li>
+          <li>Our Board of Directory</li>
+        </ul>
       </div>
-    </header>
-
-    <!-- Filter Section -->
-    <section class="filter-section">
-      <div class="container">
-        <div class="filter-wrapper">
-          <div class="filter-title">
-            <h3>View Options</h3>
-          </div>
-
-          <div class="view-toggle">
-            <button
-              @click="viewMode = 'grid'"
-              :class="['view-btn', { active: viewMode === 'grid' }]"
-              title="Grid View"
-            >
-              ⊞
-            </button>
-            <button
-              @click="viewMode = 'list'"
-              :class="['view-btn', { active: viewMode === 'list' }]"
-              title="List View"
-            >
-              ☰
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team-section">
-      <div class="container">
-        <!-- Team Grid -->
-        <div :class="['team-grid', viewMode]">
+    </div>
+  </div>
+  <section class="team-area-1 space">
+    <div class="container">
+      <div class="row gy-30 justify-content-center">
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: visible; animation-name: fadeinup"
+        >
           <div
-            v-for="member in paginatedTeam"
-            :key="member.id"
-            class="team-card"
-            @click="openMemberModal(member)"
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
           >
-            <div class="card-image">
-              <img
-                :src="member.image"
-                :alt="member.name"
-                class="member-image"
-              />
-              <div class="image-overlay">
-                <div class="social-links">
-                  <a
-                    v-for="(link, platform) in member.social_link"
-                    :key="platform"
-                    :href="link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="social-link"
-                    @click.stop
-                    :title="platform"
-                  >
-                    <i :class="getSocialIcon(platform)"></i>
-                  </a>
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_1.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Vickie Wisozk</a>
+                </h3>
+                <span class="team-desig">Real Estate Manager</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
                 </div>
               </div>
             </div>
-
-            <div class="card-content">
-              <h3 class="member-name">{{ member.name }}</h3>
-              <p class="member-designation">{{ member.designation }}</p>
-
-              <button
-                class="view-profile-btn"
-                @click.stop="openMemberModal(member)"
-              >
-                View Profile
-              </button>
-            </div>
           </div>
         </div>
-
-        <!-- Pagination -->
-        <div class="pagination-wrapper">
-          <div class="pagination">
-            <button
-              @click="goToPage(currentPage - 1)"
-              :disabled="currentPage === 1"
-              class="pagination-btn"
-            >
-              ← Previous
-            </button>
-
-            <div class="pagination-numbers">
-              <button
-                v-for="page in visiblePages"
-                :key="page"
-                @click="goToPage(page)"
-                :class="['pagination-number', { active: currentPage === page }]"
-              >
-                {{ page }}
-              </button>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: visible; animation-name: fadeinup"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_2.png" alt="Team" />
             </div>
-
-            <button
-              @click="goToPage(currentPage + 1)"
-              :disabled="currentPage === totalPages"
-              class="pagination-btn"
-            >
-              Next →
-            </button>
-          </div>
-
-          <div class="pagination-info">
-            Showing {{ startIndex + 1 }}-{{
-              Math.min(endIndex, teamMembers.length)
-            }}
-            of {{ teamMembers.length }} team members
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Member Modal -->
-    <div v-if="showMemberModal" class="modal-overlay" @click="closeMemberModal">
-      <div class="modal-content" @click.stop>
-        <button @click="closeMemberModal" class="modal-close">×</button>
-
-        <div class="modal-body">
-          <div class="modal-header">
-            <div class="modal-image">
-              <img
-                :src="selectedMember?.image"
-                :alt="selectedMember?.name"
-                class="profile-image"
-              />
-            </div>
-            <div class="modal-info">
-              <h2 class="profile-name">{{ selectedMember?.name }}</h2>
-              <p class="profile-designation">
-                {{ selectedMember?.designation }}
-              </p>
-
-              <div class="modal-social-links">
-                <a
-                  v-for="(link, platform) in selectedMember?.social_link"
-                  :key="platform"
-                  :href="link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="modal-social-link"
-                  :title="platform"
-                >
-                  <i :class="getSocialIcon(platform)"></i>
-                </a>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Renee Strosin</a>
+                </h3>
+                <span class="team-desig">Property Developer</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="modal-details">
-            <div class="detail-section">
-              <h4>Contact Information</h4>
-              <div class="contact-links">
-                <a
-                  v-for="(link, platform) in selectedMember?.social_link"
-                  :key="platform"
-                  :href="link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="contact-link"
-                >
-                  <i :class="getSocialIcon(platform)"></i>
-                  <span>{{ formatPlatformName(platform) }}</span>
-                </a>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: visible; animation-name: fadeinup"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_3.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Zulia Era</a>
+                </h3>
+                <span class="team-desig">Listing Coordinator</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: visible; animation-name: fadeinup"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_4.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Bernice Roberts</a>
+                </h3>
+                <span class="team-desig">Leasing Consultant</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: hidden; animation-name: none"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_5.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Martha Leffler</a>
+                </h3>
+                <span class="team-desig">Real Estate Manager</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: hidden; animation-name: none"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_6.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Thomas Kirlin</a>
+                </h3>
+                <span class="team-desig">Listing Coordinator</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: hidden; animation-name: none"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_7.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Maliha Nancy</a>
+                </h3>
+                <span class="team-desig">Property Developer</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+          style="visibility: hidden; animation-name: none"
+        >
+          <div
+            class="team-card style-2 background-image"
+            style="
+              background-image: url('assets/img/shape/team-2-bg-shape.png');
+            "
+          >
+            <div class="team-img">
+              <img src="assets/frontend/img/team/team_2_8.png" alt="Team" />
+            </div>
+            <div class="team-content">
+              <div class="left-contet">
+                <h3 class="box-title">
+                  <a href="team-details.html">Annie Murazik</a>
+                </h3>
+                <span class="team-desig">Leasing Consultant</span>
+              </div>
+              <div class="team-social">
+                <div class="th-social">
+                  <a target="_blank" href="https://instagram.com/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a target="_blank" href="https://linkedin.com/"
+                    ><i class="fa-solid fa-envelope"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -217,277 +292,6 @@ import { Link } from "@inertiajs/vue3";
 export default {
   components: {
     Link,
-  },
-  setup() {
-    // Reactive data
-    const teamMembers = ref([
-      {
-        id: 1,
-        name: "Michael Johnson",
-        designation: "Chief Executive Officer",
-        image: "/uploads/avatars/avatar-1.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/michael-johnson",
-          twitter: "https://twitter.com/michaeljohnson",
-          email: "mailto:michael.johnson@securetrade.com",
-        },
-      },
-      {
-        id: 2,
-        name: "Sarah Davis",
-        designation: "Project Manager",
-        image: "/uploads/avatars/avatar-2.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/sarah-davis",
-          email: "mailto:sarah.davis@securetrade.com",
-        },
-      },
-      {
-        id: 3,
-        name: "Robert Wilson",
-        designation: "Senior Architect",
-        image: "/uploads/avatars/avatar-3.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/robert-wilson",
-          instagram: "https://instagram.com/robertwilsonarchitect",
-          email: "mailto:robert.wilson@securetrade.com",
-        },
-      },
-      {
-        id: 4,
-        name: "Emily Thompson",
-        designation: "Civil Engineer",
-        image: "/uploads/avatars/avatar-4.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/emily-thompson",
-          twitter: "https://twitter.com/emilythompson",
-          email: "mailto:emily.thompson@securetrade.com",
-        },
-      },
-      {
-        id: 5,
-        name: "David Martinez",
-        designation: "Construction Supervisor",
-        image: "/uploads/avatars/avatar-5.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/david-martinez",
-          email: "mailto:david.martinez@securetrade.com",
-        },
-      },
-      {
-        id: 6,
-        name: "Lisa Anderson",
-        designation: "Interior Designer",
-        image: "/uploads/avatars/avatar-6.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/lisa-anderson",
-          instagram: "https://instagram.com/lisaandersondesign",
-          pinterest: "https://pinterest.com/lisaandersondesign",
-          email: "mailto:lisa.anderson@securetrade.com",
-        },
-      },
-      {
-        id: 7,
-        name: "James Brown",
-        designation: "Safety Manager",
-        image: "/uploads/avatars/avatar-7.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/james-brown",
-          email: "mailto:james.brown@securetrade.com",
-        },
-      },
-      {
-        id: 8,
-        name: "Maria Garcia",
-        designation: "Financial Controller",
-        image: "/uploads/avatars/avatar-8.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/maria-garcia",
-          email: "mailto:maria.garcia@securetrade.com",
-        },
-      },
-      {
-        id: 9,
-        name: "Kevin Lee",
-        designation: "Equipment Manager",
-        image: "/uploads/avatars/avatar-9.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/kevin-lee",
-          email: "mailto:kevin.lee@securetrade.com",
-        },
-      },
-      {
-        id: 10,
-        name: "Jennifer White",
-        designation: "Marketing Director",
-        image: "/uploads/avatars/avatar-10.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/jennifer-white",
-          twitter: "https://twitter.com/jenniferwhite",
-          instagram: "https://instagram.com/jenniferwhitemarketing",
-          email: "mailto:jennifer.white@securetrade.com",
-        },
-      },
-      {
-        id: 11,
-        name: "Thomas Clark",
-        designation: "Quality Assurance Manager",
-        image: "/uploads/avatars/avatar-11.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/thomas-clark",
-          email: "mailto:thomas.clark@securetrade.com",
-        },
-      },
-      {
-        id: 12,
-        name: "Amanda Rodriguez",
-        designation: "Human Resources Manager",
-        image: "/uploads/avatars/avatar-12.png",
-        social_link: {
-          linkedin: "https://linkedin.com/in/amanda-rodriguez",
-          email: "mailto:amanda.rodriguez@securetrade.com",
-        },
-      },
-    ]);
-
-    const activeFilter = ref("all");
-    const viewMode = ref("grid");
-    const currentPage = ref(1);
-    const itemsPerPage = ref(9);
-    const showMemberModal = ref(false);
-    const selectedMember = ref(null);
-    const experienceYears = ref(15);
-
-    // Computed properties
-    const totalPages = computed(() => {
-      return Math.ceil(teamMembers.value.length / itemsPerPage.value);
-    });
-
-    const startIndex = computed(() => {
-      return (currentPage.value - 1) * itemsPerPage.value;
-    });
-
-    const endIndex = computed(() => {
-      return startIndex.value + itemsPerPage.value;
-    });
-
-    const paginatedTeam = computed(() => {
-      return teamMembers.value.slice(startIndex.value, endIndex.value);
-    });
-
-    const visiblePages = computed(() => {
-      const pages = [];
-      const start = Math.max(1, currentPage.value - 2);
-      const end = Math.min(totalPages.value, currentPage.value + 2);
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-
-      return pages;
-    });
-
-    // Methods
-    const goToPage = (page) => {
-      if (page >= 1 && page <= totalPages.value) {
-        currentPage.value = page;
-        // Scroll to top of team section
-        document
-          .querySelector(".team-section")
-          .scrollIntoView({ behavior: "smooth" });
-      }
-    };
-
-    const openMemberModal = (member) => {
-      selectedMember.value = member;
-      showMemberModal.value = true;
-      document.body.style.overflow = "hidden";
-    };
-
-    const closeMemberModal = () => {
-      showMemberModal.value = false;
-      selectedMember.value = null;
-      document.body.style.overflow = "auto";
-    };
-
-    const getSocialIcon = (platform) => {
-      const icons = {
-        linkedin: "fab fa-linkedin-in",
-        twitter: "fab fa-twitter",
-        instagram: "fab fa-instagram",
-        facebook: "fab fa-facebook-f",
-        pinterest: "fab fa-pinterest-p",
-        email: "fas fa-envelope",
-        github: "fab fa-github",
-        website: "fas fa-globe",
-      };
-      return icons[platform] || "fas fa-link";
-    };
-
-    const formatPlatformName = (platform) => {
-      const names = {
-        linkedin: "LinkedIn",
-        twitter: "Twitter",
-        instagram: "Instagram",
-        facebook: "Facebook",
-        pinterest: "Pinterest",
-        email: "Email",
-        github: "GitHub",
-        website: "Website",
-      };
-      return (
-        names[platform] || platform.charAt(0).toUpperCase() + platform.slice(1)
-      );
-    };
-
-    // Reset pagination when filter changes
-    const resetPagination = () => {
-      currentPage.value = 1;
-    };
-
-    // Keyboard navigation
-    const handleKeydown = (event) => {
-      if (showMemberModal.value && event.key === "Escape") {
-        closeMemberModal();
-      }
-    };
-
-    // Lifecycle hooks
-    onMounted(() => {
-      document.addEventListener("keydown", handleKeydown);
-    });
-
-    onUnmounted(() => {
-      document.removeEventListener("keydown", handleKeydown);
-      document.body.style.overflow = "auto";
-    });
-
-    return {
-      // Data
-      teamMembers,
-      activeFilter,
-      viewMode,
-      currentPage,
-      itemsPerPage,
-      showMemberModal,
-      selectedMember,
-      experienceYears,
-
-      // Computed
-      totalPages,
-      startIndex,
-      endIndex,
-      paginatedTeam,
-      visiblePages,
-
-      // Methods
-      goToPage,
-      openMemberModal,
-      closeMemberModal,
-      getSocialIcon,
-      formatPlatformName,
-      resetPagination,
-    };
   },
 };
 </script>
@@ -525,7 +329,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("/uploads/property_dark/property_dark_6.jpeg") center center no-repeat;
+  background: url("/uploads/property_dark/property_dark_6.jpeg") center center
+    no-repeat;
   background-size: cover;
   opacity: 0.3;
   z-index: 1;
