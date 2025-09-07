@@ -68,6 +68,14 @@ class FrontendController extends Controller
             ]
         ]);
     }
+    public function ServicePage()
+    {
+        return Inertia::render('Service/Index', [
+            'event' => [
+                'title' => 'Service',
+            ]
+        ]);
+    }
 
 
     public function GalleryPage()

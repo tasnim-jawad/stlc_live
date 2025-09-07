@@ -11,6 +11,7 @@ Route::get('/about-us', [FrontendController::class, 'AboutUsPage'])->name('About
 Route::get('/portfolio', [FrontendController::class, 'PortfolioPage'])->name('PortfolioPage');
 Route::get('/project', [FrontendController::class, 'ProjectPage'])->name('ProjectPage');
 Route::get('/team', [FrontendController::class, 'TeamPage'])->name('TeamPage');
+Route::get('/service', [FrontendController::class, 'ServicePage'])->name('ServicePage');
 Route::get('/gallery', [FrontendController::class, 'GalleryPage'])->name('GalleryPage');
 Route::get('/gallery/images', [FrontendController::class, 'GalleryImagesPage'])->name('GalleryImagesPage');
 Route::get('/gallery/videos', [FrontendController::class, 'GalleryVideosPage'])->name('GalleryVideosPage');

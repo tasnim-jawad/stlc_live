@@ -3,10 +3,10 @@
     <button class="th-btn preloaderCls">Cancel Preloader</button>
     <div id="preloader" class="preloader-inner">
       <div class="txt-loading">
-        <span data-text-preloader="P" class="letters-loading">S </span
-        ><span data-text-preloader="I" class="letters-loading">T </span
+        <span data-text-preloader="S" class="letters-loading">S </span
+        ><span data-text-preloader="T" class="letters-loading">T </span
         ><span data-text-preloader="L" class="letters-loading">L </span
-        ><span data-text-preloader="L" class="letters-loading">C </span
+        ><span data-text-preloader="C" class="letters-loading">C </span>
       </div>
     </div>
   </div>
@@ -295,28 +295,29 @@
           <div class="row align-items-center justify-content-between">
             <div class="col-auto">
               <div class="header-logo">
-                <a href="/"
+                <Link href="/"
                   ><img
                     style="height: 80px; width: auto"
                     src="/assets/frontend/img/logo.jpeg"
                     alt="Piller-html"
-                /></a>
+                /></Link>
               </div>
             </div>
             <div class="col-auto">
               <nav class="main-menu d-none d-lg-inline-block">
                 <ul>
                   <li class="active">
-                    <a href="/">Home</a>
+                    <Link href="/">Home</Link>
                   </li>
-                  <li><a href="/about-us">About Us</a></li>
-                  <li><a href="/team">Our Team</a></li>
+                  <li><Link href="/about-us">About Us</Link></li>
+                  <li><Link href="/team">Our Team</Link></li>
+                  <li><Link href="/service">Our Services</Link></li>
                   <li>
-                    <a href="/portfolio">Property</a>
+                    <Link href="/portfolio">Property</Link>
                   </li>
-                  <li><a href="/gallery">Gallery </a></li>
-                  <li><a href="/blog">STC Blog</a></li>
-                  <li><a href="/contact">Contact Us</a></li>
+                  <li><Link href="/gallery">Gallery </Link></li>
+                  <li><Link href="/blog">STC Blog</Link></li>
+                  <li><Link href="/contact">Contact Us</Link></li>
                 </ul>
               </nav>
               <button type="button" class="th-menu-toggle d-block d-lg-none">
