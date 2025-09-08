@@ -169,18 +169,9 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="about-bottom-wrap fadeinup wow">
-                <a href="/about-us" class="th-btn bg-black pill"
-                  >More About Us</a
+                <Link href="/about-us" class="th-btn bg-black pill"
+                  >More About Us</Link
                 >
-                <div class="about1-call-wrapper">
-                  <div class="icon"><i class="fa-regular fa-phone"></i></div>
-                  <div class="content">
-                    <p>Free Consulting</p>
-                    <a href="tel:+00(123)45678900" class="link"
-                      >+00 (123) 456789 00</a
-                    >
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -191,7 +182,7 @@
 </template>
 
 <script>
-import CircleText from "../Pages/Home/components/CircleText.vue";
+import CircleText from "../../Pages/Home/components/CircleText.vue";
 export default {
   components: {
     CircleText,

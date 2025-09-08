@@ -132,7 +132,7 @@ import { Link } from "@inertiajs/vue3";
 
 import PropertySingleItemGrid from "./components/PropertySingleItemGrid.vue";
 import PropertySingleItemList from "./components/PropertySingleItemList.vue";
-import Pagination from "../../GlobalComponent/Pagination.vue";
+import Pagination from "../../GlobalComponent/Pagination/Pagination.vue";
 import SidebarArea from "./components/SidebarArea.vue";
 
 import $ from "jquery";

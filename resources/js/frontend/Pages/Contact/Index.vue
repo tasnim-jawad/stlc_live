@@ -6,7 +6,7 @@
   >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title">Contact</h1>
+        <h1 class="breadcumb-title mt-5">Contact</h1>
         <ul class="breadcumb-menu">
           <li><a href="index.html">Home</a></li>
           <li>Contact with Us</li>
@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import ContactForm2 from "../../GlobalComponent/ContactForm2.vue";
-import LocationMap from "../../GlobalComponent/LocationMap.vue";
+import ContactForm2 from "../../GlobalComponent/ContactForm2/ContactForm2.vue";
+import LocationMap from "../../GlobalComponent/LocationMap/LocationMap.vue";
 export default {
   components: {
     ContactForm2,

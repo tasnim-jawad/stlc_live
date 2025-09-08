@@ -33,7 +33,7 @@
 import { ref, computed } from "vue";
 import { Link } from "@inertiajs/vue3";
 import BlogSingleItem from "./components/BlogSingleItem.vue";
-import Pagination from "../../GlobalComponent/Pagination.vue";
+import Pagination from "../../GlobalComponent/Pagination/Pagination.vue";
 import $ from "jquery";
 import "magnific-popup";
 import "magnific-popup/dist/magnific-popup.css";

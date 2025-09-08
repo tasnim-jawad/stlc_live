@@ -44,9 +44,9 @@ class FrontendController extends Controller
 
     public function PortfolioPropertyPage()
     {
-        return Inertia::render('Portfolio/Property', [
+        return Inertia::render('Portfolio/PropertyDetails', [
             'event' => [
-                'title' => 'Portfolio Property',
+                'title' => 'Property Details',
             ]
         ]);
     }
@@ -76,6 +76,14 @@ class FrontendController extends Controller
             ]
         ]);
     }
+    public function ServiceDetailsPage()
+    {
+        return Inertia::render('Service/ServiceDetails', [
+            'event' => [
+                'title' => 'Service Details',
+            ]
+        ]);
+    }
 
 
     public function GalleryPage()
@@ -90,7 +98,7 @@ class FrontendController extends Controller
     public function GalleryImagesPage()
     {
 
-        return Inertia::render('Gallery/Images', [
+        return Inertia::render('Gallery/GalleryImages', [
             'event' => [
                 'title' => 'Gallery Images',
             ]
@@ -100,8 +108,7 @@ class FrontendController extends Controller
     
     public function GalleryVideosPage()
     {
-
-        return Inertia::render('Gallery/Videos', [
+        return Inertia::render('Gallery/GalleryVideos', [
             'event' => [
                 'title' => 'Gallery Videos',
             ]

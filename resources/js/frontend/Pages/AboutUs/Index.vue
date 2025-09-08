@@ -78,12 +78,12 @@ import $ from "jquery";
 import "magnific-popup";
 import "magnific-popup/dist/magnific-popup.css";
 
-import AboutUs from "../../GlobalComponent/AboutUs.vue";
-import Service from "../../GlobalComponent/Service.vue";
-import TeamSlider2 from "../../GlobalComponent/TeamSlider2.vue";
-import AtAGlance from "../../GlobalComponent/AtAGlance.vue";
-import Testimonials2 from "../../GlobalComponent/Testimonials2.vue";
-import ContactForm from "../../GlobalComponent/ContactForm.vue";
+import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
+import Service from "../../GlobalComponent/Service/Service.vue";
+import TeamSlider2 from "../../GlobalComponent/TeamSlider2/TeamSlider2.vue";
+import AtAGlance from "../../GlobalComponent/AtAGlance/AtAGlance.vue";
+import Testimonials2 from "../../GlobalComponent/Testimonials2/Testimonials2.vue";
+import ContactForm from "../../GlobalComponent/ContactForm/ContactForm.vue";
 
 export default {
   components: {

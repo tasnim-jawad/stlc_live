@@ -28,11 +28,7 @@
           </div>
           <div class="col-lg-7 col-xl-7 col-xxl-6">
             <div class="download-get-in-touch">
-              <form
-                action="https://html.themeholy.com/piller/demo/mail.php"
-                method="POST"
-                class="ajax-contact"
-              >
+              <form @submit.prevent="handleSubmit" class="ajax-contact">
                 <div class="title-area text-left mb-70">
                   <p
                     class="sub-title fadeinup wow"
@@ -46,47 +42,69 @@
                     data-wow-duration="1.5s"
                     data-wow-delay="0.3s"
                   >
-                    Let’s Talk Your Property Goal
+                    Let's Talk Your Property Goal
                   </h2>
                 </div>
                 <div class="row">
                   <div class="form-group col-lg-6 col-md-6">
-                    <label for="name">Name*</label>
+                    <label for="name">Name<span>*</span></label>
                     <input
                       type="text"
                       class="form-control"
+                      :class="{ 'is-invalid': contactStore.errors.name }"
                       name="name"
                       id="name"
                       placeholder="Your Name"
+                      v-model="contactStore.form.name"
                     />
                   </div>
                   <div class="form-group col-lg-6 col-md-6">
-                    <label for="email">Email*</label>
+                    <label for="email">Email<span>*</span></label>
                     <input
                       type="email"
                       class="form-control"
+                      :class="{ 'is-invalid': contactStore.errors.email }"
                       name="email"
                       id="email"
                       placeholder="Email Address"
+                      v-model="contactStore.form.email"
                     />
                   </div>
                   <div class="form-group col-lg-6 col-md-6">
-                    <label for="date">Desired Date*</label>
-                    <input
-                      type="date"
+                    <label for="service_types">Service Types</label>
+                    <select
                       class="form-control"
-                      name="date"
-                      id="date"
-                    />
+                      :class="{
+                        'is-invalid': contactStore.errors.service_types,
+                      }"
+                      name="service_types"
+                      id="service_types"
+                      v-model="contactStore.form.service_types"
+                    >
+                      <option value="" disabled="" selected="" hidden="">
+                        Select Service Type
+                      </option>
+                      <option
+                        v-for="serviceType in contactStore.serviceTypes"
+                        :key="serviceType.value"
+                        :value="serviceType.value"
+                      >
+                        {{ serviceType.label }}
+                      </option>
+                    </select>
                   </div>
                   <div class="form-group col-lg-6 col-md-6">
-                    <label for="desired_time">Desired Date*</label>
+                    <label for="phone_number">Phone Number</label>
                     <input
                       type="text"
                       class="form-control"
-                      name="desired_time"
-                      id="desired_time"
-                      placeholder="Desired Time"
+                      :class="{
+                        'is-invalid': contactStore.errors.phone_number,
+                      }"
+                      name="phone_number"
+                      id="phone_number"
+                      placeholder="Phone Number"
+                      v-model="contactStore.form.phone_number"
                     />
                   </div>
                   <div class="form-group col-lg-12">
@@ -97,14 +115,37 @@
                       cols="30"
                       rows="3"
                       class="form-control"
+                      :class="{ 'is-invalid': contactStore.errors.message }"
                       placeholder="Please write any note here..."
+                      v-model="contactStore.form.message"
                     ></textarea>
                   </div>
                   <div class="form-btn col-12 text-end">
-                    <button class="th-btn bg-theme radius">Submit Now</button>
+                    <button
+                      type="submit"
+                      class="th-btn bg-theme radius"
+                      :disabled="contactStore.loading"
+                    >
+                      {{
+                        contactStore.loading ? "Submitting..." : "Submit Now"
+                      }}
+                    </button>
                   </div>
                 </div>
-                <p class="form-messages mb-0 mt-3"></p>
+                <p
+                  class="form-messages mb-0 mt-3"
+                  v-if="contactStore.successMessage"
+                  style="color: green"
+                >
+                  {{ contactStore.successMessage }}
+                </p>
+                <p
+                  class="form-messages mb-0 mt-3"
+                  v-if="contactStore.errorMessage"
+                  style="color: red"
+                >
+                  {{ contactStore.errorMessage }}
+                </p>
               </form>
             </div>
           </div>
@@ -119,15 +160,30 @@
   <!-- --------------------------------------- -->
   <!-- ----------Marquee----------------- -->
   <!-- --------------------------------------- -->
-  
-
 </template>
 
 <script>
-import Marquee from "./Marquee.vue";
+import { useContactStore } from "./Store/contactStore.js";
+import Marquee from "../Marquee/Marquee.vue";
+
 export default {
   components: {
     Marquee,
+  },
+  setup() {
+    const contactStore = useContactStore();
+
+    const handleSubmit = async () => {
+      const result = await contactStore.submitForm();
+      if (result.success) {
+        console.log("Form submitted successfully");
+      }
+    };
+
+    return {
+      contactStore,
+      handleSubmit,
+    };
   },
 };
 </script>

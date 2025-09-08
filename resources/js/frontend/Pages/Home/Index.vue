@@ -67,13 +67,13 @@
 <script>
 import CircleText from "./components/CircleText.vue";
 import HeroSlider from "./components/HeroSlider.vue";
-import AboutUs from "../../GlobalComponent/AboutUs.vue";
-import TeamSlider from "../../GlobalComponent/TeamSlider.vue";
-import PopularProperties from "../../GlobalComponent/PopularProperties.vue";
-import MissionVissionCore from "../../GlobalComponent/MissionVissionCore.vue";
-import WhyChooseUs from "../../GlobalComponent/WhyChooseUs.vue";
-import Testimonials from "../../GlobalComponent/Testimonials.vue";
-import News from "../../GlobalComponent/News.vue";
+import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
+import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
+import PopularProperties from "../../GlobalComponent/PopularProperties/PopularProperties.vue";
+import MissionVissionCore from "../../GlobalComponent/MissionVissionCore/MissionVissionCore.vue";
+import WhyChooseUs from "../../GlobalComponent/WhyChooseUs/WhyChooseUs.vue";
+import Testimonials from "../../GlobalComponent/Testimonials/Testimonials.vue";
+import News from "../../GlobalComponent/News/News.vue";
 
 export default {
   name: "HomePage",

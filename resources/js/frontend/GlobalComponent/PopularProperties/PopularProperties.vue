@@ -47,6 +47,11 @@
         </div>
       </div>
       <div class="row gy-30 justify-content-center filter-active">
+        
+        <template v-for="n in 4" :key="n"> 
+          <PopularPropertiesSingleItem />
+        </template>
+
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 filter-item cat3 cat1">
           <div class="popular-list-1">
             <div class="thumb-wrapper">
@@ -1049,7 +1054,12 @@
 </template>
 
 <script>
-export default {};
+import PopularPropertiesSingleItem from './PopularPropertiesSingleItem.vue';
+export default {
+  components: {
+    PopularPropertiesSingleItem
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>
