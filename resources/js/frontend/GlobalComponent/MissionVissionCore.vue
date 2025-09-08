@@ -86,7 +86,7 @@
       <div class="row gx-60">
         <div class="col-xxl-12 col-lg-12">
           <div class="row gy-30 gx-30 justify-content-center mb-60">
-            <div class="col-xxl-6 col-xl-12">
+            <div class="col-xxl-6 col-xl-12 order-2 order-xxl-1">
               <div class="team-wrap">
                 <!-- <div class="top-wrap">
                   <div class="title-wrap">
@@ -111,7 +111,7 @@
                 >
               </div>
             </div>
-            <div class="col-xxl-6 col-xl-12">
+            <div class="col-xxl-6 col-xl-12 order-1 order-xxl-2">
               <div
                 class="team-card style-2 me-xxl-4 background-image"
                 data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
@@ -202,13 +202,19 @@ export default {};
 
 .mission .team-card.style-2 {
     padding: 0 0 0 0;
+    max-width: 700px;
+    margin: 0 auto;
 }
 .mission .team-card.style-2 .team-img{
     padding: 0 0 0 0;
+    max-height: 450px;
+    max-width: 700px;
 }
 .mission .team-card.style-2 img{
     padding: 0 0 0 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 </style>

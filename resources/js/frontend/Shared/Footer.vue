@@ -42,7 +42,10 @@
                 </div>
                 <div class="about-logo">
                   <a href="index.html"
-                    ><img src="/assets/frontend/img/logo-white.svg" alt="Piller-html"
+                    ><img
+                      src="/assets/frontend/img/logo.jpeg"
+                      style="width: 100px; height: auto"
+                      alt="Piller-html"
                   /></a>
                 </div>
               </div>

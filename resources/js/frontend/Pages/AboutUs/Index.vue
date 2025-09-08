@@ -1,8 +1,12 @@
 <template>
-  <div class="breadcumb-wrapper" data-bg-src="assets/img/bg/breadcrumb-bg.jpg">
+  <div
+    class="breadcumb-wrapper"
+    data-bg-src="assets/frontend/img/bg/breadcrumb-bg.jpg"
+    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+  >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title">About Us</h1>
+        <h1 class="breadcumb-title mt-5">About Us</h1>
         <ul class="breadcumb-menu">
           <li><a href="index.html">Home</a></li>
           <li>About Us</li>
