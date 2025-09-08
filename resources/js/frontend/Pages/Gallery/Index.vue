@@ -61,210 +61,7 @@
         </div>
       </div>
       <div class="row gy-4 justify-content-center filter-active">
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat3 cat2 cat4"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-1.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-1.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat3 cat3 cat4"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-2.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-2.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat2 cat0 cat4"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-3.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-3.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat2 cat0 cat3"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-4.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-4.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat3 cat1 cat2"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-5.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-5.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat1 cat2 cat3"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-6.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-6.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat3 cat1 cat4"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-7.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-7.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat2 cat0 cat1"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-8.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-8.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat4 cat3 cat4"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-9.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-9.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat1 cat0 cat1"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-10.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-10.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat0 cat1 cat3"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-11.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-11.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat1 cat2 cat0"
-        >
-          <div class="gallery-card2">
-            <div class="gallery-img">
-              <img
-                src="assets/frontend/img/gallery/gallery-inner-12.jpg"
-                alt="gallery image"
-              />
-              <a
-                class="popular-popup-image"
-                href="assets/frontend/img/gallery/gallery-inner-12.jpg"
-                ><i class="fa-solid fa-eye"></i
-              ></a>
-            </div>
-          </div>
-        </div>
+        <Images :galleryImages="galleryItems" />
       </div>
     </div>
   </section>
@@ -273,10 +70,56 @@
 <script>
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
+import Images from "./Images.vue";
+import Videos from "./Videos.vue";
 
 export default {
   components: {
     Link,
+    Images,
+    Videos,
+  },
+  data() {
+    return {
+      galleryItems: [
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-1.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-2.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-3.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-4.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-5.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-6.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-7.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-8.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-9.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-10.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-11.jpg",
+        },
+        {
+          src: "assets/frontend/img/gallery/gallery-inner-12.jpg",
+        },
+      ],
+    };
   },
 };
 </script>

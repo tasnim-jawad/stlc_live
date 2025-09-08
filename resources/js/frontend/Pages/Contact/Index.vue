@@ -67,103 +67,26 @@
       </div>
     </div>
   </div>
-  <div class="contact-form-area">
-    <div class="container">
-      <div class="row gx-0">
-        <div class="col-xl-12">
-          <div class="contact-all-wrapper">
-            <div class="contact-form-wrap">
-              <form
-                action="https://html.themeholy.com/piller/demo/mail.php"
-                method="POST"
-                class="contact-form ajax-contact"
-              >
-                <h3 class="form-title">Do you have questions? Contact Us</h3>
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="name"
-                      id="name"
-                      placeholder="Name *"
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <input
-                      type="tel"
-                      class="form-control"
-                      name="number"
-                      id="number"
-                      placeholder="Phone *"
-                    />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      id="email"
-                      placeholder="Email Address *"
-                    />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <select name="subject" id="subject" class="orderby">
-                      <option value="" disabled="" selected="" hidden="">
-                        Select Subject
-                      </option>
-                      <option value="Apartment">Apartment</option>
-                      <option value="House">House</option>
-                      <option value="Villa">Villa</option>
-                      <option value="Land">Land</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-12">
-                    <textarea
-                      name="Your Messsage*"
-                      id="message"
-                      cols="30"
-                      rows="3"
-                      class="form-control"
-                      placeholder="Your Message *"
-                    ></textarea>
-                  </div>
-                  <div class="form-btn text-start col-12">
-                    <button class="th-btn radius">Send message</button>
-                  </div>
-                </div>
-                <p class="form-messages mb-0 mt-3"></p>
-              </form>
-            </div>
-            <div class="contact-form-thumb overflow-hidden">
-              <img
-                src="assets/frontend/img/contact/contact-page-thumb.jpg"
-                alt="img"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="space-top">
-    <div class="container-fluid p-0">
-      <div class="contact-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.7310056272386!2d89.2286059153658!3d24.00527418490799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe9b97badc6151%3A0x30b048c9fb2129bc!2sAngfuztheme!5e0!3m2!1sen!2sbd!4v1651028958211!5m2!1sen!2sbd"
-          allowfullscreen=""
-          loading="lazy"
-        ></iframe>
-        <div class="contact-icon">
-          <img src="assets/frontend/img/icon/con-location-dot.svg" alt="img" />
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <!-- ContactForm2 -->
+  <ContactForm2 />
+  <!-- ContactForm2 -->
+
+  <!-- LocationMap -->
+  <LocationMap />
+  <!-- LocationMap -->
+
 </template>
 
 <script>
-export default {};
+import ContactForm2 from "../../GlobalComponent/ContactForm2.vue";
+import LocationMap from "../../GlobalComponent/LocationMap.vue";
+export default {
+  components: {
+    ContactForm2,
+    LocationMap
+  }
+};
 </script>
 
 <style></style>

@@ -284,12 +284,12 @@
             <div class="col-auto d-none d-xl-block">
               <div class="header-button">
                 <a href="contact.html" class="th-btn outline pill text-white"
-                  ><i class="fa-regular fa-house-chimney me-2"></i> Add Listing </a
+                  ><i class="fa fa-house-chimney me-2"></i> Add Listing </a
                 ><button
                   type="button"
                   class="icon-btn searchBoxToggler text-white"
                 >
-                  <i class="far fa-search"></i>
+                  <i class="fa fa-search"></i>
                 </button>
               </div>
             </div>
