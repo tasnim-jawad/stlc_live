@@ -1,258 +1,42 @@
 <template>
   <div
-    class="breadcumb-wrapper background-image"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    class="col-xl-3 col-lg-4 col-md-6 fadeinup wow"
+    style="visibility: visible; animation-name: fadeinup"
   >
-    <div class="container">
-      <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">Our Board of Directory</h1>
-        <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
-          <li>Our Board of Directory</li>
-        </ul>
+    <div
+      class="team-card style-2 background-image"
+      style="background-image: url('assets/img/shape/team-2-bg-shape.png')"
+    >
+      <div class="team-img">
+        <img src="assets/frontend/img/team/team_2_1.png" alt="Team" />
+      </div>
+      <div class="team-content">
+        <div class="left-contet">
+          <h3 class="box-title">
+            <a href="team-details.html">Vickie Wisozk</a>
+          </h3>
+          <span class="team-desig">Real Estate Manager</span>
+        </div>
+        <div class="team-social">
+          <div class="th-social">
+            <a target="_blank" href="https://instagram.com/"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a target="_blank" href="https://linkedin.com/"
+              ><i class="fa-solid fa-envelope"></i
+            ></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <section class="team-area-1 space">
-    <div class="container">
-      <div class="row gy-30 justify-content-center">
-        <template v-for="i in 8" :key="`team-member-${i}`">
-          <team-single-item  />
-        </template>
-      </div>
-    </div>
-  </section>
-
 </template>
 
 <script>
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import { Link } from "@inertiajs/vue3";
-import TeamSingleItem from "./components/TeamSingleItem.vue";
-
-export default {
-  components: {
-    Link,
-    TeamSingleItem,
-  },
-};
+export default {};
 </script>
 
 <style scoped>
-/* Team Wrapper */
-.team-wrapper {
-  background: #0a0a0a;
-  min-height: 100vh;
-  color: #ffffff;
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Header Section */
-.team-header {
-  position: relative;
-  height: 50vh;
-  min-height: 400px;
-  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.header-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("/uploads/property_dark/property_dark_6.jpeg") center center
-    no-repeat;
-  background-size: cover;
-  opacity: 0.3;
-  z-index: 1;
-}
-
-.header-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  width: 100%;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  gap: 0.5rem;
-}
-
-.breadcrumb-link {
-  color: #b0b0b0;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.breadcrumb-link:hover {
-  color: #22c55e;
-}
-
-.breadcrumb-separator {
-  color: #6b7280;
-}
-
-.breadcrumb-current {
-  color: #fbbf24;
-  font-weight: 500;
-}
-
-.page-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  background: #fff;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.page-subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #fff;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.header-stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.stat-badge {
-  text-align: center;
-  padding: 1rem 1.5rem;
-  background: rgba(26, 26, 26, 0.8);
-  backdrop-filter: blur(20px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fbbf24;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: #b0b0b0;
-}
-
-/* Filter Section */
-.filter-section {
-  background: #1a1a1a;
-  padding: 2rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.filter-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.filter-title h3 {
-  color: #ffffff;
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.filter-tabs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  padding: 0.75rem 1.5rem;
-  background: #2a2a2a;
-  color: #b0b0b0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: white;
-  border-color: transparent;
-}
-
-.view-toggle {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.view-btn {
-  width: 40px;
-  height: 40px;
-  background: #2a2a2a;
-  color: #b0b0b0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.view-btn:hover,
-.view-btn.active {
-  background: #22c55e;
-  color: white;
-  border-color: transparent;
-}
-
-/* Team Section */
-.team-section {
-  padding: 4rem 0;
-  background: #0a0a0a;
-}
-
-.team-grid {
-  display: grid;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.team-grid.grid {
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-}
-
-.team-grid.list {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
 
 /* Team Card */
 .team-card {
@@ -634,58 +418,7 @@ export default {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .page-title {
-    font-size: 2rem;
-  }
-
-  .filter-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filter-tabs {
-    justify-content: center;
-  }
-
-  .team-grid.grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-grid.list {
-    grid-template-columns: 1fr;
-  }
-
-  .team-grid.list .team-card {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .team-grid.list .card-image {
-    width: 100%;
-  }
-
-  .header-stats {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .pagination {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .pagination-numbers {
-    order: -1;
-  }
-
-  .modal-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .modal-social-links {
-    justify-content: center;
-  }
+  
 }
 
 @media (max-width: 480px) {
@@ -728,3 +461,4 @@ export default {
   }
 }
 </style>
+
