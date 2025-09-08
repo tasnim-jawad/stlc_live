@@ -198,7 +198,7 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 .mission .team-card.style-2 {
     padding: 0 0 0 0;
