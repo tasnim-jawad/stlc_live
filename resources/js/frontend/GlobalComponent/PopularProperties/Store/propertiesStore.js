@@ -1,120 +1,83 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { get } from "jquery";
 
-export const usePropertiesStore = defineStore("properties", {
+export const store = defineStore("properties_store", {
   state: () => ({
-    properties: [],
+    properties: {
+      data: [],
+      current_page: 1,
+      last_page: 1,
+      total: 0,
+      per_page: 6,
+    },
+    property_category_id: null,
+    property_categories: [],
     loading: false,
     error: null,
-    pagination: {
-      current_page: 1,
-      total: 0,
-      per_page: 10,
-      last_page: 1,
-    },
-    filters: {
-      category: "",
-      price_range: "",
-      location: "",
-      status: "all",
-    },
   }),
 
   actions: {
-    async fetchProperties(page = 1) {
+    set_property_category_id(id) {
+      this.property_category_id = id;
+      console.log('id', this.property_category_id);
+      if (this.property_category_id === 'all' || this.property_category_id === null || this.property_category_id === undefined || this.property_category_id === '') {
+        this.property_category_id = null;
+        this.fetch_properties({ page: 1 });
+      }else{
+        this.fetch_properties({ page: 1 });
+      }
+    },
+    async fetch_properties({  page = 1 } = {}) {
       this.loading = true;
       this.error = null;
 
       try {
         const params = {
           page,
-          per_page: this.pagination.per_page,
-          ...this.filters,
+          limit: 6,
+          property_category_id: this.property_category_id,
         };
 
-        const response = await axios.get("/api/properties", { params });
+        const response = await axios.get("properties", { params });
+        console.log('clicked',response.data);
 
-        this.properties = response.data.data || response.data;
-
-        if (response.data.meta) {
-          this.pagination = {
-            ...this.pagination,
-            ...response.data.meta,
+        let result = response?.data?.data;
+        if (!result.data) {
+          // If data is not present, fallback to array
+          result = {
+            data: Array.isArray(response.data) ? response.data : [],
+            current_page: 1,
+            last_page: 1,
+            total: Array.isArray(response.data) ? response.data.length : 0,
+            per_page: 6,
           };
         }
-
-        console.log("Properties fetched successfully:", this.properties);
-        return { success: true, data: this.properties };
+        this.properties = result;
       } catch (error) {
-        this.error = "Failed to fetch properties";
-        console.error("Error fetching properties:", error);
-        return { success: false, error };
+        this.error = error;
       } finally {
         this.loading = false;
       }
     },
-
-    async fetchPopularProperties(limit = 6) {
+    async fetch_property_categories() {
       this.loading = true;
       this.error = null;
 
       try {
-        const response = await axios.get(
-          `/api/properties/popular?limit=${limit}`
-        );
-        this.properties = response.data.data || response.data;
+        const response = await axios.get("property-categories", {
+          params: {
+            get_all: 1,
+            limit: 1000,
+          },
+        });
 
-        console.log(
-          "Popular properties fetched successfully:",
-          this.properties
-        );
-        return { success: true, data: this.properties };
+        this.property_categories = response?.data;
       } catch (error) {
-        this.error = "Failed to fetch popular properties";
-        console.error("Error fetching popular properties:", error);
-        return { success: false, error };
+        this.error = error;
       } finally {
         this.loading = false;
       }
     },
-
-    setFilter(key, value) {
-      this.filters[key] = value;
-    },
-
-    resetFilters() {
-      this.filters = {
-        category: "",
-        price_range: "",
-        location: "",
-        status: "all",
-      };
-    },
-
-    clearError() {
-      this.error = null;
-    },
-
-    setPage(page) {
-      this.pagination.current_page = page;
-    },
-  },
-
-  getters: {
-    getPropertyById: (state) => (id) => {
-      return state.properties.find((property) => property.id === id);
-    },
-
-    hasProperties: (state) => state.properties.length > 0,
-
-    propertiesCount: (state) => state.properties.length,
-
-    hasNextPage: (state) =>
-      state.pagination.current_page < state.pagination.last_page,
-
-    hasPrevPage: (state) => state.pagination.current_page > 1,
-
-    filteredPropertiesCount: (state) =>
-      state.pagination.total || state.properties.length,
   },
 });

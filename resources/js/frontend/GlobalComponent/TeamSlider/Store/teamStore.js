@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useTeamStore = defineStore("team", {
+export const store = defineStore("team", {
   state: () => ({
-    teamMembers: [],
+    team_members: [],
     loading: false,
     error: null,
     swiperInstance: null,
@@ -12,16 +12,22 @@ export const useTeamStore = defineStore("team", {
   }),
 
   actions: {
-    async fetchTeamMembers() {
+    async fetch_team_members() {
       this.loading = true;
       this.error = null;
 
       try {
-        const response = await axios.get("/api/team-members");
-        this.teamMembers = response.data.data || response.data;
+        const response = await axios.get("our-teams",{
+          params: { 
+            get_all: 1,
+            limmit: 999
+          }
+        });
 
-        console.log("Team members fetched successfully:", this.teamMembers);
-        return { success: true, data: this.teamMembers };
+        this.team_members = response.data.data || response.data;
+
+        console.log("Team members fetched successfully:", this.team_members);
+        return { success: true, data: this.team_members };
       } catch (error) {
         this.error = "Failed to fetch team members";
         console.error("Error fetching team members:", error);
@@ -60,15 +66,7 @@ export const useTeamStore = defineStore("team", {
   },
 
   getters: {
-    getTeamMemberById: (state) => (id) => {
-      return state.teamMembers.find((member) => member.id === id);
-    },
-
-    hasTeamMembers: (state) => state.teamMembers.length > 0,
-
     canRetryInitialization: (state) =>
       state.initializationAttempts < state.maxAttempts,
-
-    teamMembersCount: (state) => state.teamMembers.length,
   },
 });

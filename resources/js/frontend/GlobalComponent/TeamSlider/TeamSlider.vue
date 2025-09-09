@@ -1,5 +1,5 @@
 <template>
-  <section class="team-area-1 space overflow-hidden">
+  <section class="team-area-1 space-top overflow-hidden">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
@@ -21,235 +21,19 @@
           </div>
         </div>
       </div>
-      <div class="slider-area mb-20">
+      <div
+        class="slider-area mb-20"
+        v-if="team_members && team_members.length > 0"
+      >
         <div
           class="swiper th-slider has-shadow"
           id="teamSlider1"
           data-slider-options='{"autoplay":true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"4"}}, "autoHeight": "true"}'
         >
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_1.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">Bernice Roberts</a>
-                  </h3>
-                  <span class="team-desig">Real Estate Manager</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_2.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">Mr. Raul Hirthe</a>
-                  </h3>
-                  <span class="team-desig">Listing Coordinator</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_3.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">Michel John</a>
-                  </h3>
-                  <span class="team-desig">Property Developer</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_4.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">William Bins</a>
-                  </h3>
-                  <span class="team-desig">Leasing Consultant</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_1.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">Bernice Roberts</a>
-                  </h3>
-                  <span class="team-desig">Real Estate Manager</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-card">
-                <div
-                  class="team-img"
-                  :style="{
-                    backgroundImage: `url(/assets/frontend/img/shape/team-bg-pattern.png)`,
-                  }"
-                >
-                  <img
-                    src="/assets/frontend/img/team/team_1_2.png"
-                    alt="Team"
-                  />
-                </div>
-                <div class="team-content">
-                  <h3 class="box-title">
-                    <a href="team-details.html">Mr. Raul Hirthe</a>
-                  </h3>
-                  <span class="team-desig">Listing Coordinator</span>
-                  <div class="team-social">
-                    <div class="th-social">
-                      <a target="_blank" href="https://facebook.com/"
-                        ><i class="fab fa-facebook-f"></i
-                      ></a>
-                      <a target="_blank" href="https://twitter.com/"
-                        ><i class="fab fa-twitter"></i
-                      ></a>
-                      <a target="_blank" href="https://instagram.com/"
-                        ><i class="fab fa-instagram"></i
-                      ></a>
-                      <a target="_blank" href="https://linkedin.com/"
-                        ><i class="fab fa-linkedin-in"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <template v-for="member in team_members" :key="member.id">
+              <slider-item :member="member"></slider-item>
+            </template>
           </div>
         </div>
         <button
@@ -288,8 +72,14 @@
 
 <script>
 import { onMounted, onUpdated, nextTick, ref, onBeforeUnmount } from "vue";
+import { store as teamStore } from "./Store/teamStore";
+import { mapActions, mapState } from "pinia";
+import SliderItem from "./components/SliderItem.vue";
 
 export default {
+  components: {
+    SliderItem,
+  },
   setup() {
     const swiperInstance = ref(null);
     const initializationAttempts = ref(0);
@@ -415,6 +205,15 @@ export default {
     return {
       swiperInstance,
     };
+  },
+  created: function () {
+    this.fetch_team_members();
+  },
+  methods: {
+    ...mapActions(teamStore, ["fetch_team_members"]),
+  },
+  computed: {
+    ...mapState(teamStore, ["team_members"]),
   },
 };
 </script>

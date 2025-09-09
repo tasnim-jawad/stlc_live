@@ -25,41 +25,40 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('banner_image', 'like', '%' . $searchKey . '%');    
+                    $q->where('banner_image', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_group_id', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_group_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_category_id', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_category_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_status', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_status', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('date', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('date', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_name', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_name', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_address', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_address', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_description', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_description', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_detail', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_detail', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('facts_and_features', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('facts_and_features', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('gallery', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('gallery', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('amenities', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('amenities', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('floor_plan', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('floor_plan', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('property_video_url', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('property_video_url', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('map_location_url', 'like', '%' . $searchKey . '%');              
-
+                    $q->orWhere('map_location_url', 'like', '%' . $searchKey . '%');
                 });
             }
 
             if ($start_date && $end_date) {
-                 if ($end_date > $start_date) {
+                if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
@@ -68,6 +67,29 @@ class GetAllData
 
             if ($status == 'trased') {
                 $data = $data->trased();
+            }
+
+            if (
+                request()->has('property_category_id') &&
+                request()->input('property_category_id') != '' &&
+                request()->input('property_category_id') != null
+            ) {
+                $property_category_id = request()->input('property_category_id');
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where('property_category_id', $property_category_id)
+                    ->where('status', $status)
+                    ->orderBy($orderByColumn, $orderByType)
+                    ->paginate($pageLimit);
+
+                return entityResponse([
+                    ...$data->toArray(),
+                    "active_data_count" => self::$model::active()->count(),
+                    "inactive_data_count" => self::$model::inactive()->count(),
+                    "trased_data_count" => self::$model::trased()->count(),
+                ]);
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
@@ -79,7 +101,7 @@ class GetAllData
                     ->limit($pageLimit)
                     ->orderBy($orderByColumn, $orderByType)
                     ->get();
-                     return entityResponse($data);
+                return entityResponse($data);
             } else if ($status == 'trased') {
                 $data = $data
                     ->with($with)
@@ -103,7 +125,6 @@ class GetAllData
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
-
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

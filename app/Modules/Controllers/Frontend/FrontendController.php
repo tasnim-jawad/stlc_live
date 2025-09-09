@@ -44,6 +44,10 @@ class FrontendController extends Controller
 
     public function PortfolioPropertyPage()
     {
+        $slug = request()->query('slug');
+        if (!$slug) {
+            return redirect()->back();
+        }
         return Inertia::render('Portfolio/PropertyDetails', [
             'event' => [
                 'title' => 'Property Details',

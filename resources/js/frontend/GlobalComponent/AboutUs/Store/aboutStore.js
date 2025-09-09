@@ -1,17 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const store = defineStore("about_store", {
+export const store = defineStore("about_us_store", {
   state: () => ({
-    aboutData: {
-      title: "",
-      description: "",
-      features: [],
-      quotation: "",
-      video_url: "",
-      primary_image: "",
-      secondery_image: "",
-    },
+    about_us: null,
     loading: false,
     error: null,
   }),
@@ -25,12 +17,13 @@ export const store = defineStore("about_store", {
         const response = await axios.get("/about-uses",{
           params: {
             latest_data: 1,
+            page_type: 'about_us'
           },
         });
-        this.aboutData = response.data.data || response.data;
+        this.about_us = response.data.data || response.data;
 
-        console.log("About data fetched successfully:", this.aboutData);
-        return { success: true, data: this.aboutData };
+        console.log("About data fetched successfully:", this.about_us);
+        return { success: true, data: this.about_us };
       } catch (error) {
         this.error = "Failed to fetch about data";
         console.error("Error fetching about data:", error);
@@ -38,14 +31,6 @@ export const store = defineStore("about_store", {
       } finally {
         this.loading = false;
       }
-    },
-
-    updateAboutData(data) {
-      this.aboutData = { ...this.aboutData, ...data };
-    },
-
-    clearError() {
-      this.error = null;
     },
   },
 

@@ -12,6 +12,7 @@ class Model extends EloquentModel
     protected $guarded = [];
     protected $casts = [
         'features' => 'array',
+        'primary_image' => 'array',
     ];
 
     protected static function booted()

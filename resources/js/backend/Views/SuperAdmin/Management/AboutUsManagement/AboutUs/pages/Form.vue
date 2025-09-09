@@ -36,6 +36,7 @@
               v-bind:key="index"
             >
               <common-input
+                v-if="form_field.type !== 'file'"
                 :label="form_field.label"
                 :type="form_field.type"
                 :name="form_field.name"
@@ -47,12 +48,33 @@
                 :onchange="changeAction"
                 :onchangeAction="form_field.onchangeAction"
               />
+              <common-input
+                v-else-if="form_field.type === 'file' && !form_field.multiple"
+                :label="form_field.label"
+                :type="form_field.type"
+                :name="form_field.name"
+                :multiple="form_field.multiple"
+                :value="form_field.value"
+                :data_list="form_field.data_list"
+                :is_visible="form_field.is_visible"
+                :row_col_class="form_field.row_col_class"
+              />
+              <multiple-image-uploader
+                v-else-if="form_field.type === 'file' && form_field.multiple"
+                :name="form_field.name"
+                :accept="form_field.accept"
+                :images="form_field.images_list"
+              />
             </template>
 
             <div
               class="col-md-12 pt-3"
               id="features_section"
-              v-if="!['our_mission', 'our_vission'].includes(page_type)"
+              v-if="
+                !['our_mission', 'our_vision', 'core_values'].includes(
+                  page_type
+                )
+              "
             >
               <div
                 class="d-flex justify-content-between align-items-center border-bottom pb-2"
@@ -161,8 +183,12 @@ import { mapActions, mapState } from "pinia";
 import { store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
+import MultipleImageUploader from "../components/metadata/MultipleImageUploader.vue";
 
 export default {
+  components: {
+    MultipleImageUploader,
+  },
   data: () => ({
     setup,
     form_fields: JSON.parse(JSON.stringify(form_fields)), // Make reactive
@@ -254,6 +280,10 @@ export default {
             //     $("#description").summernote("code", value[1]);
             //   }, 1000);
             // }
+
+            if (field.name == "primary_image" && value[0] == "banner_image") {
+              this.form_fields[index].images_list = value[1];
+            }
           });
         });
 
@@ -334,7 +364,9 @@ export default {
     validate_data: function () {
       this.errors = [];
       let valid = true;
-      if (!["our_mission", "our_vission"].includes(this.page_type)) {
+      if (
+        !["our_mission", "our_vision", "core_values"].includes(this.page_type)
+      ) {
         this.features_data.forEach((features, index) => {
           let featuresErrors = {};
 
@@ -386,10 +418,14 @@ export default {
         "title",
         "quotation",
         "video_url",
-        "secondery_image",
+        "secondary_image",
       ];
       return this.form_fields.filter((f) => {
-        if (pageType === "our_mission" || pageType === "our_vission") {
+        if (
+          pageType === "our_mission" ||
+          pageType === "our_vision" ||
+          pageType === "core_values"
+        ) {
           return !fieldsToRemove.includes(f.name);
         }
         return true;

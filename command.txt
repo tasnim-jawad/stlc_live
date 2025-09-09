@@ -1,7 +1,7 @@
 
 php artisan make:module BannerManagement/Banner [short_title:string-100,short_description:text,video_url:string-200,video_file:string-200,video_type:string-50] --vue
 
-php artisan make:module AboutUsManagement/AboutUs [title:string-100,description:text,features:json,quotation:string-256,video_url:string-200,primary_image:string-200,secondery_image:string-200,page_type:enum-about_us.our_mission.our_vission.none] --vue
+php artisan make:module AboutUsManagement/AboutUs [title:string-100,description:text,features:json,quotation:string-256,video_url:string-200,primary_image:string-200,secondary_image:string-200,page_type:enum-about_us.our_mission.our_vission.none] --vue
 
 php artisan make:module AtAGlanceManagement/AtAGlance [title:string-100,icon:string-100,number:int] --vue
 

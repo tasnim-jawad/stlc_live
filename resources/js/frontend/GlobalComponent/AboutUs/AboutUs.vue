@@ -1,5 +1,5 @@
 <template>
-  <div class="about-1-wrapper space overflow-hidden position-relative" id="about-sec">
+  <div class="about-1-wrapper space overflow-hidden position-relative" id="about-sec" v-if="about_us">
     <div class="shape-mockup" data-bottom="0" data-left="0">
       <img src="/assets/frontend/img/icon/about-2-shape.png" alt="img" />
     </div>
@@ -183,10 +183,21 @@
 
 <script>
 import CircleText from "../../Pages/Home/components/CircleText.vue";
+import { store as about_us_store } from "./Store/aboutStore.js";
+import { mapActions, mapState } from "pinia";
 export default {
   components: {
     CircleText,
   },
+  created() {
+    this.fetch_about_us_data();
+  },
+  methods: {
+    ...mapActions(about_us_store, ["fetch_about_us_data"]),
+  },
+  computed:{
+    ...mapState(about_us_store, ['about_us']),
+  }
 };
 </script>
 

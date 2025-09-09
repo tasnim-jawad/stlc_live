@@ -25,27 +25,26 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('title', 'like', '%' . $searchKey . '%');    
+                    $q->where('title', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('description', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('description', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('features', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('features', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('quotation', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('quotation', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('video_url', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('video_url', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('primary_image', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('primary_image', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('secondery_image', 'like', '%' . $searchKey . '%');    
+                    $q->orWhere('secondary_image', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('page_type', 'like', '%' . $searchKey . '%');              
-
+                    $q->orWhere('page_type', 'like', '%' . $searchKey . '%');
                 });
             }
 
             if ($start_date && $end_date) {
-                 if ($end_date > $start_date) {
+                if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
@@ -54,6 +53,23 @@ class GetAllData
 
             if ($status == 'trased') {
                 $data = $data->trased();
+            }
+
+            if (
+                request()->has('latest_data') &&
+                (int)request()->input('latest_data') === 1 &&
+                request()->has('page_type')
+            ) {
+                $pageType = request()->input('page_type');
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where('page_type', $pageType)
+                    ->where('status', $status)
+                    ->orderBy($orderByColumn, $orderByType)
+                    ->first();
+                return entityResponse($data);
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
@@ -65,7 +81,7 @@ class GetAllData
                     ->limit($pageLimit)
                     ->orderBy($orderByColumn, $orderByType)
                     ->get();
-                     return entityResponse($data);
+                return entityResponse($data);
             } else if ($status == 'trased') {
                 $data = $data
                     ->with($with)
@@ -89,7 +105,6 @@ class GetAllData
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
-
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

@@ -47,8 +47,8 @@ class DataStoreValidation extends FormRequest
             'features' => 'required | sometimes',
             'quotation' => 'required | sometimes',
             'video_url' => 'required | sometimes',
-            'primary_image' => 'required | sometimes',
-            'secondery_image' => 'required | sometimes',
+            'primary_image' => 'required | sometimes | array',
+            'secondary_image' => 'required | sometimes',
             'page_type' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->json('features')->nullable();
             $table->string('quotation', 256)->nullable();
             $table->string('video_url', 200)->nullable();
-            $table->string('primary_image', 200)->nullable();
-            $table->string('secondery_image', 200)->nullable();
-            $table->enum('page_type', ['about_us','our_mission','our_vission','none'])->nullable();
+            $table->json('primary_image')->nullable();
+            $table->string('secondary_image', 200)->nullable();
+            $table->enum('page_type', ['about_us','our_mission','our_vision', 'core_values','none'])->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

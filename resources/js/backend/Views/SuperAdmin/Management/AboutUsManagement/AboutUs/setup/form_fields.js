@@ -7,16 +7,20 @@ export default [
     multiple: false,
     data_list: [
       {
-        label: "About_us",
+        label: "About us",
         value: "about_us",
       },
       {
-        label: "Our_mission",
+        label: "Our mission",
         value: "our_mission",
       },
       {
-        label: "Our_vission",
-        value: "our_vission",
+        label: "Our vision",
+        value: "our_vision",
+      },
+      {
+        label: "Core Values",
+        value: "core_values",
       },
     ],
     value: "",
@@ -31,7 +35,7 @@ export default [
   },
   {
     name: "quotation",
-    label: "Enter your quotation",
+    label: "Enter your circle text(max 36 char)",
     type: "text",
     value: "",
   },
@@ -45,14 +49,15 @@ export default [
 
   {
     name: "primary_image",
-    label: "Enter your primary image",
+    label: "Enter your images (5 images for design purpose)",
     type: "file",
-    value: "",
+    multiple: "true",
+    images_list: [],
   },
 
   {
-    name: "secondery_image",
-    label: "Enter your secondery image",
+    name: "secondary_image",
+    label: "Enter your Logo image",
     type: "file",
     value: "",
   },

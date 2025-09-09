@@ -2,11 +2,11 @@
   <div
     class="why-sec-1 space"
     id="why-sec"
-    data-bg-src="/assets/frontend/img/why/why-choose-1-bg.jpg"
+    :style="{ backgroundImage: 'url(/assets/frontend/img/why/why-choose-1-bg.jpg)' }"
   >
     <div class="container">
       <div
-        class="row justify-content-xl-between justify-content-center align-items-start"
+        class="row justify-content-xl-between justify-content-center align-items-start mb-5"
       >
         <div class="col-xl-6">
           <div
@@ -28,7 +28,7 @@
             </h2>
           </div>
         </div>
-        <div class="col-xl-auto">
+        <!-- <div class="col-xl-auto">
           <div
             class="why-right-review-wrap sec-btn fadeinup wow"
             data-wow-duration="1.5s"
@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="row gy-30 align-items-center justify-content-center">
         <div class="col-xl-4 col-lg-6 col-md-6">

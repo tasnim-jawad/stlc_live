@@ -1,5 +1,7 @@
 <template>
-  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom mission">
+  <section
+    class="th-blog-wrapper space-top overflow-hidden mission"
+  >
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
@@ -9,7 +11,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.1s"
             >
-              <span class="double-line"></span> Mission Vision & Core Values
+              <span class="double-line"></span>Our Mission
             </p>
             <h2
               class="sec-title fadeinup wow"
@@ -35,7 +37,6 @@
                     alt="Team"
                   />
                 </div>
-                
               </div>
             </div>
             <div class="col-xxl-6 col-xl-12">
@@ -68,17 +69,26 @@
       </div>
     </div>
   </section>
-  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom mission">
+  <section
+    class="th-blog-wrapper space-top overflow-hidden mission"
+  >
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
           <div class="title-area text-center">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span>Our Vision
+            </p>
             <h2
               class="sec-title fadeinup wow"
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              Our Vission
+              Our Vision
             </h2>
           </div>
         </div>
@@ -122,7 +132,6 @@
                     alt="Team"
                   />
                 </div>
-                
               </div>
             </div>
           </div>
@@ -130,11 +139,20 @@
       </div>
     </div>
   </section>
-  <section class="th-blog-wrapper space-top overflow-hidden space-extra-bottom mission">
+  <section
+    class="th-blog-wrapper space-top overflow-hidden space-extra-bottom mission"
+  >
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
           <div class="title-area text-center">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span>Our Core Values
+            </p>
             <h2
               class="sec-title fadeinup wow"
               data-wow-duration="1.5s"
@@ -159,7 +177,6 @@
                     alt="Team"
                   />
                 </div>
-                
               </div>
             </div>
             <div class="col-xxl-6 col-xl-12">
@@ -199,22 +216,21 @@ export default {};
 </script>
 
 <style scoped>
-
 .mission .team-card.style-2 {
-    padding: 0 0 0 0;
-    max-width: 700px;
-    margin: 0 auto;
+  padding: 0 0 0 0;
+  max-width: 700px;
+  margin: 0 auto;
 }
-.mission .team-card.style-2 .team-img{
-    padding: 0 0 0 0;
-    max-height: 450px;
-    max-width: 700px;
+.mission .team-card.style-2 .team-img {
+  padding: 0 0 0 0;
+  max-height: 450px;
+  max-width: 700px;
 }
-.mission .team-card.style-2 img{
-    padding: 0 0 0 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+.mission .team-card.style-2 img {
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 </style>
