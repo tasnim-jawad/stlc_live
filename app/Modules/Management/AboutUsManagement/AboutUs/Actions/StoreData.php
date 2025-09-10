@@ -11,10 +11,8 @@ class StoreData
         try {
             $requestData = $request->validated();
             $requestData['features'] = $requestData['features'] ?? [];
-            dd($requestData);
 
             if ($request->hasFile('primary_image')) {
-
                 foreach ($request->file('primary_image') as $key => $primary_image) {
                     $currentDate = now()->format('Y/m');
                     $requestData['primary_image'][$key] = uploader($primary_image, 'uploads/AboutUs/primary_image/' . $currentDate);

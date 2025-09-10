@@ -92,15 +92,24 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.5s"
             >
-              STC Building & Properties has been a trusted name in construction
-              since 2017. With nearly a decade of experience in the construction
-              industry, we are committed to delivering quality projects that
-              maximize the value of your land. STC stays true to its commitment,
-              guaranteeing on-time or even ahead of schedule handover.
+              {{ about_us?.description }}
             </p>
           </div>
           <div class="row gy-4 gx-60 mb-4">
-            <div class="col-lg-6 col-md-6 fadeinup wow">
+            <div class="col-lg-6 col-md-6 fadeinup wow" v-for="(item, index) in about_us?.features" :key="index">
+              <div class="about-1-item">
+                <div class="icon">
+                  <span><i :class="item?.icon"></i></span>
+                </div>
+                <div class="content">
+                  <h3 class="box-title">{{ item?.title }}</h3>
+                  <!-- <p class="box-text">
+                    {{ item?.description }}
+                  </p> -->
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-6 col-md-6 fadeinup wow">
               <div class="about-1-item">
                 <div class="icon">
                   <img
@@ -164,7 +173,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="col-lg-12">

@@ -32,342 +32,9 @@
             data-slider-options='{"centeredSlides":true,"paginationType": "progressbar","loop":true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"2"}, "1300":{"slidesPerView":"2.6"},"1500":{"slidesPerView":"3.6"}}}'
           >
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-1.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Perfect place for a business trip! The location was
-                      convenient, and the Wi-Fi was reliable. I had everything I
-                      needed, from a quiet workspace in the room to a great
-                      breakfast in the morning.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Marshell Jack</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.7</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-2.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Ideal business accommodation! I loved the fast Wi-Fi,
-                      peaceful room with a desk and other, strong coffee in the
-                      on morning, my trip super and the breakfast kept me
-                      throughout the trip.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Walter Deckow</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.9</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-3.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      Experience business base! no any options The location
-                      helped with meetings, the Wi-Fi never dropped once, and on
-                      in the workspace was spot-on. Great too with fresh and
-                      options.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Carlos Bauch</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_3.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.7</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-1.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Great experience for a work traveler! Everything from
-                      hours is our part the central location to the quiet desk,
-                      supportive staff, ok but it and reliable Wi-Fi on was just
-                      right for working hours.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Julia Era</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.8</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-2.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Perfect place for a business trip! The location was
-                      convenient, and the Wi-Fi was reliable. I had everything I
-                      needed, from a quiet workspace in the room to a great
-                      breakfast in the morning.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Carlos Bauch</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.9</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-3.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Ideal business accommodation! I loved the fast Wi-Fi,
-                      peaceful room with a desk and other, strong coffee in the
-                      on morning, my trip super and the breakfast kept me
-                      throughout the trip.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Julia Era</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_3.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.6</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-1.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      Experience business base! no any options The location
-                      helped with meetings, the Wi-Fi never dropped once, and on
-                      in the workspace was spot-on. Great too with fresh and
-                      options.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Julia Era</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_1.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.5</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="testi-block" dir="ltr">
-                  <div class="top-wrap">
-                    <div class="quote">
-                      <img
-                        src="/assets/frontend/img/icon/quote.svg"
-                        alt="quote"
-                      />
-                    </div>
-                    <div class="logo">
-                      <img
-                        src="/assets/frontend/img/icon/brand-logo-2.png"
-                        alt="Team"
-                      />
-                    </div>
-                  </div>
-                  <div class="testi-content">
-                    <p class="box-text">
-                      “Great experience for a work traveler! Everything from
-                      hours is our part the central location to the quiet desk,
-                      supportive staff, ok but it and reliable Wi-Fi on was just
-                      right for working hours.”
-                    </p>
-                  </div>
-                  <div class="bottom-wrap">
-                    <div class="content">
-                      <h3 class="box-title">Carlos Bauch</h3>
-                      <p class="text">Property owner</p>
-                    </div>
-                    <div class="team-img">
-                      <img
-                        src="/assets/frontend/img/testimonial/testi_1_2.jpg"
-                        alt="Team"
-                      />
-                      <div class="box-review">
-                        <i class="fa-sharp fa-solid fa-star"></i>
-                        <div class="rating"><span>4.9</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <template v-for="(testimonial, index) in testimonials" :key="index">
+                <TestimonialsSingleItem :testimonial="testimonial" />
+              </template>
             </div>
             <div class="slider-controller container-width">
               <button
@@ -395,9 +62,14 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 import { onMounted, onUpdated, nextTick, ref, onBeforeUnmount } from "vue";
-
+import { store as testimonialsStore } from "./Store/testimonialsStore.js";
+import TestimonialsSingleItem from "./components/TestimonialsSingleItem.vue";
 export default {
+  components: {
+    TestimonialsSingleItem,
+  },
   setup() {
     const swiperInstance = ref(null);
     const initializationAttempts = ref(0);
@@ -533,6 +205,21 @@ export default {
     return {
       swiperInstance,
     };
+  },
+  created: async function () {
+    await this.fetch_testimonials();
+    console.log("Testimonials:", this.testimonials);
+  },
+
+  methods: {
+    ...mapActions(testimonialsStore, [
+      "fetch_testimonials",
+    ]),
+  },
+  computed: {
+    ...mapState(testimonialsStore, [
+      "testimonials",
+    ]),
   },
 };
 </script>

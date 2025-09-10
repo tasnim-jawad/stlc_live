@@ -57,7 +57,7 @@ export default [
 
   {
     name: "secondary_image",
-    label: "Enter your Logo image",
+    label: "Enter your secondary image",
     type: "file",
     value: "",
   },

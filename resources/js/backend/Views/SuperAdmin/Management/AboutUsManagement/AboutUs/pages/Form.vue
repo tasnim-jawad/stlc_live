@@ -418,7 +418,7 @@ export default {
         "title",
         "quotation",
         "video_url",
-        "secondary_image",
+        "primary_image",
       ];
       return this.form_fields.filter((f) => {
         if (

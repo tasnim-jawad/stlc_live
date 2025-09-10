@@ -25,8 +25,6 @@ export const store = defineStore("team", {
         });
 
         this.team_members = response.data.data || response.data;
-
-        console.log("Team members fetched successfully:", this.team_members);
         return { success: true, data: this.team_members };
       } catch (error) {
         this.error = "Failed to fetch team members";

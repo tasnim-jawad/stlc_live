@@ -2,7 +2,9 @@
   <div
     class="why-sec-1 space"
     id="why-sec"
-    :style="{ backgroundImage: 'url(/assets/frontend/img/why/why-choose-1-bg.jpg)' }"
+    :style="{
+      backgroundImage: 'url(/assets/frontend/img/why/why-choose-1-bg.jpg)',
+    }"
   >
     <div class="container">
       <div
@@ -67,193 +69,32 @@
         </div> -->
       </div>
       <div class="row gy-30 align-items-center justify-content-center">
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-1.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Find your home</h3>
-              <p class="box-text">
-                Altus cedo tantillus video patrocinor valeo carus subseco
-                vestrum credo virtus.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Find a Home</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-2.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Sell a Property</h3>
-              <p class="box-text">
-                Tantillus certe patrocinor video adipisci valeo carus. Subseco
-                vestrum taedium.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Sell a Home</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-3.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Rent a Home</h3>
-              <p class="box-text">
-                Velox surgo clarus tantillus confido carus video lumen cedo
-                virtus spes decerno.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Rent a Home</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-1.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Find your home</h3>
-              <p class="box-text">
-                Altus cedo tantillus video patrocinor valeo carus subseco
-                vestrum credo virtus.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Find a Home</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-2.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Sell a Property</h3>
-              <p class="box-text">
-                Tantillus certe patrocinor video adipisci valeo carus. Subseco
-                vestrum taedium.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Sell a Home</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-6">
-          <div class="why-card-1">
-            <div class="hover-icon">
-              <img
-                src="/assets/frontend/img/icon/why-hover-icon-1.png"
-                alt="img"
-              />
-            </div>
-            <div class="why-card-1__icon">
-              <img
-                src="/assets/frontend/img/icon/why-icon-1-3.svg"
-                alt="image"
-              />
-            </div>
-            <div class="why-card-1__content">
-              <h3 class="box-title">Rent a Home</h3>
-              <p class="box-text">
-                Velox surgo clarus tantillus confido carus video lumen cedo
-                virtus spes decerno.
-              </p>
-            </div>
-            <div class="why-card-1__bottom">
-              <a
-                class="th-btn style3 pill bg-white"
-                href="property-details.html"
-                >Rent a Home</a
-              >
-            </div>
-          </div>
-        </div>
+        <template v-for="(service, index) in services" :key="index">
+          <ServiceSingleItem :service="service" />
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { store as why_choose_us_store } from "./Store/why_choose_us.js";
+import { mapActions, mapState } from "pinia";
+import ServiceSingleItem from "./components/ServiceSingleItem.vue";
+
+export default {
+  components: { ServiceSingleItem },
+  created: async function () {
+    await this.fetch_services();
+    console.log("Services:", this.services);
+  },
+  computed: {
+    ...mapState(why_choose_us_store, ["services"]),
+  },
+  methods: {
+    ...mapActions(why_choose_us_store, ["fetch_services"]),
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="th-blog-wrapper space-top overflow-hidden mission"
-  >
+  <section class="th-blog-wrapper space-top overflow-hidden mission">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
@@ -29,11 +27,11 @@
             <div class="col-xxl-6 col-xl-12">
               <div
                 class="team-card style-2 me-xxl-4 background-image"
-                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+                :style="{ backgroundImage: `url(/assets/frontend/img/shape/team-2-bg-shape.png)` }"
               >
                 <div class="team-img">
                   <img
-                    src="/assets/frontend/img/popular/popular-1-6.jpg"
+                    :src="'/' + our_mission?.secondary_image"
                     alt="Team"
                   />
                 </div>
@@ -46,21 +44,9 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p class="team-about_text mt-5">
-                  Zulia Era is one of the best online resources for learning
-                  about technology in the medical sphere. There’s a real sense
-                  skepticiesm cillum dolore eu fugiat nulla pariatur.
-                </p>
-                <p class="team-about_text mb-40">
-                  Real estate agents play a critical role in solving various
-                  problems within the real estate community. Their expertise not
-                  only helps individual buyers and sellers but also positively
-                  impacts the overall housing market, local economy, and
-                  community development. Below are key problems agents solve and
-                  how their work improves the real estate community.
-                </p>
-                <a href="agency.html" class="th-btn radius bg-theme"
-                  >Contact With Agent</a
+                <p class="team-about_text mt-5" v-html="our_mission?.description"></p>
+                <Link href="/about-us" class="th-btn radius bg-theme"
+                  >About us</Link
                 >
               </div>
             </div>
@@ -69,9 +55,7 @@
       </div>
     </div>
   </section>
-  <section
-    class="th-blog-wrapper space-top overflow-hidden mission"
-  >
+  <section class="th-blog-wrapper space-top overflow-hidden mission">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7">
@@ -103,32 +87,23 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p class="team-about_text mt-5">
-                  Zulia Era is one of the best online resources for learning
-                  about technology in the medical sphere. There’s a real sense
-                  skepticiesm cillum dolore eu fugiat nulla pariatur.
-                </p>
-                <p class="team-about_text mb-40">
-                  Real estate agents play a critical role in solving various
-                  problems within the real estate community. Their expertise not
-                  only helps individual buyers and sellers but also positively
-                  impacts the overall housing market, local economy, and
-                  community development. Below are key problems agents solve and
-                  how their work improves the real estate community.
-                </p>
-                <a href="agency.html" class="th-btn radius bg-theme"
-                  >Contact With Agent</a
+                <p
+                  class="team-about_text mt-5"
+                  v-html="our_vision?.description"
+                ></p>
+                <Link href="/about-us" class="th-btn radius bg-theme"
+                  >About us</Link
                 >
               </div>
             </div>
             <div class="col-xxl-6 col-xl-12 order-1 order-xxl-2">
               <div
                 class="team-card style-2 me-xxl-4 background-image"
-                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+                :style="{ backgroundImage: `url(/assets/frontend/img/shape/team-2-bg-shape.png)` }"
               >
                 <div class="team-img">
                   <img
-                    src="/assets/frontend/img/popular/popular-1-6.jpg"
+                    :src="'/' + our_vision?.secondary_image"
                     alt="Team"
                   />
                 </div>
@@ -169,11 +144,11 @@
             <div class="col-xxl-6 col-xl-12">
               <div
                 class="team-card style-2 me-xxl-4 background-image"
-                data-bg-src="/assets/frontend/img/shape/team-2-bg-shape.png"
+                :style="{ backgroundImage: `url(/assets/frontend/img/shape/team-2-bg-shape.png)` }"
               >
                 <div class="team-img">
                   <img
-                    src="/assets/frontend/img/popular/popular-1-6.jpg"
+                    :src="'/' + core_values?.secondary_image"
                     alt="Team"
                   />
                 </div>
@@ -186,21 +161,9 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p class="team-about_text mt-5">
-                  Zulia Era is one of the best online resources for learning
-                  about technology in the medical sphere. There’s a real sense
-                  skepticiesm cillum dolore eu fugiat nulla pariatur.
-                </p>
-                <p class="team-about_text mb-40">
-                  Real estate agents play a critical role in solving various
-                  problems within the real estate community. Their expertise not
-                  only helps individual buyers and sellers but also positively
-                  impacts the overall housing market, local economy, and
-                  community development. Below are key problems agents solve and
-                  how their work improves the real estate community.
-                </p>
-                <a href="agency.html" class="th-btn radius bg-theme"
-                  >Contact With Agent</a
+                <p class="team-about_text mt-5" v-html="core_values?.description"></p>
+                <Link href="/about-us" class="th-btn radius bg-theme"
+                  >About us</Link
                 >
               </div>
             </div>
@@ -212,7 +175,28 @@
 </template>
 
 <script>
-export default {};
+import { store as mission_vision_store } from "./Store/mission_vision_store.js";
+import { mapActions, mapState } from "pinia";
+export default {
+  created:async function () {
+    await this.fetch_mission();
+    await this.fetch_vision();
+    await this.fetch_core_values();
+    console.log("Mission:", this.our_mission);
+  },
+  methods: {
+    ...mapActions(mission_vision_store, [
+      "fetch_mission",
+      "fetch_vision",
+      "fetch_core_values",
+    ]),
+  },
+  computed: {
+    ...mapState(mission_vision_store, ["our_mission", "our_vision", "core_values"]),
+    
+  },
+
+};
 </script>
 
 <style scoped>

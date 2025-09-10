@@ -9,7 +9,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.1s"
             >
-              <span class="double-line"></span> latest News
+              <span class="double-line"></span> latest Blogs
             </p>
             <h2
               class="sec-title fadeinup wow"
@@ -28,7 +28,10 @@
           data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"2"},"1300":{"slidesPerView":"3"}}, "autoHeight": "true"}'
         >
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
+            <template v-for="(single_news , index) in news" :key="index">
+              <NewsSingleItem :news="single_news" />
+            </template>
+            <!-- <div class="swiper-slide">
               <div class="blog-card style-2">
                 <div class="blog-img">
                   <a href="blog-details.html"
@@ -223,7 +226,7 @@
                   >
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <button
@@ -245,8 +248,14 @@
 
 <script>
 import { onMounted, onUpdated, nextTick, ref, onBeforeUnmount } from "vue";
+import { store as newsStore } from "./Store/newsStore.js";
+import NewsSingleItem from "./components/NewsSingleItem.vue";
+import { mapActions, mapState } from "pinia";
 
 export default {
+  components: {
+    NewsSingleItem,
+  },
   setup() {
     const swiperInstance = ref(null);
     const initializationAttempts = ref(0);
@@ -371,6 +380,16 @@ export default {
       swiperInstance,
     };
   },
+  created: async function () {
+    await this.fetch_news();
+    console.log("News:", this.news);
+  },
+  methods: {
+    ...mapActions(newsStore, ["fetch_news"]),
+  },
+  computed:{
+    ...mapState(newsStore, ["news"]),
+  }
 };
 </script>
 

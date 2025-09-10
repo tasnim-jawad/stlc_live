@@ -31,13 +31,13 @@
   <!-- PopularProperties section -->
   <!-- PopularProperties section -->
 
-  <!-- MissionVissionCore section -->
-  <!-- MissionVissionCore section -->
+  <!-- MissionVisionCore section -->
+  <!-- MissionVisionCore section -->
 
-  <MissionVissionCore />
+  <MissionVisionCore />
 
-  <!-- MissionVissionCore section -->
-  <!-- MissionVissionCore section -->
+  <!-- MissionVisionCore section -->
+  <!-- MissionVisionCore section -->
 
   <!-- WhyChooseUs section -->
   <!-- WhyChooseUs section -->
@@ -70,7 +70,7 @@ import HeroSlider from "./components/HeroSlider.vue";
 import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
 import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
 import PopularProperties from "../../GlobalComponent/PopularProperties/PopularProperties.vue";
-import MissionVissionCore from "../../GlobalComponent/MissionVissionCore/MissionVissionCore.vue";
+import MissionVisionCore from "../../GlobalComponent/MissionVisionCore/MissionVisionCore.vue";
 import WhyChooseUs from "../../GlobalComponent/WhyChooseUs/WhyChooseUs.vue";
 import Testimonials from "../../GlobalComponent/Testimonials/Testimonials.vue";
 import News from "../../GlobalComponent/News/News.vue";
@@ -83,7 +83,7 @@ export default {
     AboutUs,
     TeamSlider,
     PopularProperties,
-    MissionVissionCore,
+    MissionVisionCore,
     WhyChooseUs,
     Testimonials,
     News,

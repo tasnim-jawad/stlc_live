@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useTestimonialsStore = defineStore("testimonials", {
+export const store = defineStore("testimonials", {
   state: () => ({
     testimonials: [],
     loading: false,
@@ -16,12 +16,18 @@ export const useTestimonialsStore = defineStore("testimonials", {
   }),
 
   actions: {
-    async fetchTestimonials() {
+    async fetch_testimonials() {
       this.loading = true;
       this.error = null;
 
       try {
-        const response = await axios.get("/api/testimonials");
+        const response = await axios.get("/testimonials",{
+          params: { 
+            get_all: 1,
+            limit: 100
+          }
+        });
+
         this.testimonials = response.data.data || response.data;
 
         console.log("Testimonials fetched successfully:", this.testimonials);
@@ -29,30 +35,6 @@ export const useTestimonialsStore = defineStore("testimonials", {
       } catch (error) {
         this.error = "Failed to fetch testimonials";
         console.error("Error fetching testimonials:", error);
-        return { success: false, error };
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async fetchFeaturedTestimonials(limit = 6) {
-      this.loading = true;
-      this.error = null;
-
-      try {
-        const response = await axios.get(
-          `/api/testimonials/featured?limit=${limit}`
-        );
-        this.testimonials = response.data.data || response.data;
-
-        console.log(
-          "Featured testimonials fetched successfully:",
-          this.testimonials
-        );
-        return { success: true, data: this.testimonials };
-      } catch (error) {
-        this.error = "Failed to fetch featured testimonials";
-        console.error("Error fetching featured testimonials:", error);
         return { success: false, error };
       } finally {
         this.loading = false;
@@ -90,29 +72,5 @@ export const useTestimonialsStore = defineStore("testimonials", {
     },
   },
 
-  getters: {
-    getTestimonialById: (state) => (id) => {
-      return state.testimonials.find((testimonial) => testimonial.id === id);
-    },
 
-    hasTestimonials: (state) => state.testimonials.length > 0,
-
-    testimonialsCount: (state) => state.testimonials.length,
-
-    featuredTestimonials: (state) => {
-      return state.testimonials.filter(
-        (testimonial) => testimonial.is_featured
-      );
-    },
-
-    ratingAverage: (state) => {
-      if (state.testimonials.length === 0) return 0;
-
-      const total = state.testimonials.reduce((sum, testimonial) => {
-        return sum + (testimonial.rating || 5);
-      }, 0);
-
-      return (total / state.testimonials.length).toFixed(1);
-    },
-  },
 });

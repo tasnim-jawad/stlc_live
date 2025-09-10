@@ -63,6 +63,18 @@ class GetAllData
                 $data = $data->trased();
             }
 
+            if (request()->has('random_data') && (int)request()->input('random_data') === 1) {
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where('status', $status)
+                    ->limit($pageLimit)
+                    ->inRandomOrder()
+                    ->get();
+                return entityResponse($data);
+            }
+
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data
                     ->with($with)
