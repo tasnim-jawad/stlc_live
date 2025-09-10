@@ -37,7 +37,10 @@
         </div>
       </div>
       <div class="row gy-30 justify-content-center">
-        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 fadeinup wow">
+        <template v-for="(service, index) in services" :key="index">
+          <ServiceSingleItem :service="service" :index="index" />
+        </template>
+        <!-- <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 fadeinup wow">
           <div class="why-card-1 style-2 style-4">
             <h4 class="count">01</h4>
             <div class="why-card-1__icon">
@@ -250,15 +253,30 @@
               >
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { store as service_store } from "./Store/services_store.js";
+import { mapActions, mapState } from "pinia";
+import ServiceSingleItem from "./components/ServiceSingleItem.vue";
     export default {
-        
+        components: {
+            ServiceSingleItem
+        },
+        methods: {
+            ...mapActions(service_store, ["fetch_services"]),
+        },
+        computed: {
+            ...mapState(service_store, ["services"]),
+        },
+        created: async function () {
+            await this.fetch_services();
+            console.log("Services:", this.services);
+        },
     }
 </script>
 

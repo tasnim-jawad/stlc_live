@@ -92,6 +92,15 @@ export const useContactStore = defineStore("contact", {
       }
     },
 
+    async fetchServiceTypes() {
+      try {
+        const response = await axios.get("/service-types");
+        this.serviceTypes = response.data;
+      } catch (error) {
+        console.error("Error fetching service types:", error);
+      }
+    },
+
     setFormField(field, value) {
       this.form[field] = value;
     },

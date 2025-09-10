@@ -55,14 +55,13 @@
             Explore Property agents are here to help with all your buying,
             renting and selling goals. Find the home of your dreams with an
             expert you can trust.
-            <a class="text-theme" href="contact.html"> Let’s chat</a>
+            <a class="text-theme" href="/team"> Let’s chat</a>
           </p>
         </div>
         <div class="col-12">
           <div class="text-center">
-            <a class="th-btn pill bg-black" href="team.html"
-              >Find Your Location Agent <i class="fas fa-search"></i
-            ></a>
+            <Link class="th-btn pill bg-black" href="/team"
+              >See More Team Member</Link>
           </div>
         </div>
       </div>

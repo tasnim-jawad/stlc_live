@@ -1,6 +1,6 @@
 <template>
   <div
-    class="counter-sec1 space overflow-hidden"
+    class="counter-sec1 space overflow-hidden mt-5"
     data-bg-src="assets/img/bg/counter-1-bg.jpg"
   >
     <div class="container">
