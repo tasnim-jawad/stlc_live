@@ -40,3 +40,4 @@ include_once base_path("app/Modules/Management/ContactManagement/Contact/Routes/
 include_once base_path("app/Modules/Management/GalleryManagement/GalleryCategory/Routes/Route.php");
 include_once base_path("app/Modules/Management/GalleryManagement/ImageGallery/Routes/Route.php");
 include_once base_path("app/Modules/Management/GalleryManagement/VideoGallery/Routes/Route.php");
+include_once base_path("app/Modules/Management/WhyChooseUsManagement/WhyChooseUs/Routes/Route.php");

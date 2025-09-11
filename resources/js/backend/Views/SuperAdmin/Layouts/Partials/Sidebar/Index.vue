@@ -168,7 +168,8 @@
         :route_name="`AllContact`"
       />
 
-      <!-- Management end -->
+      <side-bar-single-menu :icon="`fa fa-plus`" :menu_title="`WhyChooseUs`"  :route_name="`AllWhyChooseUs`" />
+<!-- Management end -->
     </ul>
   </div>
 </template>

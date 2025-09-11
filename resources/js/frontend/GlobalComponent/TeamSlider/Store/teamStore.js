@@ -20,7 +20,7 @@ export const store = defineStore("team", {
         const response = await axios.get("our-teams",{
           params: { 
             get_all: 1,
-            limmit: 999
+            limit: 999
           }
         });
 

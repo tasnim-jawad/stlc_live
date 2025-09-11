@@ -594,7 +594,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "ServiceDetails"
+};
 </script>
 
 <style scoped></style>

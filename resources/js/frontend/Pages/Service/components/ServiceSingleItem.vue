@@ -11,16 +11,15 @@
       <div class="box-content">
         <div class="icon-wrap">
           <div class="icon">
-            <img src="/assets/frontend/img/icon/why-icon-1-1.svg" alt="img" />
+            <img :src="'/' + service?.image" alt="img" />
           </div>
-          <div class="number"><h3>01</h3></div>
+            <div class="number"><h3>{{ (index + 1).toString().padStart(2, '0') }}</h3></div>
         </div>
         <h3 class="box-title">
-          <a href="service-details.html">Property Buying Services</a>
+          <a href="service-details.html">{{ service?.title }}</a>
         </h3>
         <p class="box-text">
-          Assistance in finding, negotiating, and purchasing residential,
-          commercial, or investment properties. Includes market research.
+          {{ service?.description }}
         </p>
       </div>
     </div>
@@ -29,10 +28,25 @@
 
 <script>
 export default {
-  setup() {
-    return {};
-  },
+  name: "ServiceSingleItem",
+  props: {
+    service: {
+      type: Object,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: true
+    }
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.service-card .box-content .icon-wrap .icon{
+  background: none;
+}
+.service-card .box-content .icon-wrap .icon img{
+  object-fit: cover;
+}
+</style>

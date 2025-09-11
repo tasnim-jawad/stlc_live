@@ -23,10 +23,10 @@ export const store = defineStore("team_main_store", {
       try {
         const params = {
           page,
-          limit: 6,
+          limit: 8,
         };
 
-        const response = await axios.get("properties", { params });
+        const response = await axios.get("our-teams", { params });
         console.log('clicked',response.data);
 
         let result = response?.data?.data;
@@ -37,7 +37,7 @@ export const store = defineStore("team_main_store", {
             current_page: 1,
             last_page: 1,
             total: Array.isArray(response.data) ? response.data.length : 0,
-            per_page: 6,
+            per_page: 8,
           };
         }
         this.team = result;

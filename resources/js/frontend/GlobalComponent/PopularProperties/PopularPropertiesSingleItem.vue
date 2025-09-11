@@ -60,7 +60,7 @@
       <div class="property-content">
         <div class="media-body">
           <h3 class="box-title">
-            <a href="property-details.html">{{ property?.property_name }}</a>
+            <Link :href="`/portfolio/property-details?slug=${property?.slug}`">{{ property?.property_name }}</Link>
           </h3>
           <div class="box-text">
             <div class="icon">

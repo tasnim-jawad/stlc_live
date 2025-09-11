@@ -5,6 +5,7 @@ import Dashboard from "../Management/Dashboard/Dashboard.vue";
 //SettingsRoutes
 import SettingsRoutes from "../Management/Settings/setup/routes.js";
 //routes
+import WhyChooseUsRoutes from '../Management/WhyChooseUsManagement/WhyChooseUs/setup/routes.js';
 import VideoGalleryRoutes from '../Management/GalleryManagement/VideoGallery/setup/routes.js';
 import ImageGalleryRoutes from '../Management/GalleryManagement/ImageGallery/setup/routes.js';
 import GalleryCategoryRoutes from "../Management/GalleryManagement/GalleryCategory/setup/routes.js";
@@ -36,6 +37,7 @@ const routes = {
       name: "adminDashboard",
     },
     //management routes
+        WhyChooseUsRoutes,
         VideoGalleryRoutes,
         ImageGalleryRoutes,
     GalleryCategoryRoutes,

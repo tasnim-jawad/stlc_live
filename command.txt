@@ -34,4 +34,4 @@ php artisan make:module VideoGallaryManagement/VideoGallary [title:string-100,vi
 
 php artisan make:module ContactManagement/Contact [name:string-100,email:string-50,service_types:string,phone_number:string,message:text] --vue
 
-php artisan make:module WhyManagement/OurService [title:string-100,description:text,url:string200,image:string-200] --vue
+php artisan make:module WhyChooseUsManagement/WhyChooseUs [title:string-100,description:text,image:string-200] --vue

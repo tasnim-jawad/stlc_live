@@ -69,6 +69,19 @@ class GetAllData
                 $data = $data->trased();
             }
 
+            if (request()->has('random_data') && request()->input('random_data') == 1) {
+             
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where('status', $status)
+                    ->limit($pageLimit)
+                    ->inRandomOrder()
+                    ->get();
+                return entityResponse($data);
+            }
+
             if (
                 request()->has('property_category_id') &&
                 request()->input('property_category_id') != '' &&
