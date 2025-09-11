@@ -1,15 +1,13 @@
 <template>
   <div
-    v-for="(item, index) in galleryImages"
-    :key="item.src"
-    :class="`col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item cat${
-      index % 5
-    } cat${(index + 1) % 5} cat${(index + 2) % 5}`"
+    v-for="(item, index) in images"
+    :key="index"
+    :class="`col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item fadeinup wow animated`"
   >
     <div class="gallery-card2">
       <div class="gallery-img">
-        <img :src="item.src" alt="gallery image" />
-        <a class="popular-popup-image" :href="item.src"
+        <img :src="item?.image" alt="gallery image" />
+        <a class="popular-popup-image" :href="item?.image"
           ><i class="fa-solid fa-eye"></i
         ></a>
       </div>
@@ -18,13 +16,28 @@
 </template>
 
 <script>
+import "magnific-popup/dist/magnific-popup.css";
+import "magnific-popup/dist/jquery.magnific-popup.min.js";
 
 export default {
   props: {
-    galleryImages: {
+    images: {
       type: Array,
       required: true,
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      $(".popular-popup-image").magnificPopup({
+        type: "image",
+        gallery: {
+          enabled: true,
+        },
+      });
+    });
+  },
+  created: function () {
+    console.log("Images in gallery images:", this.images);
   },
 };
 </script>

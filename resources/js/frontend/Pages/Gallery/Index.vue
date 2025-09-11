@@ -41,27 +41,25 @@
                 data-filter="*"
                 class="th-btn tab-btn active"
                 type="button"
+                @click.prevent="set_image_category_id(null)"
               >
                 View All
               </button>
-              <button data-filter=".cat1" class="th-btn tab-btn" type="button">
-                Apartment
-              </button>
-              <button data-filter=".cat2" class="th-btn tab-btn" type="button">
-                Commercial
-              </button>
-              <button data-filter=".cat3" class="th-btn tab-btn" type="button">
-                Land or Plot
-              </button>
-              <button data-filter=".cat4" class="th-btn tab-btn" type="button">
-                Farm
+              <button
+                v-for="category in image_categories?.data"
+                :key="category.id"
+                @click.prevent="set_image_category_id(category?.id)"
+                class="th-btn tab-btn"
+                type="button"
+              >
+                {{ category?.name }}
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="row gy-4 justify-content-center filter-active">
-        <Images :galleryImages="galleryItems" />
+      <div class="row gy-4 justify-content-center filter-active" v-if="images?.data?.length">
+        <Images :images="images?.data" />
       </div>
     </div>
   </section>
@@ -72,6 +70,8 @@ import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
 import Images from "./Images.vue";
 import Videos from "./Videos.vue";
+import { store as gallery_store } from "./Store/gallery_store";
+import { mapState, mapActions } from "pinia";
 
 export default {
   components: {
@@ -79,47 +79,30 @@ export default {
     Images,
     Videos,
   },
-  data() {
-    return {
-      galleryItems: [
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-1.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-2.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-3.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-4.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-5.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-6.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-7.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-8.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-9.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-10.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-11.jpg",
-        },
-        {
-          src: "assets/frontend/img/gallery/gallery-inner-12.jpg",
-        },
-      ],
-    };
+  created: function () {
+    this.fetch_images();
+    this.fetch_image_categories();
   },
+  methods: {
+    ...mapActions(gallery_store, [
+      "fetch_images",
+      "fetch_videos",
+      "fetch_image_categories",
+      "fetch_video_categories",
+      "set_image_category_id",
+      "set_video_category_id",
+    ]),
+  },
+  computed: {
+    ...mapState(gallery_store, [
+      "images",
+      "videos",
+      "image_categories",
+      "video_categories",
+      "image_category_id",
+      "video_category_id",
+    ]),
+  },
+  
 };
 </script>

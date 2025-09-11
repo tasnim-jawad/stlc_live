@@ -49,6 +49,26 @@ class GetAllData
                 $data = $data->trased();
             }
 
+            if (request()->has('type')) {
+                if (request()->input('type') == 'image') {
+                    $condition_type['type'] = 'image';
+                }
+                if (request()->input('type') == 'video') {
+                    $condition_type['type'] = 'video';
+                }
+                
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where($condition_type)
+                    ->where('status', $status)
+                    ->limit($pageLimit)
+                    ->orderBy($orderByColumn, $orderByType)
+                    ->get();
+                     return entityResponse($data);
+            }
+
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data
                     ->with($with)
