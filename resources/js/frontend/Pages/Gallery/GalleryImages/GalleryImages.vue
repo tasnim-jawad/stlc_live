@@ -1,14 +1,14 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('/assets/frontend/img/bg/breadcrumb-bg.jpg')"
   >
     <div class="container">
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Amazing Gallery</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
-          <li>Gallery</li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/gallery/images">Gallery Images</Link></li>
         </ul>
       </div>
     </div>
@@ -71,16 +71,14 @@
 <script>
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
-import Images from "./components/Images.vue";
-import Videos from "./GalleryVideos/GalleryVideos.vue";
-import { store as gallery_store } from "./Store/gallery_store";
+import Images from "../components/Images.vue";
+import { store as gallery_store } from "../Store/gallery_store";
 import { mapState, mapActions } from "pinia";
 
 export default {
   components: {
     Link,
     Images,
-    Videos,
   },
   created: function () {
     this.fetch_images();

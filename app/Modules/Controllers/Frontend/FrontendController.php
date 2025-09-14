@@ -102,7 +102,7 @@ class FrontendController extends Controller
     public function GalleryImagesPage()
     {
 
-        return Inertia::render('Gallery/GalleryImages', [
+        return Inertia::render('Gallery/GalleryImages/GalleryImages', [
             'event' => [
                 'title' => 'Gallery Images',
             ]
@@ -112,7 +112,7 @@ class FrontendController extends Controller
     
     public function GalleryVideosPage()
     {
-        return Inertia::render('Gallery/GalleryVideos', [
+        return Inertia::render('Gallery/GalleryVideos/GalleryVideos', [
             'event' => [
                 'title' => 'Gallery Videos',
             ]

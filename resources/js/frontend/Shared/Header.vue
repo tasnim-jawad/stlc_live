@@ -188,7 +188,13 @@
           <li><Link href="/team">Our Team</Link></li>
           <li><Link href="/service">Our Services</Link></li>
           <li><Link href="/portfolio"> Portfolio</Link></li>
-          <li><Link href="/gallery"> Gallery</Link></li>
+          <li class="menu-item-has-children">
+            <a href="#"> Gallery </a>
+            <ul class="sub-menu">
+              <li><Link href="/gallery/images">Images</Link></li>
+              <li><Link href="/gallery/videos">Videos</Link></li>
+            </ul>
+          </li>
           <li><Link href="/blog"> Blog</Link></li>
           <li><Link href="/contact"> Contact</Link></li>
         </ul>
@@ -268,7 +274,13 @@
                   <li>
                     <Link href="/portfolio">Property</Link>
                   </li>
-                  <li><Link href="/gallery">Gallery </Link></li>
+                  <li class="menu-item-has-children">
+                    <a href="#">Gallery </a>
+                    <ul class="sub-menu">
+                      <li><Link href="/gallery/images">Images</Link></li>
+                      <li><Link href="/gallery/videos">Videos</Link></li>
+                    </ul>
+                  </li>
                   <li><Link href="/blog">STC Blog</Link></li>
                   <li><Link href="/contact">Contact Us</Link></li>
                 </ul>

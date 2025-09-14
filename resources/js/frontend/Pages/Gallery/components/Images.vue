@@ -6,8 +6,8 @@
   >
     <div class="gallery-card2">
       <div class="gallery-img">
-        <img :src="item?.image" alt="gallery image" />
-        <a class="popular-popup-image" :href="item?.image"
+        <img :src="'/' + item?.image" alt="gallery image" />
+        <a class="popular-popup-image" :href="'/' + item?.image"
           ><i class="fa-solid fa-eye"></i
         ></a>
       </div>

@@ -1,14 +1,14 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('/assets/frontend/img/bg/breadcrumb-bg.jpg')"
   >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">Amazing Gallery</h1>
+        <h1 class="breadcumb-title mt-5">Amazing Video Gallery</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
-          <li>Gallery</li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/gallery/videos">Gallery Videos</Link></li>
         </ul>
       </div>
     </div>
@@ -41,14 +41,14 @@
                 data-filter="*"
                 class="th-btn tab-btn active"
                 type="button"
-                @click.prevent="set_image_category_id(null)"
+                @click.prevent="set_video_category_id(null)"
               >
                 View All
               </button>
               <button
-                v-for="category in image_categories?.data"
+                v-for="category in video_categories?.data"
                 :key="category.id"
-                @click.prevent="set_image_category_id(category?.id)"
+                @click.prevent="set_video_category_id(category?.id)"
                 class="th-btn tab-btn"
                 type="button"
               >
@@ -60,9 +60,9 @@
       </div>
       <div
         class="row gy-4 justify-content-center filter-active"
-        v-if="images?.data?.length"
+        v-if="videos?.data?.length"
       >
-        <Images :images="images?.data" />
+        <Videos :videos="videos?.data" />
       </div>
     </div>
   </section>
@@ -71,20 +71,20 @@
 <script>
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
-import Images from "./components/Images.vue";
-import Videos from "./GalleryVideos/GalleryVideos.vue";
-import { store as gallery_store } from "./Store/gallery_store";
+import Videos from "../components/Videos.vue";
+import { store as gallery_store } from "../Store/gallery_store";
 import { mapState, mapActions } from "pinia";
 
 export default {
   components: {
     Link,
-    Images,
     Videos,
   },
   created: function () {
-    this.fetch_images();
-    this.fetch_image_categories();
+    this.fetch_videos();
+    this.fetch_video_categories();
+    console.log("Gallery Videos component created");
+    
   },
   methods: {
     ...mapActions(gallery_store, [
@@ -108,3 +108,14 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.gallery-inner-sec {
+  .title-area {
+    .sec-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+</style>
