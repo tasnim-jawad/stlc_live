@@ -75,6 +75,30 @@ class GetAllData
                 return entityResponse($data);
             }
 
+            if (
+                request()->has('blog_category_id') &&
+                request()->input('blog_category_id') != '' &&
+                request()->input('blog_category_id') != null
+            ) {
+                $blog_category_id = request()->input('blog_category_id');
+                $data = $data
+                    ->with($with)
+                    ->select($fields)
+                    ->where($condition)
+                    ->where('blog_category_id', $blog_category_id)
+                    ->where('status', $status)
+                    ->orderBy($orderByColumn, $orderByType)
+                    ->paginate($pageLimit);
+
+                return entityResponse([
+                    ...$data->toArray(),
+                    "active_data_count" => self::$model::active()->count(),
+                    "inactive_data_count" => self::$model::inactive()->count(),
+                    "trased_data_count" => self::$model::trased()->count(),
+                ]);
+            }
+
+
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data
                     ->with($with)

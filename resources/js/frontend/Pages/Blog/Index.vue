@@ -8,7 +8,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Blog Grid</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Blog Grid</li>
         </ul>
       </div>
@@ -16,13 +16,72 @@
   </div>
   <section class="th-blog-wrapper space-top space-extra-bottom">
     <div class="container">
+      <div class="th-sort-bar property-style">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md">
+            <h4
+              class="box-title text-start fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+              style="
+                visibility: visible;
+                animation-duration: 1.5s;
+                animation-delay: 0.1s;
+                animation-name: fadeinup;
+              "
+            >
+              Blog Listing
+            </h4>
+          </div>
+          <div class="col-md-auto">
+            <div
+              class="sorting-filter-wrap fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+              style="
+                visibility: visible;
+                animation-duration: 1.5s;
+                animation-delay: 0.3s;
+                animation-name: fadeinup;
+              "
+            >
+              
+              <form class="woocommerce-ordering" method="get">
+                <select
+                  name="orderby"
+                  class="orderby"
+                  aria-label="Shop order"
+                  @change="onCategoryChange"
+                >
+                  <option value="all" selected="selected">
+                    All images
+                  </option>
+                  <option
+                    v-for="category in blog_categories?.data"
+                    :key="category.id"
+                    :value="category.id"
+                  >
+                    Sort by {{ category.title }}
+                  </option>
+                </select>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row gy-30 justify-content-center">
-        <template v-for="i in 10" :key="i">
-          <BlogSingleItem />
+        <template v-for="blog in blogs?.data" :key="blog.id">
+          <BlogSingleItem :blog="blog" />
         </template>
-        
+
         <div class="col-12">
-          <Pagination /> 
+          <Pagination
+            :currentPage="blogs.current_page || 1"
+            :totalPages="blogs.last_page || 1"
+            @prev="goToPage(blogs.current_page - 1)"
+            @next="goToPage(blogs.current_page + 1)"
+            @change="goToPage"
+          />
         </div>
       </div>
     </div>
@@ -34,6 +93,8 @@ import { ref, computed } from "vue";
 import { Link } from "@inertiajs/vue3";
 import BlogSingleItem from "./components/BlogSingleItem.vue";
 import Pagination from "../../GlobalComponent/Pagination/Pagination.vue";
+import { mapState, mapActions } from "pinia";
+import { store as blog_store } from "./Store/blog_store.js";
 import $ from "jquery";
 import "magnific-popup";
 import "magnific-popup/dist/magnific-popup.css";
@@ -44,310 +105,31 @@ export default {
     BlogSingleItem,
     Pagination,
   },
-  setup() {
-    // Reactive data
-    const blogs = ref([
-      {
-        id: 1,
-        blog_category_id: 1,
-        title: "Safety First: New HSE Protocols in Construction",
-        description: `<p>Safety remains our top priority at Unique Construction. We have implemented comprehensive Health, Safety, and Environment (HSE) protocols that exceed industry standards.</p>
-        <p>Our new protocols include enhanced personal protective equipment (PPE) requirements, regular safety training sessions, and advanced monitoring systems across all construction sites.</p>
-        <p>These measures ensure that every worker returns home safely while maintaining the highest quality standards in our projects.</p>`,
-        tags: "safety, hse, protocols, construction, training",
-        publish_date: "2024-03-15",
-        writer: "Ahmed Al-Rashid",
-        meta_description:
-          "Learn about our comprehensive HSE protocols and safety measures in construction",
-        meta_keywords: "safety, construction, hse, protocols, training",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_1.jpg",
-        image: "/uploads/blog/thumbnail_image/2025/06/image_1.jpg",
-        url: null,
-        created_at: "2024-03-15T10:00:00Z",
-        updated_at: "2024-03-15T10:00:00Z",
-      },
-      {
-        id: 2,
-        blog_category_id: 2,
-        title: "Sustainable Building Practices in Oman",
-        description: `<p>As environmental consciousness grows, Unique Construction is leading the way in sustainable building practices throughout Oman.</p>
-        <p>We incorporate eco-friendly materials, energy-efficient systems, and water conservation techniques in all our projects.</p>
-        <p>Our commitment to sustainability extends beyond construction to include waste reduction, renewable energy integration, and green building certifications.</p>`,
-        tags: "sustainability, green building, eco-friendly, energy efficiency",
-        publish_date: "2024-03-10",
-        writer: "Sarah Johnson",
-        meta_description:
-          "Discover our sustainable building practices and green construction methods",
-        meta_keywords:
-          "sustainable, green building, eco-friendly, construction",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_2.jpg",
-        image: "/uploads/blog/thumbnail_image/2025/06/image_2.jpg",
-        url: null,
-        created_at: "2024-03-10T14:30:00Z",
-        updated_at: "2024-03-10T14:30:00Z",
-      },
-      {
-        id: 3,
-        blog_category_id: 3,
-        title: "Modern Construction Technologies",
-        description: `<p>The construction industry is evolving rapidly with new technologies transforming how we build.</p>
-        <p>At Unique Construction, we embrace cutting-edge technologies including BIM (Building Information Modeling), drone surveying, and automated construction equipment.</p>
-        <p>These technologies improve accuracy, reduce costs, and accelerate project timelines while maintaining superior quality standards.</p>`,
-        tags: "technology, bim, automation, innovation, construction",
-        publish_date: "2024-03-05",
-        writer: "Dr. Mohammed Al-Balushi",
-        meta_description:
-          "Explore modern construction technologies and innovations in building",
-        meta_keywords: "technology, bim, construction, innovation, automation",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_3.jpg",
-        image: "/uploads/blog/thumbnail_image/2025/06/image_3.jpg",
-        url: "/uploads/blog/construction-tech.mp4",
-        created_at: "2024-03-05T09:15:00Z",
-        updated_at: "2024-03-05T09:15:00Z",
-      },
-      {
-        id: 4,
-        blog_category_id: 1,
-        title: "Project Management Excellence",
-        description: `<p>Successful construction projects require meticulous planning, coordination, and execution.</p>
-        <p>Our project management approach combines traditional methodologies with modern tools to ensure projects are delivered on time, within budget, and to the highest quality standards.</p>
-        <p>We utilize advanced project management software, regular stakeholder communication, and proactive risk management strategies.</p>`,
-        tags: "project management, planning, coordination, quality",
-        publish_date: "2024-02-28",
-        writer: "Manilal H. Limbani",
-        meta_description:
-          "Learn about our project management excellence and methodologies",
-        meta_keywords: "project management, construction, planning, quality",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_4.jpg",
-        image: "/uploads/blog/thumbnail_image/2025/06/image_4.jpg",
-        url: null,
-        created_at: "2024-02-28T11:20:00Z",
-        updated_at: "2024-02-28T11:20:00Z",
-      },
-      {
-        id: 5,
-        blog_category_id: 4,
-        title: "Quality Assurance in Construction",
-        description: `<p>Quality is not an accident; it's the result of systematic processes, skilled craftsmanship, and continuous improvement.</p>
-        <p>Our quality assurance program includes regular inspections, material testing, and adherence to international standards.</p>
-        <p>Every project undergoes rigorous quality checks at multiple stages to ensure the final deliverable exceeds client expectations.</p>`,
-        tags: "quality assurance, inspections, standards, craftsmanship",
-        publish_date: "2024-02-20",
-        writer: "Ahmad Al-Hinai",
-        meta_description:
-          "Understand our comprehensive quality assurance processes",
-        meta_keywords:
-          "quality assurance, construction, standards, inspections",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_4.jpg",
-        image: "/uploads/blog/thumbnail_image/2025/06/image_1.jpg",
-        url: null,
-        created_at: "2024-02-20T16:45:00Z",
-        updated_at: "2024-02-20T16:45:00Z",
-      },
-      {
-        id: 6,
-        blog_category_id: 2,
-        title: "Client Partnership and Communication",
-        description: `<p>Building strong relationships with our clients is fundamental to our success.</p>
-        <p>We believe in transparent communication, regular updates, and collaborative decision-making throughout the project lifecycle.</p>
-        <p>Our client-centric approach has resulted in over 60% repeat business, demonstrating the trust and satisfaction of our valued clients.</p>`,
-        tags: "client partnership, communication, relationships, trust",
-        publish_date: "2024-02-15",
-        writer: "Maria Rodriguez",
-        meta_description:
-          "Discover our client partnership approach and communication strategies",
-        meta_keywords:
-          "client partnership, communication, construction, relationships",
-        thumbnail_image: "/uploads/blog/thumbnail_image/2025/06/image_6.jpg",
-        image: null,
-        url: "https://www.youtube.com/watch?v=A5zLYDP0iG8",
-        created_at: "2024-02-15T13:30:00Z",
-        updated_at: "2024-02-15T13:30:00Z",
-      },
-    ]);
-
-    const categories = ref([
-      { id: 1, name: "Safety & HSE" },
-      { id: 2, name: "Sustainability" },
-      { id: 3, name: "Technology" },
-      { id: 4, name: "Quality Assurance" },
-    ]);
-
-    const activeFilter = ref("all");
-    const viewMode = ref("grid");
-    const currentPage = ref(1);
-    const itemsPerPage = ref(6);
-    const searchQuery = ref("");
-
-    // Computed properties
-    const uniqueCategories = computed(() => {
-      return categories.value;
-    });
-
-    const filteredBlogs = computed(() => {
-      let filtered = blogs.value;
-
-      // Filter by category
-      if (activeFilter.value !== "all") {
-        filtered = filtered.filter(
-          (blog) => blog.blog_category_id === activeFilter.value
-        );
+  created: function () {
+    this.fetch_blog_categories();
+    this.fetch_blogs({ page: 1 });
+    console.log("Blogs in store dsd:", this.blogs);
+  },
+  methods: {
+    ...mapActions(blog_store, [
+      "fetch_blogs",
+      "fetch_blog_categories",
+      "set_blog_category_id",
+    ]),
+    goToPage(page) {
+      console.log("Going to page:", page);
+      if (page < 1 || page > (this.blogs.last_page || 1)) return;
+      this.fetch_blogs({ page });
+    },
+    onCategoryChange(event) {
+      const categoryId = event.target.value;
+      if (categoryId !== "menu_order") {
+        this.set_blog_category_id(categoryId);
       }
-
-      // Filter by search query
-      if (searchQuery.value.trim()) {
-        const query = searchQuery.value.toLowerCase().trim();
-        filtered = filtered.filter(
-          (blog) =>
-            blog.title.toLowerCase().includes(query) ||
-            blog.description.toLowerCase().includes(query) ||
-            blog.writer.toLowerCase().includes(query) ||
-            blog.tags.toLowerCase().includes(query)
-        );
-      }
-
-      // Sort by publish date (newest first)
-      return filtered.sort(
-        (a, b) => new Date(b.publish_date) - new Date(a.publish_date)
-      );
-    });
-
-    const featuredBlog = computed(() => {
-      return filteredBlogs.value[0] || null;
-    });
-
-    const regularBlogs = computed(() => {
-      return filteredBlogs.value.slice(1);
-    });
-
-    const totalPages = computed(() => {
-      return Math.ceil(regularBlogs.value.length / itemsPerPage.value);
-    });
-
-    const startIndex = computed(() => {
-      return (currentPage.value - 1) * itemsPerPage.value;
-    });
-
-    const endIndex = computed(() => {
-      return startIndex.value + itemsPerPage.value;
-    });
-
-    const paginatedBlogs = computed(() => {
-      return regularBlogs.value.slice(startIndex.value, endIndex.value);
-    });
-
-    const visiblePages = computed(() => {
-      const pages = [];
-      const start = Math.max(1, currentPage.value - 2);
-      const end = Math.min(totalPages.value, currentPage.value + 2);
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-
-      return pages;
-    });
-
-    // Methods
-    const goToPage = (page) => {
-      if (page >= 1 && page <= totalPages.value) {
-        currentPage.value = page;
-        document
-          .querySelector(".blog-section")
-          .scrollIntoView({ behavior: "smooth" });
-      }
-    };
-
-    const resetPagination = () => {
-      currentPage.value = 1;
-    };
-
-    // Open YouTube link in Magnific Popup iframe
-    const openVideo = (url) => {
-      if (!url) return;
-      // initialize and open directly
-      $.magnificPopup.open({
-        items: {
-          src: url,
-        },
-        type: "iframe",
-        mainClass: "mfp-fade",
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false,
-        iframe: {
-          patterns: {
-            youtube: {
-              index: "youtube.com/",
-              id: "v=",
-              src: "https://www.youtube.com/embed/%id%?autoplay=1",
-            },
-          },
-          srcAction: "iframe_src",
-        },
-      });
-    };
-
-    const getCategoryName = (categoryId) => {
-      const category = categories.value.find((cat) => cat.id === categoryId);
-      return category ? category.name : "Uncategorized";
-    };
-
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    };
-
-    const getExcerpt = (html, maxLength = 150) => {
-      // Remove HTML tags and get plain text
-      const text = html.replace(/<[^>]*>/g, "").replace(/&[^;]+;/g, " ");
-      return text.length > maxLength
-        ? text.substring(0, maxLength) + "..."
-        : text;
-    };
-
-    const getTags = (tagsString) => {
-      if (!tagsString) return [];
-      return tagsString
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter((tag) => tag.length > 0);
-    };
-
-    return {
-      // Data
-      blogs,
-      categories,
-      activeFilter,
-      viewMode,
-      currentPage,
-      itemsPerPage,
-      searchQuery,
-
-      // Computed
-      uniqueCategories,
-      filteredBlogs,
-      featuredBlog,
-      regularBlogs,
-      totalPages,
-      startIndex,
-      endIndex,
-      paginatedBlogs,
-      visiblePages,
-
-      // Methods
-      goToPage,
-      resetPagination,
-      getCategoryName,
-      formatDate,
-      getExcerpt,
-      getTags,
-      openVideo, // expose to template
-    };
+    },
+  },
+  computed: {
+    ...mapState(blog_store, ["blogs", "blog_categories"]),
   },
 };
 </script>

@@ -7,7 +7,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Properties</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Properties</li>
         </ul>
       </div>
@@ -140,7 +140,7 @@
               </div>
             </div>
 
-            <div class="col-xl-4 col-lg-6">
+            <div class="col-xl-4 col-lg-12">
               <SidebarArea />
             </div>
           </div>

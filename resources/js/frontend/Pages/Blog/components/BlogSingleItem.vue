@@ -2,31 +2,60 @@
   <div class="col-lg-4 col-md-6">
     <div class="blog-card">
       <div class="blog-img">
-        <a href="blog-details.html"
-          ><img src="assets/frontend/img/blog/blog_1_1.jpg" alt="Image"
-        /></a>
-        <div class="date"><a href="blog.html">22 Feb</a></div>
+        <Link :href="`/blog/details?slug=${blog?.slug}`">
+          <img :src="'/' + (blog?.thumbnail_image ?? 'uploads/default.jpg')" alt="Image" />
+        </Link>
+        />
+        <div class="date">
+          <a href="blog.html">{{ formatDate(blog?.publish_date) }}</a>
+        </div>
       </div>
       <div class="blog-content">
         <div class="blog-meta">
-          <a href="blog.html"><i class="fa-solid fa-user"></i> Emma</a>
-          <a href="blog.html"
-            ><i class="fa-solid fa-comments"></i> No Comments</a
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-user"></i> {{ blog?.writer ?? "Admin" }}</a
+          >
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-tag"></i>
+            {{ blog?.blog_category?.title ?? "General" }}</a
           >
         </div>
         <h3 class="box-title">
-          <a href="blog-details.html"
-            >Building gains into housing stocks and how to trade the sector</a
-          >
+          <Link :href="`/blog/details?slug=${blog?.slug}`">
+            {{ blog?.title }}
+          </Link>
         </h3>
-        <a href="blog-details.html" class="th-btn pill style3">Read More</a>
+        <Link
+          :href="`/blog/details?slug=${blog?.slug}`"
+          class="th-btn pill style3"
+          >Read More</Link
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { Link } from "@inertiajs/vue3";
+
+export default {
+  props: {
+    blog: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
