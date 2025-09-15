@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Modules\Management\BlogManagement\Blog\Controller;
+
 use App\Modules\Management\BlogManagement\Blog\Actions\GetAllData;
 use App\Modules\Management\BlogManagement\Blog\Actions\DestroyData;
 use App\Modules\Management\BlogManagement\Blog\Actions\GetSingleData;
 use App\Modules\Management\BlogManagement\Blog\Actions\StoreData;
+use App\Modules\Management\BlogManagement\Blog\Actions\GetAllComments;
+use App\Modules\Management\BlogManagement\Blog\Actions\StoreComment;
 use App\Modules\Management\BlogManagement\Blog\Actions\UpdateData;
 use App\Modules\Management\BlogManagement\Blog\Actions\UpdateStatus;
 use App\Modules\Management\BlogManagement\Blog\Actions\SoftDelete;
@@ -19,7 +22,8 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -42,7 +46,7 @@ class Controller extends ControllersController
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-         public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -74,4 +78,16 @@ class Controller extends ControllersController
         return $data;
     }
 
+    public function storeComment($blog_id)
+    {
+        $data = StoreComment::execute(request(), $blog_id);
+        return $data;
+    }
+
+    public function getComments($blog_id)
+    {
+
+        $data = GetAllComments::execute($blog_id);
+        return $data;
+    }
 }

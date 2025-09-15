@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('blog_comments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('blog_id')->nullable();
-            $table->string('comment', 100)->nullable();
+            $table->text('comment')->nullable();
             $table->string('name', 100)->nullable();
             $table->string('email', 50)->nullable();
             $table->string('website', 100)->nullable();
-            
+
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

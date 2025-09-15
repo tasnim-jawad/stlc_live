@@ -6,7 +6,7 @@
 
     <SidebarContactForm />
 
-    <WidgetBanner />
+    <!-- <WidgetBanner /> -->
 
   </aside>
 </template>

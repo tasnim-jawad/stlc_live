@@ -10,7 +10,7 @@
         <div class="media-img">
           <Link :href="`/portfolio/property-details?slug=${property?.slug}`"
             ><img
-              :src="
+              :src="'/' + 
                 property?.banner_image[0] ||
                 'assets/frontend/img/blog/featured-listing-sidebar-1-1.jpg'
               "

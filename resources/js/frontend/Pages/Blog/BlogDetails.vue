@@ -60,142 +60,43 @@
             </div>
           </div>
           <div class="th-comments-wrap">
-            <h2 class="blog-inner-title h4">Comments (3)</h2>
-            <ul class="comment-list">
-              <li class="th-comment-item">
-                <div class="th-post-comment">
-                  <div class="comment-avater">
-                    <img
-                      src="/assets/frontend/img/blog/comment-author-1.jpg"
-                      alt="Comment Author"
-                    />
-                  </div>
-                  <div class="comment-content">
-                    <h3 class="name">Adam Jhon</h3>
-                    <span class="commented-on">25 Jun, 2025 08:56pm</span>
-                    <p class="text">
-                      Through this blog, we aim to inspire readers and of the
-                      blog to embrace education as a lifelong journey and to
-                      advocate for quality education
-                    </p>
-                    <div class="reply_and_edit">
-                      <a href="blog-details.html" class="reply-btn"
-                        ><i class="fa-solid fa-reply"></i> Reply</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <ul class="children">
-                  <li class="th-comment-item">
-                    <div class="th-post-comment">
-                      <div class="comment-avater">
-                        <img
-                          src="/assets/frontend/img/blog/comment-author-2.jpg"
-                          alt="Comment Author"
-                        />
-                      </div>
-                      <div class="comment-content">
-                        <h3 class="name">Jhon Abraham</h3>
-                        <span class="commented-on">25 Jun, 2025 08:56pm</span>
-                        <p class="text">
-                          Education News and Trends: and of the blog We provide
-                          updates on the latest blog and developments and trends
-                          in the education sector.
-                        </p>
-                        <div class="reply_and_edit">
-                          <a href="blog-details.html" class="reply-btn"
-                            ><i class="fa-solid fa-reply"></i> Reply</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li class="th-comment-item">
-                <div class="th-post-comment">
-                  <div class="comment-avater">
-                    <img
-                      src="/assets/frontend/img/blog/comment-author-3.jpg"
-                      alt="Comment Author"
-                    />
-                  </div>
-                  <div class="comment-content">
-                    <h3 class="name">Anadi Juila</h3>
-                    <span class="commented-on">25 Jun, 2025 08:56pm</span>
-                    <p class="text">
-                      We discuss strategies to and of the blog help students and
-                      other people public make informed decisions about their
-                      educational and career paths.
-                    </p>
-                    <div class="reply_and_edit">
-                      <a href="blog-details.html" class="reply-btn"
-                        ><i class="fa-solid fa-reply"></i> Reply</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </li>
+            <h2 class="blog-inner-title h4">Comments ({{ commentsCount }})</h2>
+
+            <div v-if="loading" class="text-center">
+              <p>Loading comments...</p>
+            </div>
+
+            <div v-else-if="error" class="alert alert-danger">
+              {{ error }}
+            </div>
+
+            <ul v-else-if="displayedComments.length > 0" class="comment-list">
+              <Comments
+                v-for="comment in displayedComments"
+                :key="comment.id"
+                :comment="comment"
+              />
             </ul>
-          </div>
-          <div class="th-comment-form blog-comment-wrap">
-            <div class="form-title mb-25">
-              <h3 class="blog-inner-title h4">Leave a Reply</h3>
-              <p class="form-text">
-                Your email address will not be published. Required fields are
-                marked
-              </p>
+
+            <div v-else>
+              <p>No comments yet. Be the first to comment!</p>
             </div>
-            <div class="row">
-              <div class="col-md-6 form-group style-border">
-                <i class="fa-regular fa-user"></i>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your name*"
-                  class="form-control"
-                />
-              </div>
-              <div class="col-md-6 form-group style-border">
-                <i class="fa-regular fa-envelope"></i>
-                <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  placeholder="Your email*"
-                  class="form-control"
-                />
-              </div>
-              <div class="col-12 form-group style-border">
-                <i class="fa-solid fa-globe"></i>
-                <input
-                  id="website"
-                  name="name"
-                  type="text"
-                  placeholder="Website*"
-                  class="form-control"
-                />
-              </div>
-              <div class="col-12 form-group style-border">
-                <i class="fa-regular fa-pen"></i>
-                <textarea
-                  placeholder="Comment*"
-                  class="form-control"
-                ></textarea>
-              </div>
-              <div class="col-12 form-group">
-                <input id="reviewcheck" name="reviewcheck" type="checkbox" />
-                <label for="reviewcheck"
-                  >Save my name, email, and website in this browser for the next
-                  time I comment.<span class="checkmark"></span
-                ></label>
-              </div>
-              <div class="col-12 form-group style-border mb-0">
-                <button class="th-btn radius">Send Message</button>
-              </div>
+
+            <!-- See More/See Less Button -->
+            <div
+              v-if="hasMoreComments || showAllComments"
+              class="text-center mt-3"
+            >
+              <button @click="toggleShowAllComments" class="th-btn style2">
+                {{
+                  showAllComments
+                    ? "See Less"
+                    : `See More (${comments.length - commentsPerPage} more)`
+                }}
+              </button>
             </div>
           </div>
+          <CommentForm :blog-id="single_blog?.id" />
         </div>
         <div class="col-xxl-4 col-lg-5">
           <SidebarArea />
@@ -208,13 +109,19 @@
 <script>
 import { Link } from "@inertiajs/vue3";
 import SidebarArea from "./components/SidebarArea.vue";
+import CommentForm from "./components/CommentForm.vue";
+import Comments from "./components/Comments.vue";
 import { store as blog_details_store } from "./Store/blog_details_store.js";
+import { store as blog_comments_store } from "./Store/blog_comments_store.js";
 import { mapState, mapActions } from "pinia";
 
 export default {
   name: "BlogDetails",
   components: {
     SidebarArea,
+    CommentForm,
+    Comments,
+    Link,
   },
   created: function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -224,15 +131,36 @@ export default {
     }
     console.log("Single blog in store:", this.single_blog);
   },
+  watch: {
+    single_blog: {
+      handler(newBlog) {
+        if (newBlog?.id) {
+          this.fetchComments(newBlog.id);
+        }
+      },
+      immediate: true,
+    },
+  },
   computed: {
-    ...mapState(blog_details_store, ["single_blog", "loading", "error"]),
+    ...mapState(blog_details_store, ["single_blog"]),
+    ...mapState(blog_comments_store, [
+      "comments",
+      "displayedComments",
+      "showAllComments",
+      "commentsPerPage",
+      "loading",
+      "error",
+      "commentsCount",
+      "hasMoreComments",
+    ]),
   },
   methods: {
-    ...mapActions(blog_details_store, [
-      "fetch_single_blog",
-      "getTagsArray"
+    ...mapActions(blog_details_store, ["fetch_single_blog", "getTagsArray"]),
+    ...mapActions(blog_comments_store, [
+      "fetchComments",
+      "toggleShowAllComments",
     ]),
-    
+
     formatDate(dateString) {
       if (!dateString) return "N/A";
       const date = new Date(dateString);

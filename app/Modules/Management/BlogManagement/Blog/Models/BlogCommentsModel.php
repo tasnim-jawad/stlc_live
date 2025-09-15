@@ -17,8 +17,8 @@ class BlogCommentsModel  extends EloquentModel
     {
         static::created(function ($data) {
             $random_no = random_int(100, 999) . $data->id . random_int(100, 999);
-            $slug = $data->title . " " . $random_no;
-            $data->slug = Str::slug($slug); //use Illuminate\Support\Str;
+            $slug = "comment-" . $data->id . "-" . $random_no;
+            $data->slug = Str::slug($slug);
             if (strlen($data->slug) > 50) {
                 $data->slug = substr($data->slug, strlen($data->slug) - 50, strlen($data->slug));
             }
@@ -41,5 +41,10 @@ class BlogCommentsModel  extends EloquentModel
     public function scopeTrased($q)
     {
         return $q->onlyTrashed();
+    }
+
+    public function blog()
+    {
+        return $this->belongsTo(\App\Modules\Management\BlogManagement\Blog\Models\Model::class, 'blog_id');
     }
 }
