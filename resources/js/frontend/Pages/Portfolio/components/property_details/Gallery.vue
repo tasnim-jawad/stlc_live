@@ -70,7 +70,7 @@ export default {
       // Completely destroy any existing instances first
       if (window.$ && window.$.fn.magnificPopup) {
         try {
-          // Close any open popups
+          // Close any open popupsfuio9ohguyffy9 vf   99bookv
           $.magnificPopup.close();
 
           // Remove all existing magnific popup data and events

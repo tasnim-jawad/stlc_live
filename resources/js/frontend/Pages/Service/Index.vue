@@ -8,7 +8,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Our Services</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Our Services</li>
         </ul>
       </div>
@@ -18,7 +18,7 @@
     <div class="container">
       <div class="row gy-40 justify-content-center">
         <template
-          v-for="(service,index) in services?.data"
+          v-for="(service, index) in services?.data"
           :key="`service-item-${index}`"
         >
           <service-single-item :service="service" :index="index" />
@@ -51,7 +51,6 @@ export default {
   created: function () {
     this.fetch_services({ page: 1 });
     console.log("Services:", this.services);
-    
   },
   methods: {
     ...mapActions(service_store, ["fetch_services"]),

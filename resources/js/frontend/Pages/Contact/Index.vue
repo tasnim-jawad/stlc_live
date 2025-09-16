@@ -8,7 +8,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Contact</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Contact with Us</li>
         </ul>
       </div>
@@ -23,9 +23,13 @@
               <i class="fas fa-location-dot"></i>
             </div>
             <div class="media-body">
-              <p class="contact-feature_label">Mosque Address</p>
-              <a href="https://www.google.com/maps" class="contact-feature_link"
-                >123 Academic Way City, State, 1234, New York City.</a
+              <p class="contact-feature_label">Address</p>
+              <a
+                href="javascript:void(0);"
+                class="contact-feature_link"
+                v-for="address in getSettingValuesByTitle('address')"
+                :key="address"
+                >{{ address }}</a
               >
             </div>
           </div>
@@ -37,11 +41,12 @@
             </div>
             <div class="media-body">
               <p class="contact-feature_label">Phone Number</p>
-              <a href="tel:+011123234567890" class="contact-feature_link"
-                >+011 (123) 234 567 890</a
-              >
-              <a href="tel:+09456876543210" class="contact-feature_link"
-                >+09 (456) 876 543 210</a
+              <a
+                href="javascript:void(0);"
+                class="contact-feature_link"
+                v-for="phone in getSettingValuesByTitle('phone_numbers')"
+                :key="phone"
+                >{{ phone }}</a
               >
             </div>
           </div>
@@ -53,14 +58,13 @@
             </div>
             <div class="media-body">
               <p class="contact-feature_label">Email Address</p>
-              <a href="mailto:info@examplemail.edu" class="contact-feature_link"
-                >info@examplemail.edu</a
-              >
               <a
-                href="mailto:admission@examplemail.edu"
+                href="javascript:void(0);"
                 class="contact-feature_link"
-                >admission@examplemail.edu</a
-              >
+                v-for="email in getSettingValuesByTitle('emails')"
+                :key="email"
+                >{{ email }}
+              </a>
             </div>
           </div>
         </div>
@@ -73,20 +77,42 @@
   <!-- ContactForm2 -->
 
   <!-- LocationMap -->
-  <LocationMap />
+  <LocationMap/>
   <!-- LocationMap -->
-
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 import ContactForm2 from "../../GlobalComponent/ContactForm2/ContactForm2.vue";
 import LocationMap from "../../GlobalComponent/LocationMap/LocationMap.vue";
+
+import { store as contact_store } from "./Store/contact_store.js";
 export default {
   components: {
     ContactForm2,
-    LocationMap
-  }
+    LocationMap,
+  },
+  methods: {
+    ...mapActions(contact_store, [
+      "fetch_website_settings",
+      "fetch_addresses",
+      "getSettingValuesByTitle",
+      "getFirstSettingValueByTitle",
+    ]),
+    
+  },
+  created: function () {
+    this.fetch_website_settings();
+  },
+  computed: {
+    ...mapState(contact_store, ["website_settings"]),
+  },
 };
 </script>
 
-<style></style>
+<style>
+.contact-feature_link {
+  word-break: break-all;   /* or break-word */
+  overflow-wrap: anywhere; /* modern & better */
+}
+</style>

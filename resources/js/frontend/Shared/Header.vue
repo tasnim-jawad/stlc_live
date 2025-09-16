@@ -212,13 +212,15 @@
               <ul>
                 <li>
                   <i class="fa-solid fa-envelope"></i>
-                  <a href="mailto:infomailexample@mail.com"
-                    >infomailexample@mail.com</a
-                  >
+                  <a href="javascript:void(0);">{{
+                    getFirstSettingValueByTitle("emails")
+                  }}</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-phone"></i>
-                  <a href="tel:+0012345678900">+00 (123) 456 789 00</a>
+                  <a href="javascript:void(0);">{{
+                    getFirstSettingValueByTitle("phone_numbers")
+                  }}</a>
                 </li>
               </ul>
             </div>
@@ -228,17 +230,28 @@
               <ul>
                 <li>
                   <div class="th-social">
-                    <a href="https://www.facebook.com/"
+                    <a :href="getFirstSettingValueByTitle('whatsapp')"
+                      ><i class="fab fa-whatsapp"></i
+                    ></a>
+                    <a
+                      :href="getFirstSettingValueByTitle('facebook')"
+                      target="_blank"
                       ><i class="fab fa-facebook-f"></i
                     ></a>
-                    <a href="https://www.twitter.com/"
+                    <a
+                      :href="getFirstSettingValueByTitle('twitter')"
+                      target="_blank"
                       ><i class="fab fa-twitter"></i
                     ></a>
-                    <a href="https://www.linkedin.com/"
+                    <a
+                      :href="getFirstSettingValueByTitle('linkedin')"
+                      target="_blank"
                       ><i class="fab fa-linkedin-in"></i
                     ></a>
-                    <a href="https://www.whatsapp.com/"
-                      ><i class="fab fa-whatsapp"></i
+                    <a
+                      :href="getFirstSettingValueByTitle('youtube')"
+                      target="_blank"
+                      ><i class="fab fa-youtube"></i
                     ></a>
                   </div>
                 </li>
@@ -314,6 +327,8 @@
 
 <script>
 import { Link } from "@inertiajs/vue3";
+import { store as header_store } from "./Store/header_store.js";
+import { mapState, mapActions } from "pinia";
 
 export default {
   data: () => ({
@@ -325,6 +340,16 @@ export default {
     toggleSidebarMenu() {
       this.isSideBarMenuOpen = !this.isSideBarMenuOpen;
     },
+    ...mapActions(header_store, [
+      "fetch_website_settings",
+      "getFirstSettingValueByTitle",
+    ]),
+  },
+  computed: {
+    ...mapState(header_store, ["website_settings"]),
+  },
+  created: function () {
+    this.fetch_website_settings();
   },
 };
 </script>

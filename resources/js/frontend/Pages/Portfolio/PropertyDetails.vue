@@ -7,7 +7,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Property Details</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Property Details</li>
         </ul>
       </div>
@@ -104,6 +104,11 @@
                   ---------------------------------------------------------------------- -->
                   <PropertyDetail
                     :property_detail="single_property?.property_detail"
+                    :property_status="
+                      single_property?.property_status == 'sale'
+                        ? 'For Sale'
+                        : 'For Rent'
+                    "
                   />
 
                   <!-- ----------------------------------------------------------------------

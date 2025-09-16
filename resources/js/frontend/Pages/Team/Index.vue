@@ -7,7 +7,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Our Board of Directory</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Our Board of Directory</li>
         </ul>
       </div>
@@ -62,4 +62,3 @@ export default {
   },
 };
 </script>
-

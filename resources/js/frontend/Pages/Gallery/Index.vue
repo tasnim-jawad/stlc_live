@@ -7,7 +7,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title mt-5">Amazing Gallery</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Gallery</li>
         </ul>
       </div>

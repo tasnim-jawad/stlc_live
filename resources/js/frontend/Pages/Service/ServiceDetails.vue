@@ -4,7 +4,7 @@
       <div class="breadcumb-content">
         <h1 class="breadcumb-title">Service Details</h1>
         <ul class="breadcumb-menu">
-          <li><a href="index.html">Home</a></li>
+          <li><Link href="/">Home</Link></li>
           <li>Service Details</li>
         </ul>
       </div>
@@ -595,7 +595,7 @@
 
 <script>
 export default {
-  name: "ServiceDetails"
+  name: "ServiceDetails",
 };
 </script>
 
