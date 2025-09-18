@@ -12,50 +12,56 @@ class StoreData
 
             $requestData = $request->validated();
 
-            // Handle YouTube URL embedding
-            if (!empty($requestData['video_url'])) {
-                $videoUrl = $requestData['video_url'];
-                $parsedUrl = parse_url($videoUrl);
-
-                $videoId = null;
-
-                // Handle full URL: https://www.youtube.com/watch?v=VIDEO_ID
-                if (strpos($parsedUrl['host'], 'youtube.com') !== false && isset($parsedUrl['query'])) {
-                    parse_str($parsedUrl['query'], $queryParams);
-                    $videoId = $queryParams['v'] ?? null;
-                }
-
-                // Handle short URL: https://youtu.be/VIDEO_ID
-                if (strpos($parsedUrl['host'], 'youtu.be') !== false) {
-                    $videoId = ltrim($parsedUrl['path'], '/');
-                }
-
-                if ($videoId) {
-                    $requestData['video_url'] = 'https://www.youtube.com/embed/' . $videoId;
-                }
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $currentDate = now()->format('Y/m');
+                $requestData['image'] = uploader($image, 'uploads/Banner/image/' . $currentDate);
             }
+
+            // Handle YouTube URL embedding
+            // if (!empty($requestData['video_url'])) {
+            //     $videoUrl = $requestData['video_url'];
+            //     $parsedUrl = parse_url($videoUrl);
+
+            //     $videoId = null;
+
+            //     // Handle full URL: https://www.youtube.com/watch?v=VIDEO_ID
+            //     if (strpos($parsedUrl['host'], 'youtube.com') !== false && isset($parsedUrl['query'])) {
+            //         parse_str($parsedUrl['query'], $queryParams);
+            //         $videoId = $queryParams['v'] ?? null;
+            //     }
+
+            //     // Handle short URL: https://youtu.be/VIDEO_ID
+            //     if (strpos($parsedUrl['host'], 'youtu.be') !== false) {
+            //         $videoId = ltrim($parsedUrl['path'], '/');
+            //     }
+
+            //     if ($videoId) {
+            //         $requestData['video_url'] = 'https://www.youtube.com/embed/' . $videoId;
+            //     }
+            // }
 
             // Only allow mp4 video uploads
-            if ($request->hasFile('video_file')) {
-                $video = $request->file('video_file');
-                // Validate file type and extension
-                if ($video->getClientOriginalExtension() !== 'mp4' || $video->getMimeType() !== 'video/mp4') {
-                    return messageResponse('Only MP4 video files are allowed.', [], 422, 'validation_error');
-                }
-                $currentDate = now()->format('Y/m');
-                $videoPath = self::uploadVideoFile($video, $currentDate);
-                    // dd($videoPath);
-                $requestData['video_file'] = $videoPath;
-            }
+            // if ($request->hasFile('video_file')) {
+            //     $video = $request->file('video_file');
+            //     // Validate file type and extension
+            //     if ($video->getClientOriginalExtension() !== 'mp4' || $video->getMimeType() !== 'video/mp4') {
+            //         return messageResponse('Only MP4 video files are allowed.', [], 422, 'validation_error');
+            //     }
+            //     $currentDate = now()->format('Y/m');
+            //     $videoPath = self::uploadVideoFile($video, $currentDate);
+            //         // dd($videoPath);
+            //     $requestData['video_file'] = $videoPath;
+            // }
 
             if ($data = self::$model::query()->create($requestData)) {
 
-                if (isset($requestData['display_status']) && $requestData['display_status'] == 1) {
-                    // Set all other records to display_status = 0
-                    self::$model::query()
-                        ->where('id', '!=', $data->id)
-                        ->update(['display_status' => 0]);
-                }
+                // if (isset($requestData['display_status']) && $requestData['display_status'] == 1) {
+                //     // Set all other records to display_status = 0
+                //     self::$model::query()
+                //         ->where('id', '!=', $data->id)
+                //         ->update(['display_status' => 0]);
+                // }
                 
                 return messageResponse('Item added successfully', $data, 201);
             }

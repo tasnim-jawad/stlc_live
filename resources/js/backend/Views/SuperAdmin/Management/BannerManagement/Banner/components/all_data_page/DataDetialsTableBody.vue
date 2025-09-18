@@ -6,7 +6,24 @@
       <th>{{ row_item }}</th>
       <th class="text-center">:</th>
       <th class="text-trim">
-        {{ trim_content(item[row_item], row_item) }}
+        <template v-if="row_item === 'image'">
+          <a
+            v-if="item[row_item]"
+            :href="item[row_item]"
+            data-lightbox="gallery"
+            :data-title="item.title || ''"
+          >
+            <img
+              :src="item[row_item]"
+              alt="Image"
+              style="max-width: 80px; max-height: 80px; object-fit: contain"
+            />
+          </a>
+          <span v-else>No Image</span>
+        </template>
+        <template v-else>
+          {{ trim_content(item[row_item], row_item) }}
+        </template>
       </th>
     </tr>
   </template>

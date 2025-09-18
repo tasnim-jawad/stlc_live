@@ -306,7 +306,7 @@
                 <i class="fa fa-bars"></i>
               </button>
             </div>
-            <div class="col-auto d-none d-xl-block">
+            <!-- <div class="col-auto d-none d-xl-block">
               <div class="header-button">
                 <a href="contact.html" class="th-btn outline pill text-white"
                   ><i class="fa fa-house-chimney me-2"></i> Add Listing </a
@@ -317,7 +317,7 @@
                   <i class="fa fa-search"></i>
                 </button>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

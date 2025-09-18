@@ -44,6 +44,7 @@ class DataStoreValidation extends FormRequest
         return [
             'short_title' => 'required | sometimes',
             'short_description' => 'required | sometimes',
+            'permalink' => 'required | sometimes',
             'video_url' => 'required | sometimes',
             'video_file' => ' sometimes',
             'video_type' => 'required | sometimes',

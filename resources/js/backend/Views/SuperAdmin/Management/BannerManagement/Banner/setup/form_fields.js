@@ -12,6 +12,19 @@ export default [
     type: "text",
     value: "",
   },
+  {
+    name: "permalink",
+    label: "Enter your permanent link",
+    type: "text",
+    value: "",
+  },
+
+  {
+    name: "image",
+    label: "Upload image",
+    type: "file",
+    value: "",
+  },
 
 
 	{
@@ -31,22 +44,22 @@ export default [
 		],
 	},
 
-	{
-		name: "display_status",
-		label: "select display status",
-		type: "select",
-		value: "",
-		data_list: [
-			{
-				label: "Show",
-				value: 1,
-			},
-			{
-				label: "hide",
-				value: 0,
-			},
-		],
-	},
+	// {
+	// 	name: "display_status",
+	// 	label: "select display status",
+	// 	type: "select",
+	// 	value: "",
+	// 	data_list: [
+	// 		{
+	// 			label: "Show",
+	// 			value: 1,
+	// 		},
+	// 		{
+	// 			label: "hide",
+	// 			value: 0,
+	// 		},
+	// 	],
+	// },
 
   // {
   // 	name: "video_url",

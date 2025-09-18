@@ -16,146 +16,46 @@
       data-slider-options='{"effect":"fade", "loop":true, "autoplay":true, "autoHeight": "false"}'
     >
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div
-            class="hero-inner hero-style1"
-            :style="{
-              backgroundImage: `url('/assets/frontend/img/hero/hero_bg_1_1.jpg')`,
-            }"
-          >
-            <div class="container">
-              <div class="row gy-50 gx-40 align-items-center">
-                <div class="col-xxl-7 col-xl-7 col-lg-8">
-                  <div class="hero-1-content pe-xl-4">
-                    <h1
-                      class="hero-title"
-                      data-ani="slideinup"
-                      data-ani-delay="0.2s"
-                    >
-                      Constructing
-                      <span class="title2 text-theme">Excellence</span>
-                    </h1>
-                    <p>
-                      Every project we take on is executed with precision,
-                      dedication, and a commitment to surpass expectations.
-                    </p>
-                    <div
-                      class="btn-group justify-content-center"
-                      data-ani="slideinup"
-                      data-ani-delay="0.4s"
-                    >
-                      <a href="property.html" class="th-btn style2 pill"
-                        >Start Your Journey Today</a
+        <template v-if="banners && banners.length">
+          <div class="swiper-slide" v-for="(banner, index) in banners" :key="index">
+            <div
+              class="hero-inner hero-style1"
+              :style="{
+                backgroundImage: `url('/${banner.image}')`,
+              }"
+            >
+              <div class="container">
+                <div class="row gy-50 gx-40 align-items-center">
+                  <div class="col-xxl-7 col-xl-7 col-lg-8">
+                    <div class="hero-1-content pe-xl-4">
+                      <h1
+                        class="hero-title"
+                        data-ani="slideinup"
+                        data-ani-delay="0.2s"
                       >
+                      {{ banner?.short_title }}
+                        <!-- Constructing
+                        <span class="title2 text-theme">Excellence</span> -->
+                      </h1>
+                      <p>
+                      {{ banner?.short_description }}
+                      </p>
+                      <div
+                        class="btn-group justify-content-center"
+                        data-ani="slideinup"
+                        data-ani-delay="0.4s"
+                      >
+                        <a :href="banner?.permalink ? banner?.permalink : '/'" class="th-btn style2 pill"
+                          >Start Your Journey Today</a
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="swiper-slide">
-          <div
-            class="hero-inner hero-style1"
-            :style="{
-              backgroundImage: `url('assets/frontend/img/hero/hero_bg_1_2.jpg')`,
-            }"
-          >
-            <div class="container">
-              <div class="row gy-50 gx-40 align-items-center">
-                <div class="col-xxl-7 col-xl-7 col-lg-8">
-                  <div class="hero-1-content pe-xl-4">
-                    <h1
-                      class="hero-title"
-                      data-ani="slideinup"
-                      data-ani-delay="0.2s"
-                    >
-                      Find Your Perfect Place to
-                      <span class="title2 text-theme">Call Home</span>
-                    </h1>
-                    <div
-                      class="btn-group justify-content-center"
-                      data-ani="slideinup"
-                      data-ani-delay="0.4s"
-                    >
-                      <a href="property.html" class="th-btn style2 pill"
-                        >Explore Property</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div
-            class="hero-inner hero-style1"
-            :style="{
-              backgroundImage: `url('/assets/frontend/img/hero/hero_bg_1_3.jpg')`,
-            }"
-          >
-            <div class="container">
-              <div class="row gy-50 gx-40 align-items-center">
-                <div class="col-xxl-7 col-xl-7 col-lg-8">
-                  <div class="hero-1-content pe-xl-4">
-                    <h1
-                      class="hero-title"
-                      data-ani="slideinup"
-                      data-ani-delay="0.2s"
-                    >
-                      Experience Real Estate
-                      <span class="title2 text-theme">Never Before</span>
-                    </h1>
-                    <div
-                      class="btn-group justify-content-center"
-                      data-ani="slideinup"
-                      data-ani-delay="0.4s"
-                    >
-                      <a href="property.html" class="th-btn style2 pill"
-                        >Explore Property</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div
-            class="hero-inner hero-style1"
-            :style="{
-              backgroundImage: `url('assets/frontend/img/hero/hero_bg_1_4.jpg')`,
-            }"
-          >
-            <div class="container">
-              <div class="row gy-50 gx-40 align-items-center">
-                <div class="col-xxl-7 col-xl-7 col-lg-8">
-                  <div class="hero-1-content pe-xl-4">
-                    <h1
-                      class="hero-title"
-                      data-ani="slideinup"
-                      data-ani-delay="0.2s"
-                    >
-                      Constructing Excellence
-                      <span class="title2 text-theme">Dream Home</span>
-                    </h1>
-                    <div
-                      class="btn-group justify-content-center"
-                      data-ani="slideinup"
-                      data-ani-delay="0.4s"
-                    >
-                      <a href="property.html" class="th-btn style2 pill"
-                        >Explore Property</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </template>
       </div>
       <div class="slider-pagination"></div>
       <div class="slider-pagination-wrapper">
@@ -198,6 +98,9 @@
 <script>
 import { onMounted, onUpdated, nextTick, ref, onBeforeUnmount } from "vue";
 import CircleText from "./CircleText.vue";
+import { store as home_store } from "../Store/home_store";
+import { mapActions, mapState } from "pinia";
+
 
 export default {
   name: "HeroSlider",
@@ -338,6 +241,18 @@ export default {
     return {
       swiperInstance,
     };
+  },
+
+  created() {
+    this.fetch_banners();
+    console.log("Banners fetched:", this.banners);
+    
+  },
+  methods: {
+    ...mapActions(home_store, ["fetch_banners"]),
+  },
+  computed: {
+    ...mapState(home_store, ["banners"]),
   },
 };
 </script>

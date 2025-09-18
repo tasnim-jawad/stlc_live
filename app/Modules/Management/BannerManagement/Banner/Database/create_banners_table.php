@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('video_url', 200)->nullable();
             $table->string('video_file', 200)->nullable();
             $table->string('video_type', 50)->nullable();
-            $table->boolean('display_status')->default(1)->after('status'); ; 
+            $table->string('image',150)->nullable();
+            $table->string('permalink',250)->nullable();
+            $table->boolean('display_status')->default(1)->after('status');
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -47,7 +47,7 @@
               />
             </template>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="form-group">
                 <label for="">Upload your video</label>
                 <div class="mt-1 mb-3">
@@ -60,7 +60,7 @@
                   />
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="card-footer">
