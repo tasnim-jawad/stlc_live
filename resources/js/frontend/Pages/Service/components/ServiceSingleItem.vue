@@ -4,7 +4,7 @@
       <div class="box-thumb">
         <a href="service-details.html"
           ><img
-            src="/assets/frontend/img/service/service_inner_1.jpg"
+            :src="'/' + service?.primary_image"
             alt="thumb"
         /></a>
       </div>

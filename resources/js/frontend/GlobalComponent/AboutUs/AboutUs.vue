@@ -22,7 +22,7 @@
               <div class="logo-icon-wrap">
                 <div class="logo-icon">
                   <img
-                    src="/assets/frontend/img/icon/logo-circle-icon.png"
+                    :src="'/' + about_us?.secondary_image"
                     alt="img"
                   />
                 </div>
@@ -31,7 +31,7 @@
                     >PILLAR REAL ESTATE HOME * REAL ESTATE</span
                   >
                 </div> -->
-                <CircleText />
+                <CircleText :text="about_us?.quotation"/>
               </div>
             </div>
             <div class="about-left">

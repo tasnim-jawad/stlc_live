@@ -27,12 +27,12 @@
           </div>
         </div>
         <div class="col-lg-auto">
-          <a
-            href="property.html"
+          <Link
+            href="/service"
             class="th-btn style3 radius fadeinup wow"
             data-wow-duration="1.5s"
             data-wow-delay="0.1s"
-            >View All Services</a
+            >View All Services</Link
           >
         </div>
       </div>

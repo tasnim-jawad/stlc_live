@@ -14,6 +14,21 @@
       <td v-if="row_item == 'id'">
         {{ dataindex + 1 }}
       </td>
+      <td v-else-if="row_item === 'image'" class="text-wrap max-w-120">
+        <a
+          v-if="item[row_item]"
+          :href="item[row_item]"
+          data-lightbox="gallery"
+          :data-title="item.title || ''"
+        >
+          <img
+            :src="item[row_item]"
+            alt="Image"
+            style="max-width: 80px; max-height: 80px; object-fit: contain"
+          />
+        </a>
+        <span v-else>No Image</span>
+      </td>
       <td v-else class="text-wrap max-w-120">
         {{ trim_content(item[row_item], row_item) }}
       </td>

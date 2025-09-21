@@ -13,6 +13,13 @@
             style="max-width: 100px; max-height: 100px; object-fit: cover"
           />
         </template>
+        <template v-else-if="row_item === 'primary_image' && item[row_item]">
+          <img
+            :src="item[row_item]"
+            alt="Primary Image"
+            style="max-width: 100px; max-height: 100px; object-fit: cover"
+          />
+        </template>
         <template v-else>
           {{ trim_content(item[row_item], row_item) }}
         </template>

@@ -28,6 +28,13 @@ export default [
 	},
 
 	{
+		name: "primary_image",
+		label: "Enter your primary image",
+		type: "file",
+		value: "",
+	},
+
+	{
 		name: "status",
 		label: "select status",
 		type: "select",

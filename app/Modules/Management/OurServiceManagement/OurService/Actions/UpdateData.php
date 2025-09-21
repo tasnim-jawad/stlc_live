@@ -21,6 +21,12 @@ class UpdateData
                 $requestData['image'] = uploader($image, 'uploads/service/' . $currentDate);
             }
 
+            if ($request->hasFile('primary_image')) {
+                $primary_image = $request->file('primary_image');
+                $currentDate = now()->format('Y/m');
+                $requestData['primary_image'] = uploader($primary_image, 'uploads/service/' . $currentDate);
+            }
+
             $data->update($requestData);
             return messageResponse('Item updated successfully', $data, 201);
         } catch (\Exception $e) {

@@ -44,7 +44,9 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p class="team-about_text mt-5" v-html="our_mission?.description"></p>
+                <p class="team-about_text mt-5">
+                  <pre>{{ our_mission?.description }}</pre>
+                </p>
                 <Link href="/about-us" class="th-btn radius bg-theme"
                   >About us</Link
                 >
@@ -87,13 +89,12 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p
-                  class="team-about_text mt-5"
-                  v-html="our_vision?.description"
-                ></p>
-                <Link href="/about-us" class="th-btn radius bg-theme"
-                  >About us</Link
-                >
+                <p class="team-about_text mt-5">
+                  <pre>{{ our_vision?.description }}</pre>
+                </p>
+                <Link href="/about-us" class="th-btn radius bg-theme">
+                  About us
+                </Link>
               </div>
             </div>
             <div class="col-xxl-6 col-xl-12 order-1 order-xxl-2">
@@ -161,7 +162,9 @@
                     <h3 class="team-about_title">Our Mission</h3>
                   </div>
                 </div> -->
-                <p class="team-about_text mt-5" v-html="core_values?.description"></p>
+                <p class="team-about_text mt-5">
+                  <pre>{{ core_values?.description }}</pre>
+                </p>
                 <Link href="/about-us" class="th-btn radius bg-theme"
                   >About us</Link
                 >

@@ -6,7 +6,16 @@
       <th>{{ row_item }}</th>
       <th class="text-center">:</th>
       <th class="text-trim">
-        {{ trim_content(item[row_item], row_item) }}
+        <template v-if="row_item === 'image' && item[row_item]">
+          <img
+            :src="item[row_item]"
+            alt="Image"
+            style="max-width: 100px; max-height: 100px; object-fit: cover"
+          />
+        </template>
+        <template v-else>
+          {{ trim_content(item[row_item], row_item) }}
+        </template>
       </th>
     </tr>
   </template>

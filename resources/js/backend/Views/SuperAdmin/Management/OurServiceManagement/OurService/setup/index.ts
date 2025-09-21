@@ -22,14 +22,15 @@ const setup: setup_type = {
     "description",
     "url",
     "image",
+    "primary_image",
     "status",
     "slug",
     "created_at",
   ],
 
-  sort_by_cols: ["id", "title", "image", "status", "created_at"],
-  table_header_data: ["id", "title", "image", "status", "created_at"],
-  table_row_data: ["id", "title", "image", "status", "created_at"],
+  sort_by_cols: ["id", "title", "image", "primary_image", "status", "created_at"],
+  table_header_data: ["id", "title", "image", "primary_image", "status", "created_at"],
+  table_row_data: ["id", "title", "image", "primary_image", "status", "created_at"],
 
   layout_title: prefix + " Management",
   page_title: `${prefix} Management`,
