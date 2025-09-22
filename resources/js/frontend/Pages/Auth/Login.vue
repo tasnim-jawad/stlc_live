@@ -59,7 +59,7 @@
           >
         </form>
       </div>
-      <div class="col-md-5">
+      <!-- <div class="col-md-5">
         <div id="userList">
           <table
             class="table table-dark table-striped table-hover table-bordered"
@@ -67,14 +67,12 @@
             <thead class="sticky-top">
               <tr>
                 <th scope="col">Email</th>
-                <!-- <th scope="col">Password</th> -->
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Super Admin</td>
-                <!-- <td>@12345678</td> -->
                 <td>
                   <button
                     @click="setPassword('superadmin@gmail.com')"
@@ -87,7 +85,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
     </div>
   </Layout>
 </template>
