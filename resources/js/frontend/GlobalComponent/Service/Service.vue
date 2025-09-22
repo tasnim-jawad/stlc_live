@@ -22,7 +22,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              See how Pillar can Help
+              See how STC can Help
             </h2>
           </div>
         </div>
@@ -263,23 +263,21 @@
 import { store as service_store } from "./Store/services_store.js";
 import { mapActions, mapState } from "pinia";
 import ServiceSingleItem from "./components/ServiceSingleItem.vue";
-    export default {
-        components: {
-            ServiceSingleItem
-        },
-        methods: {
-            ...mapActions(service_store, ["fetch_services"]),
-        },
-        computed: {
-            ...mapState(service_store, ["services"]),
-        },
-        created: async function () {
-            await this.fetch_services();
-            console.log("Services:", this.services);
-        },
-    }
+export default {
+  components: {
+    ServiceSingleItem,
+  },
+  methods: {
+    ...mapActions(service_store, ["fetch_services"]),
+  },
+  computed: {
+    ...mapState(service_store, ["services"]),
+  },
+  created: async function () {
+    await this.fetch_services();
+    console.log("Services:", this.services);
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -52,16 +52,17 @@
       <div class="row gy-40 justify-content-center">
         <div class="col-xl-8">
           <p class="chat-text-wrap text-center pe-xl-5 ps-xl-5 mb-0">
-            Explore Property agents are here to help with all your buying,
-            renting and selling goals. Find the home of your dreams with an
-            expert you can trust.
+            Explore our team of property experts who are here to help with all
+            your buying, renting, and selling goals. Find the home of your
+            dreams with professionals you can trust.
             <a class="text-theme" href="/team"> Let’s chat</a>
           </p>
         </div>
         <div class="col-12">
           <div class="text-center">
             <Link class="th-btn pill bg-black" href="/team"
-              >See More Team Member</Link>
+              >See More Team Member</Link
+            >
           </div>
         </div>
       </div>

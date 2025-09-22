@@ -74,7 +74,7 @@
                   aria-label="Shop order"
                   @change="onCategoryChange"
                 >
-                  <option value="menu_order" selected="selected">
+                  <option value="all" selected="selected">
                     Default Sorting
                   </option>
                   <option
@@ -175,8 +175,13 @@ export default {
   
   created: function () {
     this.fetch_property_categories();
-    this.fetch_properties({ page: 1 });
-    console.log("Properties in store dsd:", this.properties);
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryId = urlParams.get('property_category_id');
+    if (categoryId) {
+      this.set_property_category_id(categoryId);
+    }else {
+      this.fetch_properties({ page: 1 });
+    }
     
   },
   methods: {

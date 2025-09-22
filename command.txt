@@ -35,3 +35,11 @@ php artisan make:module VideoGallaryManagement/VideoGallary [title:string-100,vi
 php artisan make:module ContactManagement/Contact [name:string-100,email:string-50,service_types:string,phone_number:string,message:text] --vue
 
 php artisan make:module WhyChooseUsManagement/WhyChooseUs [title:string-100,description:text,image:string-200] --vue
+
+
+/*
+|--------------------------------------------------------------------------
+| SectionType
+|--------------------------------------------------------------------------
+*/
+php artisan make:module SectionHeadingManagement/SectionHeading [section_type:string-50,short_title:100,title:string-200,long_title:text,short_description:text,description:longtext,video_url:string-150,primary_image:string-200,background_image:string-200,side_image:string-200,image:string-200,special_note:longtext] --vue

@@ -101,7 +101,7 @@
             </div>
             <div class="contact-form-thumb overflow-hidden">
               <img
-                src="assets/frontend/img/contact/contact-page-thumb.jpg"
+                src="/assets/frontend/img/contact/contact_ai.png"
                 alt="img"
               />
             </div>

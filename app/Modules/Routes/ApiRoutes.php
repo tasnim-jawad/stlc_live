@@ -41,3 +41,4 @@ include_once base_path("app/Modules/Management/GalleryManagement/GalleryCategory
 include_once base_path("app/Modules/Management/GalleryManagement/ImageGallery/Routes/Route.php");
 include_once base_path("app/Modules/Management/GalleryManagement/VideoGallery/Routes/Route.php");
 include_once base_path("app/Modules/Management/WhyChooseUsManagement/WhyChooseUs/Routes/Route.php");
+include_once base_path("app/Modules/Management/SectionHeadingManagement/SectionHeading/Routes/Route.php");

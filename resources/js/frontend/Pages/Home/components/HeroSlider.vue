@@ -3,7 +3,7 @@
     <div class="hero-img-shape-1">
       <div class="logo-icon-wrap">
         <a
-          href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"
+          href="javascript:void(0)"
           class="logo-icon popup-video"
           ><i class="fa-sharp fa-solid fa-play"></i
         ></a>

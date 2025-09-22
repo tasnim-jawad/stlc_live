@@ -174,9 +174,8 @@
       <div class="mobile-logo">
         <a href="index.html"
           ><img
-            style="width: 80px; height: auto"
             src="/assets/frontend/img/logo.jpeg"
-            alt="Piller-html"
+            alt="logo"
         /></a>
       </div>
       <div class="th-mobile-menu">
@@ -277,9 +276,8 @@
               <div class="header-logo">
                 <Link href="/"
                   ><img
-                    style="height: 80px; width: auto"
                     src="/assets/frontend/img/logo.jpeg"
-                    alt="Piller-html"
+                    alt="logo"
                 /></Link>
               </div>
             </div>

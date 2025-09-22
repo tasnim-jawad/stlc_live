@@ -48,7 +48,7 @@
                     ><img
                       :src="'/' + getFirstSettingValueByTitle('footer_logo')"
                       style="width: 100px; height: auto"
-                      alt="Piller-html"
+                      alt="logo"
                   /></a>
                 </div>
               </div>
@@ -62,11 +62,9 @@
                     <h3 class="widget_title">Featured Houses</h3>
                     <div class="menu-all-pages-container">
                       <ul class="menu">
-                        <li><a href="service.html">#Villa</a></li>
-                        <li><a href="service.html">#Commercial</a></li>
-                        <li><a href="service.html">#Farm Houses</a></li>
-                        <li><a href="service.html">#Apartments</a></li>
-                        <li><a href="service.html">#Apartments</a></li>
+                        <li v-for="(category, index) in property_categories?.data" :key="index">
+                          <Link :href="`/portfolio?property_category_id=${category.id}`"># {{ category?.name }}</Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -204,7 +202,13 @@ export default {
     GalleryImage,
   },
   computed: {
-    ...mapState(footer_store, ["website_settings", "addresses", "images", "custom_pages"]),
+    ...mapState(footer_store, [
+      "website_settings", 
+      "addresses", 
+      "images", 
+      "custom_pages",
+      "property_categories"
+    ]),
   },
   methods: {
     ...mapActions(footer_store, [
@@ -215,6 +219,7 @@ export default {
       "firstAddressMapLink",
       "fetch_images",
       "fetch_custom_pages",
+      "fetch_property_categories",
     ]),
   },
   created() {
@@ -222,6 +227,7 @@ export default {
     this.fetch_addresses();
     this.fetch_images();
     this.fetch_custom_pages();
+    this.fetch_property_categories();
   },
 };
 </script>

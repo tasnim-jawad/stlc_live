@@ -8,6 +8,7 @@ export const store = defineStore("footer_main_store", {
     addresses: [],
     images: [],
     custom_pages: [],
+    property_categories: [],
     loading: false,
     error: null,
   }),
@@ -126,6 +127,26 @@ export const store = defineStore("footer_main_store", {
       } finally {
         this.loading = false;
       }
-    }
+    },
+
+    async fetch_property_categories() {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await axios.get("property-categories", {
+          params: {
+            get_all: 1,
+            limit: 1000,
+          },
+        });
+
+        this.property_categories = response?.data;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 });

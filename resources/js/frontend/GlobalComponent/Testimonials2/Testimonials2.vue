@@ -23,7 +23,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              What Clients Say About Pillar
+              What Clients Say About STC
             </h2>
           </div>
         </div>

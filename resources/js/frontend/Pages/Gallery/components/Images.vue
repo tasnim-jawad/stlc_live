@@ -2,7 +2,7 @@
   <div
     v-for="(item, index) in images"
     :key="index"
-    :class="`col-lg-4 col-xl-4 col-md-6 col-xxl-auto filter-item fadeinup wow animated`"
+    :class="`col-lg-4 col-xl-4 col-md-6 col-xxl-4 filter-item fadeinup wow animated`"
   >
     <div class="gallery-card2">
       <div class="gallery-img">

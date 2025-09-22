@@ -7,7 +7,7 @@
         class="d-flex align-items-center"
       >
         <img
-          :src="`${get_setting_value('image') ?? 'avatar.png'} `"
+          :src="`${get_setting_value('header_logo') ?? 'avatar.png'} `"
           class="logo-icon"
           alt="logo icon"
         />
@@ -168,8 +168,28 @@
         :route_name="`AllContact`"
       />
 
-      <side-bar-single-menu :icon="`fa fa-plus`" :menu_title="`WhyChooseUs`"  :route_name="`AllWhyChooseUs`" />
-<!-- Management end -->
+      <side-bar-single-menu
+        :icon="`fa fa-plus`"
+        :menu_title="`WhyChooseUs`"
+        :route_name="`AllWhyChooseUs`"
+      />
+      <!-- <side-bar-single-menu
+        :icon="`fa fa-plus`"
+        :menu_title="`SectionHeading`"
+        :route_name="`AllSectionHeading`"
+      /> -->
+      <!-- <side-bar-drop-down-menus
+        :icon="`fa fa-plus`"
+        :menu_title="`Section Headings`"
+        :menus="[
+          {
+            route_name: `HomePageSectionHeading`,
+            title: `Section Heading`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+        ]"
+      /> -->
+      <!-- Management end -->
     </ul>
   </div>
 </template>
