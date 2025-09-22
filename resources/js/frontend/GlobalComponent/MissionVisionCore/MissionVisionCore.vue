@@ -166,8 +166,7 @@
                   <pre>{{ core_values?.description }}</pre>
                 </p>
                 <Link href="/about-us" class="th-btn radius bg-theme"
-                  >About us</Link
-                >
+                  >About us</Link>
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ export const store = defineStore("header_main_store", {
     website_settings: [],
     addresses: [],
     images: [],
+    custom_pages: [],
     loading: false,
     error: null,
   }),
@@ -109,5 +110,23 @@ export const store = defineStore("header_main_store", {
         this.loading = false;
       }
     },
+
+    async fetch_custom_pages(){
+      this.loading = true;
+      this.error = null;
+      try {
+        const res = await axios.get("custom-pages", {
+          params: {
+            get_all: 1,
+            limit: 1000,
+          },
+        });
+        this.custom_pages = res?.data?.data || [];
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.loading = false;
+      }
+    }
   },
 });

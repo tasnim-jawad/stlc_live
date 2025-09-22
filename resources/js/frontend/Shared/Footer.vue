@@ -76,11 +76,9 @@
                     <h3 class="widget_title">Quick Links</h3>
                     <div class="menu-all-pages-container">
                       <ul class="menu">
-                        <li><a href="service.html">Strategy Services</a></li>
-                        <li><a href="service.html">Management</a></li>
-                        <li><a href="service.html">Privacy & Policy</a></li>
-                        <li><a href="service.html">Sitemap</a></li>
-                        <li><a href="service.html">Term & Conditions</a></li>
+                        <li v-for="(page, index) in custom_pages" :key="index">
+                          <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -206,7 +204,7 @@ export default {
     GalleryImage,
   },
   computed: {
-    ...mapState(footer_store, ["website_settings", "addresses", "images"]),
+    ...mapState(footer_store, ["website_settings", "addresses", "images", "custom_pages"]),
   },
   methods: {
     ...mapActions(footer_store, [
@@ -216,12 +214,14 @@ export default {
       "getFirstSettingValueByTitle",
       "firstAddressMapLink",
       "fetch_images",
+      "fetch_custom_pages",
     ]),
   },
   created() {
     this.fetch_website_settings();
     this.fetch_addresses();
     this.fetch_images();
+    this.fetch_custom_pages();
   },
 };
 </script>

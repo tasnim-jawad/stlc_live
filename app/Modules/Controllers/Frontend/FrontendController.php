@@ -151,5 +151,22 @@ class FrontendController extends Controller
         ]);
     }
 
+    public function pages($permalink)
+    {
+        // dd($permalink);
+
+        if (!$permalink) {
+            return redirect()->back();
+        }
+
+        return Inertia::render('CustomPages/Index', [
+            'event' => [
+                'title' => 'Custom Page',
+                'permalink' => $permalink,
+            ],
+            
+        ]);
+    }
+
 
 }

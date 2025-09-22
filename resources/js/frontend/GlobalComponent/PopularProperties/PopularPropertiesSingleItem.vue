@@ -73,16 +73,16 @@
           </div>
         </div>
         <ul class="property-featured">
-          <li
-            v-for="(feature, index) in property?.facts_and_features"
+            <li
+            v-for="(feature, index) in (property?.facts_and_features || []).slice(0, 3)"
             :key="index"
-          >
+            >
             <div class="icon mr-1">
               <!-- <img src="/assets/frontend/img/icon/bed.svg" alt="icon" /> -->
               <span><i :class="feature?.icon"></i></span>
             </div>
             {{ feature?.title }}
-          </li>
+            </li>
         </ul>
         <div class="property-bottom">
           <h6 class="box-title">৳ {{ property?.price?.toLocaleString() }}</h6>

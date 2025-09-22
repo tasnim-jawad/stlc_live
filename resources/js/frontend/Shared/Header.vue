@@ -10,7 +10,7 @@
       </div>
     </div>
   </div> -->
-  <div class="color-scheme">
+  <!-- <div class="color-scheme">
     <button class="switchIcon"><i class="fa-solid fa-palette"></i></button>
     <h4 class="color-scheme-title">
       <i class="far fa-palette"></i> Color Switcher
@@ -38,7 +38,7 @@
     </div>
     <p class="color-scheme-text">Or custom color..</p>
     <input type="color" id="thcolorpicker" value="#068FFF" />
-  </div>
+  </div> -->
   <div class="sidemenu-wrapper sidemenu-cart d-none d-lg-block">
     <div class="sidemenu-content">
       <button class="closeButton sideMenuCls">
@@ -195,6 +195,14 @@
               <li><Link href="/gallery/videos">Videos</Link></li>
             </ul>
           </li>
+          <li class="menu-item-has-children">
+            <a href="#"> Pages </a>
+            <ul class="sub-menu">
+              <li v-for="page in custom_pages" :key="page.id">
+                <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
+              </li>
+            </ul>
+          </li>
           <li><Link href="/blog"> Blog</Link></li>
           <li><Link href="/contact"> Contact</Link></li>
         </ul>
@@ -294,6 +302,14 @@
                       <li><Link href="/gallery/videos">Videos</Link></li>
                     </ul>
                   </li>
+                  <li class="menu-item-has-children">
+                    <a href="#"> Pages </a>
+                    <ul class="sub-menu">
+                      <li v-for="page in custom_pages" :key="page.id">
+                        <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
+                      </li>
+                    </ul>
+                  </li>
                   <li><Link href="/blog">STC Blog</Link></li>
                   <li><Link href="/contact">Contact Us</Link></li>
                 </ul>
@@ -343,13 +359,15 @@ export default {
     ...mapActions(header_store, [
       "fetch_website_settings",
       "getFirstSettingValueByTitle",
+      "fetch_custom_pages",
     ]),
   },
   computed: {
-    ...mapState(header_store, ["website_settings"]),
+    ...mapState(header_store, ["website_settings", "custom_pages"]),
   },
   created: function () {
     this.fetch_website_settings();
+    this.fetch_custom_pages();
   },
 };
 </script>

@@ -21,6 +21,8 @@ Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('BlogPage');
 Route::get('/blog/details', [FrontendController::class, 'BlogDetailsPage'])->name('BlogDetailsPage');
 Route::get('/contact', [FrontendController::class, 'ContactPage'])->name('ContactPage');
 
+Route::get('/pages/{permalink}', [FrontendController::class, 'pages'])->name('pages');
+
 
 /*
 |--------------------------------------------------------------------------
