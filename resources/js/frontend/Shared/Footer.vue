@@ -9,7 +9,7 @@
         <div class="footer-all-widget-wrapper">
           <div class="footer-all-widget-item">
             <div class="widget footer-widget">
-              <h3 class="widget_title">About HTC</h3>
+              <h3 class="widget_title">{{ getFirstSettingValueByTitle("site_name") }}</h3>
               <div class="th-widget-about">
                 <p class="about-text">
                   {{ getFirstSettingValueByTitle("short_intro") }}
@@ -44,12 +44,12 @@
                   </div>
                 </div>
                 <div class="about-logo">
-                  <a href="index.html"
+                  <Link href="/"
                     ><img
                       :src="'/' + getFirstSettingValueByTitle('footer_logo')"
                       style="width: 100px; height: auto"
                       alt="logo"
-                  /></a>
+                  /></Link>
                 </div>
               </div>
             </div>
