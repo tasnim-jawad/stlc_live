@@ -28,10 +28,10 @@
                 <div class="page-content">
                   <div class="property-meta-wrap mb-55 fadeinup wow">
                     <div class="property-meta">
-                      <a class="property-tag" href="/portfolio">{{
+                      <Link class="property-tag" :href="`/portfolio?property_category_id=${single_property?.category?.id}`">{{
                         single_property?.category?.name
-                      }}</a>
-                      <a href="blog.html"
+                      }}</Link>
+                      <a href="javascript:void(0)"
                         ><i class="fa-solid fa-calendar-days"></i>
                         {{
                           new Date(single_property?.date)
@@ -43,7 +43,7 @@
                             .replace(/ (\d{4})$/, ", $1")
                         }}</a
                       >
-                      <a href="blog.html"
+                      <a href="javascript:void(0)"
                         ><i class="fa-solid fa-diagram-project"></i>
                         {{
                           single_property?.property_status == "sale"

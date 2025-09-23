@@ -20,7 +20,7 @@ export const store = defineStore("home_main_store", {
             limit: 1000,
           },
         });
-        console.log("from stor hommmmmme" ,res.data);
+        // console.log("from stor hommmmmme" ,res.data);
         this.banners = res?.data?.data ?? [];
         
       } catch (error) {

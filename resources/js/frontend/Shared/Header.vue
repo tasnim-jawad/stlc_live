@@ -186,7 +186,7 @@
           <li><Link href="/about-us">About Us</Link></li>
           <li><Link href="/team">Our Team</Link></li>
           <li><Link href="/service">Our Services</Link></li>
-          <li><Link href="/portfolio"> Portfolio</Link></li>
+          <li><Link href="/portfolio">Property</Link></li>
           <li class="menu-item-has-children">
             <a href="javascript:void(0)"> Gallery </a>
             <ul class="sub-menu">

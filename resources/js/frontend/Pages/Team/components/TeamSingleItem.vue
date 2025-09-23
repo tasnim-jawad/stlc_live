@@ -15,7 +15,7 @@
       <div class="team-content">
         <div class="left-contet">
           <h3 class="box-title">
-            <a href="team-details.html">{{ member?.name }}</a>
+            <a href="javascript:void(0)">{{ member?.name }}</a>
           </h3>
           <span class="team-desig">{{ member?.designation }}</span>
         </div>

@@ -40,7 +40,7 @@ export const store = defineStore("footer_main_store", {
       ) {
         return [];
       }
-      console.log("2nd title:", title);
+      // console.log("2nd title:", title);
       // Find the setting item with matching title in the object
       const settingItem = Object.values(this.website_settings.data).find(
         (item) => item.title === title

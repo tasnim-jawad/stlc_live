@@ -158,7 +158,7 @@ export default {
           ...options,
         });
 
-        console.log("Team slider initialized successfully");
+        // console.log("Team slider initialized successfully");
       } catch (error) {
         console.error("Error initializing team slider:", error);
         // Retry on error
@@ -176,7 +176,7 @@ export default {
       ) {
         swiperInstance.value.destroy(true, true);
         swiperInstance.value = null;
-        console.log("Team slider destroyed");
+        // console.log("Team slider destroyed");
       }
     };
 

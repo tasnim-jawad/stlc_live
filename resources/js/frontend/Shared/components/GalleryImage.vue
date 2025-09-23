@@ -1,7 +1,6 @@
 <template>
   <div class="footer-bottom-community">
     <div class="content">
-      <p>@pillar on Instagram</p>
       <h4 class="box-title">Nice Gallery</h4>
     </div>
     <div class="footer-gallery-wrapper">

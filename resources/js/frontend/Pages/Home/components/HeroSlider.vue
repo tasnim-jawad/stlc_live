@@ -256,7 +256,7 @@ export default {
         // Reset initialization attempts on success
         initializationAttempts.value = 0;
 
-        console.log("Hero slider initialized successfully");
+        // console.log("Hero slider initialized successfully");
       } catch (error) {
         console.error("Error initializing hero slider:", error);
         isInitialized.value = false;
@@ -275,7 +275,7 @@ export default {
       ) {
         try {
           swiperInstance.value.destroy(true, true);
-          console.log("Hero slider destroyed");
+          // console.log("Hero slider destroyed");
         } catch (error) {
           console.warn("Error destroying slider:", error);
         }
@@ -287,11 +287,11 @@ export default {
 
     // Lifecycle hooks
     onBeforeMount(() => {
-      console.log("HeroSlider: onBeforeMount");
+      // console.log("HeroSlider: onBeforeMount");
     });
 
     onMounted(() => {
-      console.log("HeroSlider: onMounted");
+      // console.log("HeroSlider: onMounted");
       componentMounted.value = true;
 
       // Try to initialize immediately if banners are already loaded
@@ -303,11 +303,11 @@ export default {
     });
 
     onBeforeUpdate(() => {
-      console.log("HeroSlider: onBeforeUpdate");
+      // console.log("HeroSlider: onBeforeUpdate");
     });
 
     onUpdated(() => {
-      console.log("HeroSlider: onUpdated");
+      // console.log("HeroSlider: onUpdated");
       // Reinitialize slider after updates if needed
       nextTick(() => {
         if (
@@ -321,7 +321,7 @@ export default {
     });
 
     onActivated(() => {
-      console.log("HeroSlider: onActivated");
+      // console.log("HeroSlider: onActivated");
       // Reinitialize when component is activated (keep-alive)
       if (componentMounted.value && bannersLoaded.value) {
         setTimeout(() => initializeHeroSlider(), 100);
@@ -329,19 +329,19 @@ export default {
     });
 
     onDeactivated(() => {
-      console.log("HeroSlider: onDeactivated");
+      // console.log("HeroSlider: onDeactivated");
       // Destroy slider when component is deactivated
       destroySlider();
     });
 
     onBeforeUnmount(() => {
-      console.log("HeroSlider: onBeforeUnmount");
+      // console.log("HeroSlider: onBeforeUnmount");
       componentMounted.value = false;
       destroySlider();
     });
 
     onUnmounted(() => {
-      console.log("HeroSlider: onUnmounted");
+      // console.log("HeroSlider: onUnmounted");
     });
 
     onErrorCaptured((error, instance, errorInfo) => {
@@ -372,13 +372,13 @@ export default {
 
   mounted() {
     // Banner loading will be handled by the watcher and lifecycle hooks
-    console.log("Component mounted, banners:", this.banners?.length || 0);
+    // console.log("Component mounted, banners:", this.banners?.length || 0);
   },
 
   watch: {
     banners: {
       handler(newBanners, oldBanners) {
-        console.log("Banners changed:", newBanners?.length || 0);
+        // console.log("Banners changed:", newBanners?.length || 0);
 
         if (newBanners && newBanners.length > 0) {
           this.bannersLoaded = true;
