@@ -349,7 +349,7 @@ export default {
       ) {
         swiperInstance.value.destroy(true, true);
         swiperInstance.value = null;
-        console.log("Team slider destroyed");
+        // console.log("Team slider destroyed");
       }
     };
 

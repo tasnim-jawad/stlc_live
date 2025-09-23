@@ -159,7 +159,7 @@ export default {
           ...options,
         });
 
-        console.log("Testimonial slider initialized successfully");
+        // console.log("Testimonial slider initialized successfully");
       } catch (error) {
         console.error("Error initializing testimonial slider:", error);
         // Retry on error
@@ -177,7 +177,7 @@ export default {
       ) {
         swiperInstance.value.destroy(true, true);
         swiperInstance.value = null;
-        console.log("Testimonial slider destroyed");
+        // console.log("Testimonial slider destroyed");
       }
     };
 
@@ -208,7 +208,7 @@ export default {
   },
   created: async function () {
     await this.fetch_testimonials();
-    console.log("Testimonials:", this.testimonials);
+    // console.log("Testimonials:", this.testimonials);
   },
 
   methods: {

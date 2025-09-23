@@ -30,7 +30,7 @@ export const store = defineStore("testimonials_2", {
 
         this.testimonials = response.data.data || response.data;
 
-        console.log("Testimonials fetched successfully:", this.testimonials);
+        // console.log("Testimonials fetched successfully:", this.testimonials);
         return { success: true, data: this.testimonials };
       } catch (error) {
         this.error = "Failed to fetch testimonials";

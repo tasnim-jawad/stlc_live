@@ -220,7 +220,7 @@ export default {
   },  
   created: async function () {
     await this.fetch_testimonials();
-    console.log("Testimonials:", this.testimonials);
+    // console.log("Testimonials:", this.testimonials);
   },
   computed: {
     ...mapState(testimonials_store, ["testimonials"]),

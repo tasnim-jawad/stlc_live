@@ -215,7 +215,7 @@ export default {
             ...options,
           });
 
-          console.log("Popular property slider initialized successfully");
+          // console.log("Popular property slider initialized successfully");
         } catch (error) {
           console.error("Error initializing popular property slider:", error);
           // Retry on error
@@ -235,7 +235,7 @@ export default {
           typeof sliderElement.swiper.destroy === "function"
         ) {
           sliderElement.swiper.destroy(true, true);
-          console.log("Popular property slider destroyed");
+          // console.log("Popular property slider destroyed");
         }
       });
     };

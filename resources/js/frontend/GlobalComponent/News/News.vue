@@ -333,7 +333,7 @@ export default {
           ...options,
         });
 
-        console.log("Blog slider initialized successfully");
+        // console.log("Blog slider initialized successfully");
       } catch (error) {
         console.error("Error initializing blog slider:", error);
         // Retry on error
@@ -351,7 +351,7 @@ export default {
       ) {
         swiperInstance.value.destroy(true, true);
         swiperInstance.value = null;
-        console.log("Blog slider destroyed");
+        // console.log("Blog slider destroyed");
       }
     };
 
@@ -382,7 +382,7 @@ export default {
   },
   created: async function () {
     await this.fetch_news();
-    console.log("News:", this.news);
+    // console.log("News:", this.news);
   },
   methods: {
     ...mapActions(newsStore, ["fetch_news"]),

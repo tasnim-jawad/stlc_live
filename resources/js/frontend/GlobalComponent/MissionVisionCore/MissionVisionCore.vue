@@ -184,7 +184,7 @@ export default {
     await this.fetch_mission();
     await this.fetch_vision();
     await this.fetch_core_values();
-    console.log("Mission:", this.our_mission);
+    // console.log("Mission:", this.our_mission);
   },
   methods: {
     ...mapActions(mission_vision_store, [

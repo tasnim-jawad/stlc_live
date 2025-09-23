@@ -26,7 +26,7 @@ export const store = defineStore("why_choose_us_store", {
 
         this.services = response.data.data || response.data;
 
-        console.log("Services fetched successfully:", this.services);
+        // console.log("Services fetched successfully:", this.services);
         return { success: true, data: this.services };
       } catch (error) {
         this.error = "Failed to fetch services";

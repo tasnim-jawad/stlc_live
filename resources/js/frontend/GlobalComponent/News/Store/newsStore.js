@@ -22,7 +22,7 @@ export const store = defineStore("news", {
         });
 
         this.news = response.data.data || response.data;
-        console.log("News fetched successfully:", this.news);
+        // console.log("News fetched successfully:", this.news);
         return { success: true, data: this.news };
       } catch (error) {
         this.error = "Failed to fetch news";

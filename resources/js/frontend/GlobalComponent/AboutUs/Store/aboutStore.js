@@ -22,7 +22,7 @@ export const store = defineStore("about_us_store", {
         });
         this.about_us = response.data.data || response.data;
 
-        console.log("About data fetched successfully:", this.about_us);
+        // console.log("About data fetched successfully:", this.about_us);
         return { success: true, data: this.about_us };
       } catch (error) {
         this.error = "Failed to fetch about data";

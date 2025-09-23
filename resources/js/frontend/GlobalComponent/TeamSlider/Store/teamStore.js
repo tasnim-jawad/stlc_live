@@ -46,7 +46,7 @@ export const store = defineStore("team", {
       ) {
         this.swiperInstance.destroy(true, true);
         this.swiperInstance = null;
-        console.log("Team slider destroyed");
+        // console.log("Team slider destroyed");
       }
     },
 
