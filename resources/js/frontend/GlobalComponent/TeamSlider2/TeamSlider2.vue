@@ -19,7 +19,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              Meet Our Pillar Agents
+              Meet Our Team Members
             </h2>
           </div>
         </div>

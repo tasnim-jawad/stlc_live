@@ -30,7 +30,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              Stunning Pillar Gallery
+              Stunning Gallery
             </h2>
             <div
               class="filter-menu style-2 indicator-active filter-menu-active mt-2 justify-content-center fadeinup wow"
