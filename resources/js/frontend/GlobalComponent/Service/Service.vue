@@ -275,7 +275,7 @@ export default {
   },
   created: async function () {
     await this.fetch_services();
-    console.log("Services:", this.services);
+    // console.log("Services:", this.services);
   },
 };
 </script>

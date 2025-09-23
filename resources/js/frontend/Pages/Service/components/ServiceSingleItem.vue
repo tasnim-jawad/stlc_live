@@ -2,7 +2,7 @@
   <div class="col-xl-4 col-md-12 fadeinup wow">
     <div class="service-card">
       <div class="box-thumb">
-        <a href="service-details.html"
+        <a href="javascript:void(0)"
           ><img
             :src="'/' + service?.primary_image"
             alt="thumb"
@@ -16,7 +16,7 @@
             <div class="number"><h3>{{ (index + 1).toString().padStart(2, '0') }}</h3></div>
         </div>
         <h3 class="box-title">
-          <a href="service-details.html">{{ service?.title }}</a>
+          <a href="javascript:void(0)">{{ service?.title }}</a>
         </h3>
         <p class="box-text">
           {{ service?.description }}

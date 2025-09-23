@@ -19,7 +19,7 @@
         <div class="col-xxl-8 col-lg-7">
           <div class="th-blog blog-single">
             <div class="blog-img">
-              <img :src="'/' + single_blog?.thumbnail_image" alt="Image" />
+              <img class="w-100" :src="'/' + single_blog?.thumbnail_image" alt="Image" />
             </div>
             <div class="blog-content">
               <div class="blog-meta">
