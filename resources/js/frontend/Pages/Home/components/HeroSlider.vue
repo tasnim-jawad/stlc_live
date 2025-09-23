@@ -2,9 +2,8 @@
   <div class="th-hero-wrapper hero-1" id="hero">
     <div class="hero-img-shape-1">
       <div class="logo-icon-wrap">
-        <a href="javascript:void(0)" class="logo-icon popup-video"
-          ><i class="fa-sharp fa-solid fa-play"></i
-        ></a>
+        <a href="javascript:void(0)" class="logo-icon popup-video fs-3"
+          ><i class="fa-solid fa-people-roof"></i></a>
         <CircleText />
       </div>
     </div>
