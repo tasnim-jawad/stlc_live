@@ -30,6 +30,12 @@ class StoreData
                         $finalValue = $imagePath; // Set the image path as the value
                     }
 
+                    if (request()->hasFile('footer_logo') && $title === 'footer_logo') {
+                        $image = request()->file('footer_logo');
+                        $imagePath = uploader($image, 'uploads/settings'); // Upload the image
+                        $finalValue = $imagePath; // Set the image path as the value
+                    }
+
                     // Update or create the setting title
                     $settingTitle = self::$model::updateOrCreate(
                         ['title' => $title],
