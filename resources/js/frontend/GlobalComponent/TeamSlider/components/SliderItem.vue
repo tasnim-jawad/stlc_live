@@ -11,7 +11,7 @@
       </div>
       <div class="team-content">
         <h3 class="box-title">
-          <a href="team-details.html">{{ member?.name }}</a>
+          <a href="javascript:void(0)">{{ member?.name }}</a>
         </h3>
         <span class="team-desig">{{ member?.designation }}</span>
         <div class="team-social">
@@ -20,7 +20,7 @@
               v-for="(link, index) in member?.social_link"
               :key="index"
               target="_blank"
-              :href="link?.url"
+              :href="link?.title"
               ><i :class="link?.icon"></i
             ></a>
           </div>
