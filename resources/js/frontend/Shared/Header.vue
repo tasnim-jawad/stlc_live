@@ -188,14 +188,14 @@
           <li><Link href="/service">Our Services</Link></li>
           <li><Link href="/portfolio"> Portfolio</Link></li>
           <li class="menu-item-has-children">
-            <a href="#"> Gallery </a>
+            <a href="javascript:void(0)"> Gallery </a>
             <ul class="sub-menu">
               <li><Link href="/gallery/images">Images</Link></li>
               <li><Link href="/gallery/videos">Videos</Link></li>
             </ul>
           </li>
           <li class="menu-item-has-children">
-            <a href="#"> Pages </a>
+            <a href="javascript:void(0)"> Pages </a>
             <ul class="sub-menu">
               <li v-for="page in custom_pages" :key="page.id">
                 <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
@@ -294,14 +294,14 @@
                     <Link href="/portfolio">Property</Link>
                   </li>
                   <li class="menu-item-has-children">
-                    <a href="#">Gallery </a>
+                    <a href="javascript:void(0)">Gallery </a>
                     <ul class="sub-menu">
                       <li><Link href="/gallery/images">Images</Link></li>
                       <li><Link href="/gallery/videos">Videos</Link></li>
                     </ul>
                   </li>
                   <li class="menu-item-has-children">
-                    <a href="#"> Pages </a>
+                    <a href="javascript:void(0)"> Pages </a>
                     <ul class="sub-menu">
                       <li v-for="page in custom_pages" :key="page.id">
                         <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
