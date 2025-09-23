@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Inertia\Inertia;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +28,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        // Check for 404 error
+        if ($exception instanceof NotFoundHttpException) {
+            // If using Inertia
+            return Inertia::render('Errors/NotFound') // Vue component
+                ->toResponse($request)
+                ->setStatusCode(404);
+        }
+
+        return parent::render($request, $exception);
     }
 }
