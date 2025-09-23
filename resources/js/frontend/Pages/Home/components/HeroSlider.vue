@@ -44,7 +44,7 @@
                         <!-- Constructing
                         <span class="title2 text-theme">Excellence</span> -->
                       </h1>
-                      <p>
+                      <p class="banner_description">
                         {{ banner?.short_description }}
                       </p>
                       <div
@@ -475,6 +475,11 @@ export default {
 .current_slide_number {
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: var(--smoke-color);
+}
+.banner_description {
+  font-size: 18px;
+  color: var(--smoke-color);
+  max-width: 600px;
 }
 </style>

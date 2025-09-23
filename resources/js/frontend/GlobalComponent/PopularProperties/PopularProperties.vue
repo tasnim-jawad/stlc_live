@@ -50,14 +50,15 @@
           <PopularPropertiesSingleItem :property="property" />
         </template>
       </div>
-      <div class="col-xxl-12">
-        <Pagination
+      <div class="col-xxl-12 text-center mt-5">
+        <!-- <Pagination
           :currentPage="properties.current_page || 1"
           :totalPages="properties.last_page || 1"
           @prev="goToPage(properties.current_page - 1)"
           @next="goToPage(properties.current_page + 1)"
           @change="goToPage"
-        />
+        /> -->
+       <Link class="th-btn rounded" href="/portfolio">See more</Link>
       </div>
     </div>
   </section>

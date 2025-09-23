@@ -9,7 +9,7 @@ export const store = defineStore("properties_store", {
       current_page: 1,
       last_page: 1,
       total: 0,
-      per_page: 6,
+      per_page: 8,
     },
     property_category_id: null,
     property_categories: [],
@@ -35,7 +35,7 @@ export const store = defineStore("properties_store", {
       try {
         const params = {
           page,
-          limit: 6,
+          limit: 8,
           property_category_id: this.property_category_id,
         };
 
@@ -50,7 +50,7 @@ export const store = defineStore("properties_store", {
             current_page: 1,
             last_page: 1,
             total: Array.isArray(response.data) ? response.data.length : 0,
-            per_page: 6,
+            per_page: 8,
           };
         }
         this.properties = result;

@@ -30,17 +30,13 @@
             </button>
           </div>
         </div>
-        <div class="actions">
+        <!-- <div class="actions">
           <a href="wishlist.html" class="icon-btn"
             ><i class="fas fa-heart"></i
           ></a>
-        </div>
+        </div> -->
         <div class="actions-style-2-wrapper">
           <div class="actions style-2">
-            <a href="#" class="icon-btn"
-              ><span class="action-text">Add To Favorite</span>
-              <i class="fa-solid fa-bookmark"></i>
-            </a>
             <a
               href="#"
               class="icon-btn view-all-images-btn"

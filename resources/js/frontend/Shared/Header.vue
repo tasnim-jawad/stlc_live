@@ -276,7 +276,7 @@
               <div class="header-logo">
                 <Link href="/"
                   ><img
-                    src="/assets/frontend/img/logo.jpeg"
+                    :src="'/' + getFirstSettingValueByTitle('header_logo') ?? '/assets/frontend/img/logo.jpeg'"
                     alt="logo"
                 /></Link>
               </div>

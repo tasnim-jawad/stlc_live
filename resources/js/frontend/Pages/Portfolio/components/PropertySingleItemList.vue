@@ -55,17 +55,14 @@
             aria-atomic="true"
           ></span>
         </div>
-        <div class="actions">
+        <!-- <div class="actions">
           <a href="javascript:void(0);" class="icon-btn"
             ><i class="fas fa-heart"></i
           ></a>
-        </div>
+        </div> -->
         <div class="actions-style-2-wrapper">
           <div class="actions style-2">
-            <a href="#" class="icon-btn"
-              ><span class="action-text">Add To Favorite</span>
-              <i class="fa-solid fa-bookmark"></i> </a
-            ><a href="#" class="icon-btn" @click.prevent="openImageGallery"
+            <a href="#" class="icon-btn" @click.prevent="openImageGallery"
               ><span class="action-text">View all img</span>
               <i class="fa-solid fa-camera"></i
             ></a>
