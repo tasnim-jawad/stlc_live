@@ -16,18 +16,18 @@ export const store = defineStore("team_main_store", {
   }),
 
   actions: {
-    async fetch_team({  page = 1 } = {}) {
+    async fetch_team({ page = 1 } = {}) {
       this.loading = true;
       this.error = null;
 
       try {
         const params = {
           page,
-          limit: 8,
+          limit: 20,
         };
 
-        const response = await axios.get("our-teams", { params });
-        console.log('clicked',response.data);
+        const response = await axios.get("our-teams?get_all=true");
+        console.log("clicked", response.data);
 
         let result = response?.data?.data;
         if (!result.data) {
@@ -37,7 +37,7 @@ export const store = defineStore("team_main_store", {
             current_page: 1,
             last_page: 1,
             total: Array.isArray(response.data) ? response.data.length : 0,
-            per_page: 8,
+            per_page: 20,
           };
         }
         this.team = result;
@@ -47,6 +47,5 @@ export const store = defineStore("team_main_store", {
         this.loading = false;
       }
     },
-
   },
 });

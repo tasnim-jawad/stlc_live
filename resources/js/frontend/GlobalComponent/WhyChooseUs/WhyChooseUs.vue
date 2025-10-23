@@ -3,7 +3,10 @@
     class="why-sec-1 space"
     id="why-sec"
     :style="{
-      backgroundImage: 'url(/assets/frontend/img/why/why-choose-1-bg.jpg)',
+      backgroundImage: 'url(/assets/frontend/img/common/1.jpeg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
     }"
   >
     <div class="container">
@@ -21,56 +24,28 @@
             >
               <span class="double-line"></span> Why Choose Us
             </p>
-            <h2
-              class="sec-title text-white mb-0 fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.3s"
-            >
-              Trusted by 100+ Million Buyers
-            </h2>
           </div>
         </div>
-        <!-- <div class="col-xl-auto">
-          <div
-            class="why-right-review-wrap sec-btn fadeinup wow"
-            data-wow-duration="1.5s"
-            data-wow-delay="0.3s"
-          >
-            <div class="trust-content">
-              <div class="icon">
-                <img src="/assets/frontend/img/icon/star-icon.svg" alt="img" />
-              </div>
-              <h4 class="box-title">Trustipilot</h4>
-            </div>
-            <div class="client">
-              <div class="avatar">
-                <img
-                  src="/assets/frontend/img/hero/heror-1-avator-group.png"
-                  alt="img"
-                />
-              </div>
-              <div class="content">
-                <div class="th-social">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                </div>
-                <h4 class="review-title">
-                  <span class="number"
-                    ><span class="counter-number">19</span>k+</span
-                  >
-                  clients
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="row gy-30 align-items-center justify-content-center">
-        <template v-for="(service, index) in services" :key="index">
-          <ServiceSingleItem :service="service" />
+        <!-- Show skeleton if loading or no services -->
+        <template v-if="isLoading">
+          <ServiceSingleItem
+            v-for="n in 6"
+            :key="'skeleton-' + n"
+            :service="null"
+            :isLoading="true"
+          />
+        </template>
+
+        <!-- Show actual services when loaded -->
+        <template v-else>
+          <ServiceSingleItem
+            v-for="(service, index) in services"
+            :key="'service-' + (service.id || index)"
+            :service="service"
+            :isLoading="false"
+          />
         </template>
       </div>
     </div>
@@ -83,18 +58,80 @@ import { mapActions, mapState } from "pinia";
 import ServiceSingleItem from "./components/ServiceSingleItem.vue";
 
 export default {
+  name: "WhyChooseUs",
   components: { ServiceSingleItem },
-  created: async function () {
+
+  async created() {
     await this.fetch_services();
-    console.log("Services:", this.services);
+    // console.log("Services:", this.services);
   },
+
   computed: {
-    ...mapState(why_choose_us_store, ["services"]),
+    ...mapState(why_choose_us_store, ["services", "loading", "error"]),
+
+    // Check if we have valid services data
+    hasServices() {
+      return this.services && this.services.length > 0;
+    },
+
+    // Loading state for skeleton display
+    isLoading() {
+      return this.loading || !this.hasServices;
+    },
   },
+
   methods: {
     ...mapActions(why_choose_us_store, ["fetch_services"]),
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* Container level optimizations for smooth transitions */
+.row {
+  transition: opacity 0.3s ease;
+}
+
+/* Ensure proper spacing and alignment for both skeleton and real content */
+.gy-30 > * {
+  animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for better visual effect */
+.gy-30 > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.gy-30 > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.gy-30 > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.gy-30 > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.gy-30 > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.gy-30 > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gy-30 > * {
+    animation-delay: 0s !important;
+  }
+}
+</style>

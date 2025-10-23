@@ -3,8 +3,8 @@
     <ul>
       <li>
         <a class="prev-page" href="" @click.prevent="$emit('prev')"
-          ><i class="fa fa-arrow-left"></i
-        > Prev</a>
+          ><i class="fa fa-arrow-left"></i> Prev</a
+        >
       </li>
       <li v-for="page in pages" :key="page">
         <span v-if="page === '...'" class="page-numbers dots">...</span>
@@ -12,7 +12,7 @@
           v-else
           href=""
           :class="{ current: page === currentPage }"
-          @click.prevent="$emit('change', page)"
+          @click.prevent="handlePageClick(page)"
           >{{ page < 10 ? "0" + page : page }}</a
         >
       </li>
@@ -69,9 +69,22 @@ export default {
       return "margin-top-30";
     },
   },
+  methods: {
+    handlePageClick(page) {
+      console.log(
+        "Pagination: Page clicked:",
+        page,
+        "Current page:",
+        this.currentPage
+      );
+      this.$emit("change", page);
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* Add any custom styles if needed */
+.current {
+  color: #ff0000;
+}
 </style>

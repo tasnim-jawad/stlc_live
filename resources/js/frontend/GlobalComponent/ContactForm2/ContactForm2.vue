@@ -127,6 +127,7 @@ export default {
       loading: false,
       successMessage: "",
       errorMessage: "",
+      successMsg: "",
     };
   },
   methods: {
@@ -137,17 +138,12 @@ export default {
       this.errorMessage = "";
 
       try {
-        console.log("Form Data:", this.form);
-
+        
         const response = await axios.post("/contacts/store", this.form);
-
-        // Show success message using SweetAlert
-        let successMsg =
-          response.data?.message || "Your message has been sent successfully!";
-        window.s_alert(successMsg, "success");
+        console.log("Form Data:", response);
 
         // Also set the success message for template display
-        this.successMessage = successMsg;
+        this.successMessage = this.successMsg;
 
         // Clear success message after 5 seconds
         setTimeout(() => {
@@ -163,7 +159,10 @@ export default {
           message: "",
         };
 
-        console.log("Form submitted successfully:", response.data);
+
+
+        window.s_alert("Your message has been sent successfully!");
+
       } catch (error) {
         console.error("Form submission error:", error);
 
@@ -172,7 +171,6 @@ export default {
 
           // Show validation errors using SweetAlert
           let errorMessages = Object.values(this.errors).flat().join("<br>");
-          window.s_warning(errorMessages);
         } else {
           this.errorMessage = "An error occurred. Please try again.";
           window.s_error("An error occurred. Please try again.");

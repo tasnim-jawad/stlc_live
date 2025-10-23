@@ -1,11 +1,18 @@
 <template>
   <!-- slider section -->
   <!-- slider section -->
-
-  <HeroSlider></HeroSlider>
+  <!-- <HeroSlider></HeroSlider> -->
 
   <!-- slider section -->
   <!-- slider section -->
+
+
+  <!--ThumbnailSlider section -->
+  <!--ThumbnailSlider section -->
+  <ThumbnailSlider></ThumbnailSlider>
+
+  <!--ThumbnailSlider section -->
+  <!--ThumbnailSlider section -->
 
   <!-- AboutUs section -->
   <!-- AboutUs section -->
@@ -22,14 +29,6 @@
 
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
-
-  <!-- PopularProperties section -->
-  <!-- PopularProperties section -->
-
-  <PopularProperties />
-
-  <!-- PopularProperties section -->
-  <!-- PopularProperties section -->
 
   <!-- MissionVisionCore section -->
   <!-- MissionVisionCore section -->
@@ -55,25 +54,42 @@
   <!-- Testimonials section -->
   <!-- Testimonials section -->
 
-  <!-- News section -->
-  <!-- News section -->
+  <!-- Service section -->
+  <!-- Service section -->
 
-  <News />
+  <Service />
 
-  <!-- News section -->
-  <!-- News section -->
+  <!-- Service section -->
+  <!-- Service section -->
+
+  <!-- PopularProperties section -->
+  <!-- PopularProperties section -->
+
+  <PopularProperties />
+
+  <!-- PopularProperties section -->
+  <!-- PopularProperties section -->
+  <!-- --------------------------------------- -->
+  <!-- ----------ContactForm----------------- -->
+  <!-- --------------------------------------- -->
+  <ContactForm />
+  <!-- --------------------------------------- -->
+  <!-- ----------ContactForm----------------- -->
+  <!-- --------------------------------------- -->
 </template>
 
 <script>
 import CircleText from "./components/CircleText.vue";
 import HeroSlider from "./components/HeroSlider.vue";
+import ThumbnailSlider from "./components/ThumbnailSlider.vue";
 import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
 import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
 import PopularProperties from "../../GlobalComponent/PopularProperties/PopularProperties.vue";
 import MissionVisionCore from "../../GlobalComponent/MissionVisionCore/MissionVisionCore.vue";
 import WhyChooseUs from "../../GlobalComponent/WhyChooseUs/WhyChooseUs.vue";
-import Testimonials from "../../GlobalComponent/Testimonials/Testimonials.vue";
-import News from "../../GlobalComponent/News/News.vue";
+import Testimonials from "../../GlobalComponent/Testimonials2/Testimonials2.vue";
+import Service from "../../GlobalComponent/Service/Service.vue";
+import ContactForm from "../../GlobalComponent/ContactForm/ContactForm.vue";
 
 export default {
   name: "HomePage",
@@ -86,7 +102,9 @@ export default {
     MissionVisionCore,
     WhyChooseUs,
     Testimonials,
-    News,
+    Service,
+    ContactForm,
+    ThumbnailSlider,
   },
 };
 </script>

@@ -7,8 +7,8 @@
       <div class="simple-gallery-card" v-for="image in images" :key="image.id">
         <div class="gallery-img">
           <img :src="'/' + image.image" :alt="image.title" />
-          <a :href="'/' + image.image" class="icon-btn popup-image"
-            ><i class="fa-brands fa-instagram"></i
+            <a :href="'/' + image.image" class="icon-btn popup-image"
+            ><i class="fa-solid fa-eye"></i
           ></a>
         </div>
       </div>

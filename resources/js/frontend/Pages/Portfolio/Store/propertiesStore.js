@@ -14,6 +14,9 @@ export const store = defineStore("properties_main_store", {
     property_category_id: null,
     property_categories: [],
     random_properties: [],
+    searched_properties: {
+      data: [],
+    },
     loading: false,
     error: null,
   }),
@@ -38,6 +41,10 @@ export const store = defineStore("properties_main_store", {
       this.loading = true;
       this.error = null;
 
+      // Add minimum loading time to show skeleton
+      const startTime = Date.now();
+      const minLoadingTime = 800; // 800ms minimum loading
+
       try {
         const params = {
           page,
@@ -46,27 +53,41 @@ export const store = defineStore("properties_main_store", {
         };
         if (search) {
           params.search = search;
-          params.limit = 100;
+          params.limit = 10;
         }
 
         const response = await axios.get("properties", { params });
-        console.log("clicked", response.data);
+        console.log("API Response:", response.data);
+        console.log("Requested page:", page);
 
         let result = response?.data?.data;
         if (!result.data) {
           // If data is not present, fallback to array
           result = {
             data: Array.isArray(response.data) ? response.data : [],
-            current_page: 1,
+            current_page: page, // Use the requested page, not hardcoded 1
             last_page: 1,
             total: Array.isArray(response.data) ? response.data.length : 0,
             per_page: 6,
           };
+        } else {
+          // Ensure current_page matches the requested page if API doesn't return it correctly
+          result.current_page = result.current_page || page;
         }
+
+        console.log("Setting properties:", result);
         this.properties = result;
       } catch (error) {
         this.error = error;
       } finally {
+        // Ensure minimum loading time for better skeleton visibility
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+
         this.loading = false;
       }
     },
@@ -78,7 +99,7 @@ export const store = defineStore("properties_main_store", {
         const response = await axios.get("property-categories", {
           params: {
             get_all: 1,
-            limit: 1000,
+            limit: 10,
           },
         });
 
@@ -106,6 +127,39 @@ export const store = defineStore("properties_main_store", {
         this.error = error;
       } finally {
         this.loading = false;
+      }
+    },
+
+    async search_properties(searchTerm) {
+      // Don't set loading to true for search to avoid disrupting the main view
+      this.error = null;
+
+      try {
+        const params = {
+          search: searchTerm,
+          limit: 100,
+          fields: [
+            "property_name",
+            "slug",
+            "property_address",
+            "price",
+            "property_category_id",
+          ],
+        };
+
+        const response = await axios.get("/properties", { params });
+        let result = response?.data?.data;
+
+        // Ensure we have a proper structure
+        if (!result) {
+          this.searched_properties = { data: [] };
+        } else {
+          this.searched_properties = result;
+        }
+        
+      } catch (error) {
+        this.error = error;
+        this.searched_properties = { data: [] };
       }
     },
   },

@@ -14,29 +14,30 @@
       <div class="results-header">
         <h4 class="results-title">Search Results</h4>
         <span class="results-count"
-          >{{ blogStore.blogs.data.length }} found</span
+          >{{ blogStore?.searched_blogs?.data.length }} found</span
         >
       </div>
+      <div class="text-center" v-if="blogStore?.searched_blogs?.data.length  === 0"> No results found </div>
       <div class="results-list">
         <div
-          v-for="blog in blogStore.blogs.data"
+          v-for="blog in blogStore?.searched_blogs?.data"
           :key="blog.id"
           class="search-result-item"
         >
           <div class="result-content">
             <Link :href="`/blog/details?slug=${blog.slug}`" class="result-link">
               <h5 class="result-title">{{ blog.title }}</h5>
-              <p class="result-excerpt" v-if="blog.excerpt">
+              <!-- <p class="result-excerpt" v-if="blog.excerpt">
                 {{ blog.excerpt }}
-              </p>
+              </p> -->
               <div class="result-meta">
                 <span class="result-date" v-if="blog.created_at">
                   <i class="fa fa-calendar"></i>
                   {{ formatDate(blog.created_at) }}
                 </span>
-                <span class="result-author" v-if="blog.author">
+                <span class="result-author" v-if="blog.writer">
                   <i class="fa fa-user"></i>
-                  {{ blog.author }}
+                  {{ blog.writer }}
                 </span>
               </div>
             </Link>
@@ -73,10 +74,8 @@ export default {
   methods: {
     handleSearch() {
       const blogStore = store();
-      if (!this.searchTerm.trim()) {
-        blogStore.fetch_blogs({ page: 1 });
-      } else {
-        blogStore.fetch_blogs({ page: 1, search: this.searchTerm });
+      if (this.searchTerm.trim()) {
+        blogStore.search_blogs(this.searchTerm);
       }
     },
     debouncedSearch: debounce(function () {

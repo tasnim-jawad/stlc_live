@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 col-md-6">
+  <div class="col-lg-6 col-md-6">
     <div class="blog-card">
       <div class="blog-img">
         <Link :href="`/blog/details?slug=${blog?.slug}`">

@@ -22,32 +22,15 @@ class GetAllData
 
             $data = self::$model::query();
 
-            if (request()->has('search') && request()->input('search')) {
+            if (request()->has(key: 'search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
                     $q->where('title', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('description', 'like', '%' . $searchKey . '%');
-
+                    // $q->orWhere('description', 'like', '%' . $searchKey . '%');
                     $q->orWhere('tags', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('publish_date', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('writer', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('meta_description', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('meta_keywords', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('thumbnail_image', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('image', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('blog_type', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('url', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('show_top', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('blog_type', 'like', '%' . $searchKey . '%');
                 });
             }
 

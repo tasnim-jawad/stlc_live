@@ -23,30 +23,36 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.5s"
             >
-                <button
+              <button
                 data-filter="*"
-                class="th-btn tab-btn active"
+                :class="[
+                  'th-btn tab-btn',
+                  { active: property_category_id === null },
+                ]"
                 type="button"
-                @click.prevent="set_property_category_id(category?.id)"
-                >
+                @click.prevent.stop="handleCategoryFilter(null)"
+              >
                 View All
-                </button>
-                <button
+              </button>
+              <button
                 v-for="category in property_categories?.data"
                 :key="category.id"
-                @click.prevent="set_property_category_id(category?.id)"
-                class="th-btn tab-btn"
+                @click.prevent.stop="handleCategoryFilter(category?.id)"
+                :class="[
+                  'th-btn tab-btn',
+                  { active: property_category_id === category.id },
+                ]"
                 type="button"
-                >
+              >
                 {{ category?.name }}
-                </button>
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="row gy-30 justify-content-center filter-active">
         <!-- <p>{{ properties }} Properties Found</p> -->
-        <template v-for="(property, index) in properties?.data" :key="index"  >
+        <template v-for="(property, index) in properties?.data" :key="index">
           <PopularPropertiesSingleItem :property="property" />
         </template>
       </div>
@@ -58,7 +64,7 @@
           @next="goToPage(properties.current_page + 1)"
           @change="goToPage"
         /> -->
-       <Link class="th-btn rounded" href="/portfolio">See more</Link>
+        <Link class="th-btn rounded" href="/portfolio">See more</Link>
       </div>
     </div>
   </section>
@@ -74,7 +80,7 @@ export default {
     PopularPropertiesSingleItem,
     Pagination,
   },
-  created: function() {
+  created: function () {
     this.fetch_property_categories();
     this.fetch_properties({ page: 1 });
   },
@@ -82,21 +88,42 @@ export default {
     ...mapActions(property_store, [
       "fetch_properties",
       "fetch_property_categories",
-      "set_property_category_id"
+      "set_property_category_id",
     ]),
     goToPage(page) {
       console.log("Going to page:", page);
       if (page < 1 || page > (this.properties.last_page || 1)) return;
       this.fetch_properties({ page });
     },
+    handleCategoryFilter(categoryId) {
+      // Prevent event bubbling that might affect other components
+      event?.stopPropagation();
+      this.set_property_category_id(categoryId);
+    },
   },
   computed: {
     ...mapState(property_store, [
       "properties",
-      "property_categories"
+      "property_categories",
+      "property_category_id",
     ]),
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* Scoped styles to prevent conflicts with other components */
+.popular-sec-1 {
+  isolation: isolate;
+}
+
+.filter-menu {
+  position: relative;
+  z-index: 1;
+}
+
+.tab-btn {
+  position: relative;
+  z-index: 2;
+}
+</style>

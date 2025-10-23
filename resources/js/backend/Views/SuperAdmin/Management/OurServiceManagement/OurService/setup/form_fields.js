@@ -7,20 +7,6 @@ export default [
 	},
 
 	{
-		name: "description",
-		label: "Enter your description",
-		type: "text",
-		value: "",
-	},
-
-	{
-		name: "url",
-		label: "Enter your url",
-		type: "text",
-		value: "",
-	},
-
-	{
 		name: "image",
 		label: "Enter your image",
 		type: "file",
@@ -49,5 +35,20 @@ export default [
 				value: "inactive",
 			},
 		],
+	},
+
+	{
+		name: "url",
+		label: "Enter your Short Description",
+		type: "text",
+		value: "",
+		row_col_class: "col-md-12",
+	},
+	{
+		name: "description",
+		label: "Enter your description",
+		type: "textarea",
+		value: "",
+		row_col_class: "col-md-12",
 	},
 ];

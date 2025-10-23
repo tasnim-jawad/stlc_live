@@ -1,46 +1,6 @@
 <template>
-  <!-- <div class="preloader">
-    <button class="th-btn preloaderCls">Cancel Preloader</button>
-    <div id="preloader" class="preloader-inner">
-      <div class="txt-loading">
-        <span data-text-preloader="S" class="letters-loading">S </span
-        ><span data-text-preloader="T" class="letters-loading">T </span
-        ><span data-text-preloader="L" class="letters-loading">L </span
-        ><span data-text-preloader="C" class="letters-loading">C </span>
-      </div>
-    </div>
-  </div> -->
-  <!-- <div class="color-scheme">
-    <button class="switchIcon"><i class="fa-solid fa-palette"></i></button>
-    <h4 class="color-scheme-title">
-      <i class="far fa-palette"></i> Color Switcher
-    </h4>
-    <p class="color-scheme-text">Check template with your color</p>
-    <div class="color-switch-btns">
-      <button data-color="#6240CF">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-      <button data-color="#068FFF">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-      <button data-color="#044DBC">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-      <button data-color="#FFAF00">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-      <button data-color="#F80000">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-      <button data-color="#231E7A">
-        <i class="fa-solid fa-droplet"></i>
-      </button>
-    </div>
-    <p class="color-scheme-text">Or custom color..</p>
-    <input type="color" id="thcolorpicker" value="#068FFF" />
-  </div> -->
   <div class="sidemenu-wrapper sidemenu-cart d-none d-lg-block">
-    <div class="sidemenu-content">
+    <!-- <div class="sidemenu-content">
       <button class="closeButton sideMenuCls">
         <i class="far fa-times"></i>
       </button>
@@ -154,7 +114,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="popup-search-box d-none d-lg-block">
     <button class="searchClose"><i class="fal fa-times"></i></button>
@@ -166,44 +126,78 @@
   <div
     class="th-menu-wrapper"
     :class="{ 'th-body-visible': isSideBarMenuOpen }"
+    @click="toggleSidebarMenu"
   >
-    <div class="th-menu-area text-center">
+    <div class="th-menu-area text-center" @click.stop>
       <button class="th-menu-toggle" @click="toggleSidebarMenu">
         <i class="fa fa-times"></i>
       </button>
       <div class="mobile-logo">
-        <a href="index.html"
+        <Link href="/" @click="toggleSidebarMenu"
           ><img
-            src="/assets/frontend/img/logo.jpeg"
+            height="100"
+            width="100"
+            :src="
+              '/' + getFirstSettingValueByTitle('header_logo') ??
+              '/assets/frontend/img/logo.jpeg'
+            "
             alt="logo"
-        /></a>
+        /></Link>
       </div>
       <div class="th-mobile-menu">
         <ul>
           <li class="active">
-            <Link href="/">Home</Link>
+            <Link href="/" @click="toggleSidebarMenu">Home</Link>
           </li>
-          <li><Link href="/about-us">About Us</Link></li>
-          <li><Link href="/team">Our Team</Link></li>
-          <li><Link href="/service">Our Services</Link></li>
-          <li><Link href="/portfolio">Property</Link></li>
+          <li>
+            <Link href="/about-us" @click="toggleSidebarMenu">About Us</Link>
+          </li>
+          <li><Link href="/team" @click="toggleSidebarMenu">Our Team</Link></li>
+          <li>
+            <Link href="/service" @click="toggleSidebarMenu">Our Services</Link>
+          </li>
+          <li>
+            <Link href="/portfolio" @click="toggleSidebarMenu">Property</Link>
+          </li>
           <li class="menu-item-has-children">
-            <a href="javascript:void(0)"> Gallery </a>
-            <ul class="sub-menu">
-              <li><Link href="/gallery/images">Images</Link></li>
-              <li><Link href="/gallery/videos">Videos</Link></li>
-            </ul>
+            <a href="javascript:void(0)" @click="toggleGallery"> Gallery </a>
+            <transition name="slide-fade">
+              <ul class="sub-menu" v-show="isGalleryOpen">
+                <li>
+                  <Link href="/gallery/images" @click="toggleSidebarMenu"
+                    >Images</Link
+                  >
+                </li>
+                <li>
+                  <Link href="/gallery/videos" @click="toggleSidebarMenu"
+                    >Videos</Link
+                  >
+                </li>
+              </ul>
+            </transition>
+          </li>
+
+          <li><Link href="/blog" @click="toggleSidebarMenu"> Blog</Link></li>
+          <li>
+            <Link href="/contact" @click="toggleSidebarMenu"> Contact</Link>
           </li>
           <li class="menu-item-has-children">
-            <a href="javascript:void(0)"> Pages </a>
-            <ul class="sub-menu">
-              <li v-for="page in custom_pages" :key="page.id">
-                <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
-              </li>
-            </ul>
+            <a href="javascript:void(0)" @click="togglePages"> Pages </a>
+            <transition name="slide-fade">
+              <ul class="sub-menu" v-show="isPagesOpen">
+                <li v-for="page in custom_pages" :key="page.id">
+                  <Link
+                    :href="`/pages/${page.page_permalink}`"
+                    @click="toggleSidebarMenu"
+                    >{{ page.title }}</Link
+                  >
+                </li>
+              </ul>
+            </transition>
           </li>
-          <li><Link href="/blog"> Blog</Link></li>
-          <li><Link href="/contact"> Contact</Link></li>
+          <Link class="th-btn my-3" href="/login" @click="toggleSidebarMenu">
+            Login</Link
+          >
         </ul>
       </div>
     </div>
@@ -276,13 +270,16 @@
               <div class="header-logo">
                 <Link href="/"
                   ><img
-                    :src="'/' + getFirstSettingValueByTitle('header_logo') ?? '/assets/frontend/img/logo.jpeg'"
+                    :src="
+                      '/' + getFirstSettingValueByTitle('header_logo') ??
+                      '/assets/frontend/img/logo.jpeg'
+                    "
                     alt="logo"
                 /></Link>
               </div>
             </div>
             <div class="col-auto">
-              <nav class="main-menu d-none d-lg-inline-block">
+              <nav class="main-menu d-none d-xxl-inline-block">
                 <ul>
                   <li class="active">
                     <Link href="/">Home</Link>
@@ -300,21 +297,29 @@
                       <li><Link href="/gallery/videos">Videos</Link></li>
                     </ul>
                   </li>
+
+                  <li><Link href="/blog">STC Blog</Link></li>
+                  <li><Link href="/contact">Contact Us</Link></li>
                   <li class="menu-item-has-children">
                     <a href="javascript:void(0)"> Pages </a>
                     <ul class="sub-menu">
                       <li v-for="page in custom_pages" :key="page.id">
-                        <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
+                        <Link :href="`/pages/${page.page_permalink}`">{{
+                          page.title
+                        }}</Link>
                       </li>
                     </ul>
                   </li>
-                  <li><Link href="/blog">STC Blog</Link></li>
-                  <li><Link href="/contact">Contact Us</Link></li>
+                  <li>
+                    <Link href="/login">
+                      <button class="btn btn-danger">Login</button></Link
+                    >
+                  </li>
                 </ul>
               </nav>
               <button
                 type="button"
-                class="th-menu-toggle d-block d-lg-none"
+                class="th-menu-toggle d-block d-xxl-none"
                 @click="toggleSidebarMenu"
               >
                 <i class="fa fa-bars"></i>
@@ -349,10 +354,18 @@ export default {
     is_home: true,
     search: "",
     isSideBarMenuOpen: false,
+    isGalleryOpen: false,
+    isPagesOpen: false,
   }),
   methods: {
     toggleSidebarMenu() {
       this.isSideBarMenuOpen = !this.isSideBarMenuOpen;
+    },
+    toggleGallery() {
+      this.isGalleryOpen = !this.isGalleryOpen;
+    },
+    togglePages() {
+      this.isPagesOpen = !this.isPagesOpen;
     },
     ...mapActions(header_store, [
       "fetch_website_settings",
@@ -370,4 +383,32 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.slide-fade-enter-active {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-fade-leave-active {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>

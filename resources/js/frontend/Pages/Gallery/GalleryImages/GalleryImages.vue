@@ -1,7 +1,7 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('/assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('/assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
@@ -38,10 +38,11 @@
               data-wow-delay="0.5s"
             >
               <button
+                v-if="images?.data?.length >= 0"
                 data-filter="*"
                 class="th-btn tab-btn active"
                 type="button"
-                @click.prevent="set_image_category_id(null)"
+                @click.prevent="set_image_category_id('all')"
               >
                 View All
               </button>
@@ -64,6 +65,8 @@
       >
         <Images :images="images?.data" />
       </div>
+      <div class="text-center" v-else> No images found </div>
+
     </div>
   </section>
 </template>

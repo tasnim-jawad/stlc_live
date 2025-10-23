@@ -47,10 +47,31 @@ class DataStoreValidation extends FormRequest
             'features' => 'required | sometimes',
             'quotation' => 'required | sometimes',
             'video_url' => 'required | sometimes',
-            'primary_image' => 'required | sometimes | array',
-            'secondary_image' => 'required | sometimes',
+            'primary_image' => 'required|sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'secondary_image' => 'required|sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'page_type' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'primary_image.required' => 'The primary image is required.',
+            'primary_image.image' => 'The primary image must be an image file.',
+            'primary_image.mimes' => 'The primary image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'primary_image.max' => 'The primary image must not be greater than 2MB.',
+            'primary_image.uploaded' => 'The primary image must not be greater than 2MB.',
+            'secondary_image.required' => 'The secondary image is required.',
+            'secondary_image.image' => 'The secondary image must be an image file.',
+            'secondary_image.mimes' => 'The secondary image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'secondary_image.max' => 'The secondary image must not be greater than 2MB.',
+            'secondary_image.uploaded' => 'The secondary image must not be greater than 2MB.',
         ];
     }
 }

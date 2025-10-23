@@ -27,7 +27,6 @@ class DataStoreValidation extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->validateError($validator->errors()));
         if ($this->wantsJson() || $this->ajax()) {
             throw new HttpResponseException($this->validateError($validator->errors()));
         }
@@ -47,9 +46,30 @@ class DataStoreValidation extends FormRequest
             'features' => 'required | sometimes',
             'key_features' => 'required | sometimes',
             'video_url' => 'required | sometimes',
-            'image_gallery_left' => 'required | sometimes',
-            'image_gallery_right' => 'required | sometimes',
+            'image_gallery_left' => 'sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'image_gallery_right' => 'sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'image_gallery_left.required' => 'The left gallery image is required.',
+            'image_gallery_left.image' => 'The left gallery image must be an image file.',
+            'image_gallery_left.mimes' => 'The left gallery image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'image_gallery_left.max' => 'The left gallery image must not be greater than 2MB.',
+            'image_gallery_left.uploaded' => 'The left gallery image must not be greater than 2MB.',
+            'image_gallery_right.required' => 'The right gallery image is required.',
+            'image_gallery_right.image' => 'The right gallery image must be an image file.',
+            'image_gallery_right.mimes' => 'The right gallery image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'image_gallery_right.max' => 'The right gallery image must not be greater than 2MB.',
+            'image_gallery_right.uploaded' => 'The right gallery image must not be greater than 2MB.',
         ];
     }
 }

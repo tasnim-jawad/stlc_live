@@ -22,26 +22,26 @@
             <Link
               class="text-inherit"
               :href="`/portfolio/property-details?slug=${property?.slug}`"
-              >{{ property?.property_name }}</Link
+              >{{ property?.property_name ? (property.property_name.length > 20 ? property.property_name.substring(0, 20) + '...' : property.property_name) : 'N/A' }}</Link
             >
           </h4>
           <div class="property-features-wrap">
             <template
               v-for="(feature, index) in (
                 property?.facts_and_features || []
-              ).slice(0, 3)"
+              ).slice(0, 2)"
               :key="index"
             >
-              <div class="property-features-item">
+                <div class="property-features-item">
                 <!-- <div class="thumb">
                   <img src="assets/frontend/img/icon/bed.svg" alt="icon" />
                 </div> -->
                 <div class="icon mr-1">
                   <span><i :class="feature?.icon"></i></span>
                 </div>
-                <h5 class="feature-title">{{ feature?.title }}</h5>
+                <h5 class="feature-title">{{ feature?.title ? (feature.title.length > 6 ? feature.title.substring(0, 6) + '...' : feature.title) : 'N/A' }}</h5>
               </div>
-                <div class="divider" v-if="index < ((property?.facts_and_features || []).slice(0, 3).length - 1)"></div>
+                <div class="divider" v-if="index < ((property?.facts_and_features || []).slice(0, 2).length - 1)"></div>
             </template>
           </div>
           <div class="recent-post-meta">

@@ -1,5 +1,7 @@
 <template>
-  <section class="testi-card-area-2 space-top overflow-hidden">
+  <section
+    class="testi-card-area-2 space-top overflow-hidden testimonial-isolation-wrapper"
+  >
     <div
       class="shape-mockup spin d-none d-xxl-block"
       data-left="7%"
@@ -31,29 +33,34 @@
       <div class="row gy-4 justify-content-center mb-40">
         <div class="testi-card-slide">
           <div
-            class="swiper has-shadow th-slider"
+            ref="testimonialsSlider"
+            class="swiper has-shadow th-slider testimonial-slider-isolated"
             id="testiSlide1"
-            data-slider-options='{"centeredSlides":true,"paginationType": "progressbar","loop":true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"1"},"1200":{"slidesPerView":"1"}}}'
           >
             <div class="swiper-wrapper">
-              <template v-for="(testimonial , index) in testimonials" :key="index">
+              <template
+                v-for="(testimonial, index) in testimonials"
+                :key="`testimonial-${index}-${testimonial.id || index}`"
+              >
                 <TestimonialsSingleItem :testimonial="testimonial" />
               </template>
             </div>
             <div class="slider-controller container-width">
               <button
-                data-slider-prev="#testiSlide1"
-                class="slider-arrow default slider-prev"
+                ref="prevBtn"
+                class="slider-arrow default slider-prev testimonial-prev-btn"
+                @click.stop="goToPrev"
               >
                 <i class="fa fa-arrow-left"></i>
               </button>
               <div
-                class="slider-pagination style-2"
-                data-slider-id="#testiSlide1"
+                ref="paginationEl"
+                class="slider-pagination style-2 testimonial-pagination"
               ></div>
               <button
-                data-slider-next="#testiSlide1"
-                class="slider-arrow default slider-next"
+                ref="nextBtn"
+                class="slider-arrow default slider-next testimonial-next-btn"
+                @click.stop="goToNext"
               >
                 <i class="fa fa-arrow-right"></i>
               </button>
@@ -61,171 +68,303 @@
           </div>
         </div>
       </div>
-     
     </div>
   </section>
 </template>
 
 <script>
-import { mapActions , mapState} from "pinia";
-import { onMounted, onUpdated, nextTick, ref, onBeforeUnmount } from "vue";
+import { mapActions, mapState } from "pinia";
 import { store as testimonials_store } from "./Store/testimonialsStore.js";
 import TestimonialsSingleItem from "./components/TestimonialsSingleItem.vue";
 
 export default {
   components: {
-    TestimonialsSingleItem
+    TestimonialsSingleItem,
   },
-  setup() {
-    const swiperInstance = ref(null);
-    const initializationAttempts = ref(0);
-    const maxAttempts = 10;
+  data() {
+    return {
+      swiperInstance: null,
+      isSliderReady: false,
+      initRetries: 0,
+      maxRetries: 5,
+    };
+  },
+  async created() {
+    await this.fetch_testimonials();
+  },
+  mounted() {
+    // Use a more reliable initialization
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.initSlider();
+      }, 1200); // Increased delay to ensure everything is ready
+    });
+  },
+  beforeUnmount() {
+    this.cleanupSlider();
+  },
+  methods: {
+    ...mapActions(testimonials_store, ["fetch_testimonials"]),
 
-    const initializeTestiSlider = () => {
-      const testiSlider = document.querySelector("#testiSlide1");
-
-      // If slider already exists, don't reinitialize
-      if (swiperInstance.value) {
+    initSlider() {
+      // Only initialize if we have testimonials and slider isn't already ready
+      if (
+        this.isSliderReady ||
+        !this.testimonials ||
+        this.testimonials.length === 0
+      ) {
         return;
       }
 
-      if (!testiSlider) {
-        console.warn("Testimonials slider element not found");
+      const sliderEl = this.$refs.testimonialsSlider;
+
+      if (!sliderEl) {
+        if (this.initRetries < this.maxRetries) {
+          this.initRetries++;
+          setTimeout(() => this.initSlider(), 500);
+        }
         return;
       }
 
       if (!window.Swiper) {
-        initializationAttempts.value++;
-        if (initializationAttempts.value < maxAttempts) {
-          // Wait for Swiper to load and try again
-          setTimeout(() => initializeTestiSlider(), 200);
-        } else {
-          console.error("Swiper library not available after multiple attempts");
+        if (this.initRetries < this.maxRetries) {
+          this.initRetries++;
+          setTimeout(() => this.initSlider(), 500);
         }
         return;
       }
 
       try {
-        // Parse data-slider-options if present
-        let options = {};
-        const optionsAttr = testiSlider.getAttribute("data-slider-options");
-        if (optionsAttr) {
-          options = JSON.parse(optionsAttr);
-        }
+        // Clean up any existing instance first
+        this.cleanupSlider();
 
-        // Normalize string values to proper types
-        const normalizeOptions = (obj) => {
-          for (const key in obj) {
-            if (typeof obj[key] === "string") {
-              if (obj[key] === "true") obj[key] = true;
-              else if (obj[key] === "false") obj[key] = false;
-              else if (!isNaN(obj[key]) && obj[key] !== "")
-                obj[key] = Number(obj[key]);
-            } else if (typeof obj[key] === "object" && obj[key] !== null) {
-              normalizeOptions(obj[key]);
-            }
-          }
-        };
-        normalizeOptions(options);
-
-        // Add navigation
-        const nextBtn = document.querySelector(
-          '[data-slider-next="#testiSlide1"]'
-        );
-        const prevBtn = document.querySelector(
-          '[data-slider-prev="#testiSlide1"]'
-        );
-        if (nextBtn && prevBtn) {
-          options.navigation = {
-            nextEl: nextBtn,
-            prevEl: prevBtn,
-          };
-        }
-
-        // Add pagination
-        const paginationEl = document.querySelector(
-          '[data-slider-id="#testiSlide1"]'
-        );
-        if (paginationEl) {
-          options.pagination = {
-            el: paginationEl,
-            type: options.paginationType || "progressbar",
-          };
-        }
-
-        // Initialize slider with merged options
-        swiperInstance.value = new window.Swiper(testiSlider, {
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          autoHeight: true,
+        // Create new Swiper instance with minimal, stable configuration
+        this.swiperInstance = new window.Swiper(sliderEl, {
+          // Basic settings
           loop: true,
+          centeredSlides: true,
+          slidesPerView: 1,
           spaceBetween: 20,
-          ...options,
-        });
+          autoHeight: false, // Set to false for stability
 
-        console.log("Testimonials slider initialized successfully");
+          // Autoplay
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+
+          // Navigation using refs instead of global selectors
+          navigation: {
+            nextEl: this.$refs.nextBtn,
+            prevEl: this.$refs.prevBtn,
+          },
+
+          // Pagination
+          pagination: {
+            el: this.$refs.paginationEl,
+            type: "progressbar",
+            clickable: false,
+          },
+
+          // Stability settings
+          observer: true,
+          observeParents: true,
+          watchOverflow: true,
+
+          // Performance
+          speed: 600,
+          effect: "slide",
+
+          // Resistance to external interference
+          resistance: false,
+          preventInteractionOnTransition: false,
+
+          // Event handlers
+          on: {
+            init: () => {
+              console.log("✅ Testimonial slider initialized");
+              this.isSliderReady = true;
+            },
+            destroy: () => {
+              console.log("🔄 Testimonial slider destroyed");
+              this.isSliderReady = false;
+            },
+            slideChange: () => {
+              // Prevent external interference during slide changes
+              if (this.swiperInstance && this.swiperInstance.autoplay) {
+                this.swiperInstance.autoplay.start();
+              }
+            },
+          },
+        });
       } catch (error) {
-        console.error("Error initializing testimonials slider:", error);
-        // Retry on error
-        initializationAttempts.value++;
-        if (initializationAttempts.value < maxAttempts) {
-          setTimeout(() => initializeTestiSlider(), 500);
+        console.error("❌ Error initializing testimonial slider:", error);
+        this.isSliderReady = false;
+
+        // Retry with exponential backoff
+        if (this.initRetries < this.maxRetries) {
+          this.initRetries++;
+          const delay = Math.min(1000 * this.initRetries, 5000);
+          setTimeout(() => this.initSlider(), delay);
         }
       }
-    };
+    },
 
-    const destroySlider = () => {
-      if (
-        swiperInstance.value &&
-        typeof swiperInstance.value.destroy === "function"
-      ) {
-        swiperInstance.value.destroy(true, true);
-        swiperInstance.value = null;
-        console.log("Testimonials slider destroyed");
+    cleanupSlider() {
+      if (this.swiperInstance) {
+        try {
+          this.swiperInstance.destroy(true, true);
+          this.swiperInstance = null;
+          this.isSliderReady = false;
+        } catch (error) {
+          console.error("Error destroying slider:", error);
+        }
       }
-    };
+    },
 
-    // Initialize on mount
-    onMounted(async () => {
-      await nextTick();
-      // Multiple initialization attempts with different delays
-      setTimeout(() => initializeTestiSlider(), 100);
-      setTimeout(() => initializeTestiSlider(), 300);
-      setTimeout(() => initializeTestiSlider(), 600);
-    });
-
-    // Reinitialize on updates if needed
-    onUpdated(async () => {
-      await nextTick();
-      if (!swiperInstance.value) {
-        setTimeout(() => initializeTestiSlider(), 100);
+    // Manual navigation methods
+    goToNext() {
+      if (this.swiperInstance && this.isSliderReady) {
+        this.swiperInstance.slideNext();
       }
-    });
+    },
 
-    // Cleanup on unmount
-    onBeforeUnmount(() => {
-      destroySlider();
-    });
+    goToPrev() {
+      if (this.swiperInstance && this.isSliderReady) {
+        this.swiperInstance.slidePrev();
+      }
+    },
 
-    return {
-      swiperInstance,
-    };
-  },
-  methods:{
-    ...mapActions(testimonials_store, [
-      "fetch_testimonials",
-    ])
-  },  
-  created: async function () {
-    await this.fetch_testimonials();
-    // console.log("Testimonials:", this.testimonials);
+    // Reinitialize if needed
+    forceReinit() {
+      this.cleanupSlider();
+      this.initRetries = 0;
+      setTimeout(() => this.initSlider(), 300);
+    },
   },
   computed: {
     ...mapState(testimonials_store, ["testimonials"]),
   },
+  watch: {
+    testimonials: {
+      handler(newVal, oldVal) {
+        // Only reinitialize if we now have data and didn't before
+        if (newVal && newVal.length > 0 && (!oldVal || oldVal.length === 0)) {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              if (!this.isSliderReady) {
+                this.initSlider();
+              }
+            }, 600);
+          });
+        }
+      },
+      deep: true,
+      immediate: false,
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* Complete isolation for testimonial component */
+.testimonial-isolation-wrapper {
+  /* Create a new stacking context */
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+
+  /* Prevent external interference */
+  * {
+    pointer-events: auto !important;
+  }
+}
+
+.testimonial-slider-isolated {
+  /* Ensure slider stability */
+  position: relative !important;
+  overflow: hidden !important;
+
+  .swiper-wrapper {
+    position: relative !important;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  }
+
+  .swiper-slide {
+    flex-shrink: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Isolate navigation controls */
+.testimonial-prev-btn,
+.testimonial-next-btn {
+  position: relative !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  i {
+    font-size: 16px !important;
+    color: #333 !important;
+  }
+}
+
+/* Isolate pagination */
+.testimonial-pagination {
+  position: relative !important;
+  z-index: 5 !important;
+  margin: 20px 0 !important;
+
+  .swiper-pagination-progressbar {
+    background: rgba(0, 0, 0, 0.2) !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+
+    .swiper-pagination-progressbar-fill {
+      background: #007bff !important;
+      border-radius: 2px !important;
+    }
+  }
+}
+
+/* Prevent external filter interference */
+.testi-card-area-2 {
+  /* Reset any filter effects that might be applied globally */
+  filter: none !important;
+
+  /* Ensure proper layout */
+  .container {
+    position: relative !important;
+  }
+
+  .testi-card-slide {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
+
+/* Force override any external active states */
+.testimonial-isolation-wrapper .active,
+.testimonial-isolation-wrapper .tab-btn,
+.testimonial-isolation-wrapper [data-filter] {
+  /* Prevent external CSS from affecting this component */
+  all: unset !important;
+  display: initial !important;
+  position: initial !important;
+}
+</style>

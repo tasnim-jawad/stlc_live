@@ -14,6 +14,7 @@ export const store = defineStore("blog_main_store", {
     blog_categories: [],
     random_blogs: [],
     single_blog: null,
+    searched_blogs: [],
     loading: false,
     error: null,
   }),
@@ -123,6 +124,36 @@ export const store = defineStore("blog_main_store", {
         const response = await axios.get(`blogs/${slug}`);
         this.single_blog = response?.data?.data;
         console.log("single blog", this.single_blog);
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async search_blogs(searchTerm) {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const params = {
+          search: searchTerm,
+          limit: 100,
+          fields:  ['title', 'slug', 'created_at', 'writer'],
+        };
+
+        
+
+        const response = await axios.get("/blogs", { params });
+        console.log("clicked frof s", response.data);
+
+        let result = response?.data?.data;
+
+        
+
+        this.searched_blogs = result;
+        console.log("searched blogs", this.searched_blogs);
+        
       } catch (error) {
         this.error = error;
       } finally {

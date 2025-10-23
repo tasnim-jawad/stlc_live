@@ -10,16 +10,15 @@ export const store = defineStore("location_store", {
   }),
 
   actions: {
-  
     async fetch_addresses() {
       this.loading = true;
       this.error = null;
       try {
-        const res = await axios.get("contact-addresses", {
+        const res = await axios.get("contacts", {
           params: {
             get_latest: 1,
             latest_limit: 3,
-          }
+          },
         });
         this.addresses = res.data;
       } catch (error) {
@@ -29,11 +28,14 @@ export const store = defineStore("location_store", {
       }
     },
     firstAddressMapLink() {
-      if (this.addresses?.data && Array.isArray(this.addresses.data) && this.addresses.data.length > 0) {
-        return this.addresses.data[0].map_link || '';
+      if (
+        this.addresses?.data &&
+        Array.isArray(this.addresses.data) &&
+        this.addresses.data.length > 0
+      ) {
+        return this.addresses.data[0].map_link || "";
       }
-      return '';
+      return "";
     },
-
   },
 });

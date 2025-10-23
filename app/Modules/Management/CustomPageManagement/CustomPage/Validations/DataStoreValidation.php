@@ -45,8 +45,24 @@ class DataStoreValidation extends FormRequest
             'title' => 'required | sometimes',
             'description' => 'required | sometimes',
             'page_permalink' => 'required | sometimes',
-            'banner_image' => 'required | sometimes',
+            'banner_image' => 'required|sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'banner_image.required' => 'The banner image is required.',
+            'banner_image.image' => 'The banner image must be an image file.',
+            'banner_image.mimes' => 'The banner image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'banner_image.max' => 'The banner image must not be greater than 2MB.',
+            'banner_image.uploaded' => 'The banner image must not be greater than 2MB.',
         ];
     }
 }

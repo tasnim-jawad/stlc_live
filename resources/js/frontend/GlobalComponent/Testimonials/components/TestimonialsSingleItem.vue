@@ -14,12 +14,28 @@
       </div>
       <div class="bottom-wrap">
         <div class="content">
-          <h3 class="box-title">{{ testimonial?.name?.length > 12 ? testimonial?.name?.slice(0, 12) + '...' : testimonial?.name }}</h3>
-          <p class="text">{{ testimonial?.designation?.length > 15 ? testimonial?.designation?.slice(0, 15) + '...' : testimonial?.designation }}</p>
+          <h3 class="box-title">
+            {{
+              testimonial?.name?.length > 12
+                ? testimonial?.name?.slice(0, 12) + "..."
+                : testimonial?.name
+            }}
+          </h3>
+          <p class="text">
+            {{
+              testimonial?.designation?.length > 15
+                ? testimonial?.designation?.slice(0, 15) + "..."
+                : testimonial?.designation
+            }}
+          </p>
         </div>
         <div class="team-img">
           <img
-            :src="testimonial?.image ? '/' + testimonial?.image : '/uploads/default_man.jpeg'"
+            :src="
+              testimonial?.image
+                ? '/' + testimonial?.image
+                : '/uploads/default_man.jpeg'
+            "
             alt="Team"
           />
           <!-- <div class="box-review">
@@ -34,12 +50,12 @@
 
 <script>
 export default {
-    props: {
-        testimonial: {
-        type: Object,
-        required: true,
-        },
+  props: {
+    testimonial: {
+      type: Object,
+      required: true,
     },
+  },
 };
 </script>
 

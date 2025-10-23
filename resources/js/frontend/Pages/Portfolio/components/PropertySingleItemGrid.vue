@@ -3,120 +3,147 @@
     class="col-xl-4 col-lg-6 col-md-6 fadeinup wow animated"
     style="visibility: visible; animation-name: fadeinup"
   >
-    <div class="popular-list-1 grid-style">
-      <div class="thumb-wrapper">
-        <div
-          class="th-slider h-100 swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
-          data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
-          ref="sliderRef"
-        >
+    <div
+      class="popular-list-1 grid-style"
+      :class="{ 'skeleton-property-grid': isLoading }"
+    >
+      <!-- Skeleton State -->
+      <template v-if="isLoading">
+        <div class="thumb-wrapper">
+          <div class="skeleton-element skeleton-property-image"></div>
+        </div>
+        <div class="property-content">
+          <div class="media-body">
+            <div class="skeleton-element skeleton-title"></div>
+            <div class="skeleton-element skeleton-location"></div>
+            <div class="skeleton-element skeleton-price"></div>
+            <div class="skeleton-element skeleton-button"></div>
+          </div>
+        </div>
+      </template>
+
+      <!-- Actual Content -->
+      <template v-else>
+        <div class="thumb-wrapper">
           <div
-            class="swiper-wrapper h-100"
-            id="swiper-wrapper-a3733fa910d9a109a"
-            aria-live="polite"
-            style="transition-duration: 0ms; transition-delay: 0ms; height: 0px"
+            class="th-slider h-100 swiper-fade swiper-initialized swiper-horizontal swiper-autoheight swiper-watch-progress"
+            data-slider-options='{"loop":false, "autoplay": false,"autoHeight": true, "effect":"fade"}'
+            ref="sliderRef"
           >
             <div
-              class="swiper-slide h-100"
-              v-for="(image, index) in property?.banner_image || images"
-              :key="index"
+              class="swiper-wrapper h-100"
+              id="swiper-wrapper-a3733fa910d9a109a"
+              aria-live="polite"
+              style="
+                transition-duration: 0ms;
+                transition-delay: 0ms;
+                height: 0px;
+              "
             >
-              <a class="popular-popup-image" :href="image"
-                ><img :src="image" alt="Image"
-              /></a>
+              <div
+                class="swiper-slide h-100"
+                v-for="(image, index) in property?.banner_image || images"
+                :key="index"
+              >
+                <a class="popular-popup-image" :href="image"
+                  ><img :src="image" alt="Image"
+                /></a>
+              </div>
             </div>
+            <div class="icon-wrap">
+              <button
+                class="slider-arrow slider-prev"
+                tabindex="0"
+                aria-label="Previous slide"
+                aria-controls="swiper-wrapper-a3733fa910d9a109a"
+                aria-disabled="false"
+              >
+                <i class="fa fa-arrow-left"></i>
+              </button>
+              <button
+                class="slider-arrow slider-next"
+                tabindex="0"
+                aria-label="Next slide"
+                aria-controls="swiper-wrapper-a3733fa910d9a109a"
+                aria-disabled="false"
+              >
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+            <span
+              class="swiper-notification"
+              aria-live="assertive"
+              aria-atomic="true"
+            ></span>
           </div>
-          <div class="icon-wrap">
-            <button
-              class="slider-arrow slider-prev"
-              tabindex="0"
-              aria-label="Previous slide"
-              aria-controls="swiper-wrapper-a3733fa910d9a109a"
-              aria-disabled="false"
-            >
-              <i class="fa fa-arrow-left"></i>
-            </button>
-            <button
-              class="slider-arrow slider-next"
-              tabindex="0"
-              aria-label="Next slide"
-              aria-controls="swiper-wrapper-a3733fa910d9a109a"
-              aria-disabled="false"
-            >
-              <i class="fa fa-arrow-right"></i>
-            </button>
-          </div>
-          <span
-            class="swiper-notification"
-            aria-live="assertive"
-            aria-atomic="true"
-          ></span>
-        </div>
-        <!-- <div class="actions">
+          <!-- <div class="actions">
           <a href="wishlist.html" class="icon-btn"
             ><i class="fas fa-heart"></i
           ></a>
         </div> -->
-        <div class="actions-style-2-wrapper">
-          <div class="actions style-2">
-            
-            <a href="#" class="icon-btn" @click.prevent="openImageGallery"
-              ><span class="action-text">View all img</span>
-              <i class="fa-solid fa-camera"></i
-            ></a>
+          <div class="actions-style-2-wrapper">
+            <div class="actions style-2">
+              <a href="#" class="icon-btn" @click.prevent="openImageGallery"
+                ><span class="action-text">View all img</span>
+                <i class="fa-solid fa-camera"></i
+              ></a>
+            </div>
+          </div>
+          <div class="popular-badge">
+            <img src="assets/frontend/img/icon/sell_rent_icon.svg" alt="icon" />
+            <p>
+              {{
+                property?.property_status == "sale" ? "For Sale" : "For Rent"
+              }}
+            </p>
           </div>
         </div>
-        <div class="popular-badge">
-          <img src="assets/frontend/img/icon/sell_rent_icon.svg" alt="icon" />
-          <p>
-            {{ property?.property_status == "sale" ? "For Sale" : "For Rent" }}
-          </p>
-        </div>
-      </div>
-      <div class="property-content">
-        <div class="media-body">
-          <h3 class="box-title">
-            <Link
-              :href="`/portfolio/property-details?slug=${property?.slug}`"
-              >{{ property?.property_name }}</Link
+        <div class="property-content">
+          <div class="media-body">
+            <h3 class="box-title">
+              <Link
+                :href="`/portfolio/property-details?slug=${property?.slug}`"
+                >{{
+                  property?.property_name?.length > 40
+                    ? property?.property_name?.substring(0, 40) + ".."
+                    : property?.property_name
+                }}</Link
+              >
+            </h3>
+            <div class="box-text">
+              <div class="icon">
+                <img
+                  src="assets/frontend/img/icon/popular-location.svg"
+                  alt="icon"
+                />
+              </div>
+              {{ truncateAddress(property?.property_address) }}
+            </div>
+          </div>
+          <ul class="property-featured">
+            <li
+              v-for="(feature, index) in (
+                property?.facts_and_features || []
+              ).slice(0, 3)"
+              :key="index"
             >
-          </h3>
-          <div class="box-text">
-            <div class="icon">
-              <img
-                src="assets/frontend/img/icon/popular-location.svg"
-                alt="icon"
-              />
-            </div>
-            {{
-              property?.property_address ||
-              "298 South Goran ,Khilgaon ,Dhaka-1219"
-            }}
+              <div class="icon mr-1">
+                <!-- <img src="/assets/frontend/img/icon/bed.svg" alt="icon" /> -->
+                <span><i :class="feature?.icon"></i></span>
+              </div>
+                {{ feature?.title?.length > 8 ? feature?.title?.substring(0, 8) + ".." : feature?.title }}
+            </li>
+          </ul>
+          <div class="property-bottom">
+            <h6 class="box-title">৳ {{ property?.price?.toLocaleString() }}</h6>
+            <Link
+              class="th-btn sm style3 pill"
+              :href="`/portfolio/property-details?slug=${property?.slug}`"
+              >View More</Link
+            >
           </div>
         </div>
-        <ul class="property-featured">
-          <li
-            v-for="(feature, index) in (
-              property?.facts_and_features || []
-            ).slice(0, 3)"
-            :key="index"
-          >
-            <div class="icon mr-1">
-              <!-- <img src="/assets/frontend/img/icon/bed.svg" alt="icon" /> -->
-              <span><i :class="feature?.icon"></i></span>
-            </div>
-            {{ feature?.title }}
-          </li>
-        </ul>
-        <div class="property-bottom">
-          <h6 class="box-title">৳ {{ property?.price?.toLocaleString() }}</h6>
-          <Link
-            class="th-btn sm style3 pill"
-            :href="`/portfolio/property-details?slug=${property?.slug}`"
-            >View More</Link
-          >
-        </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -128,6 +155,10 @@ export default {
       type: Object,
       required: true,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -135,22 +166,45 @@ export default {
         "assets/frontend/img/popular/popular-1-1.jpg",
         "assets/frontend/img/popular/popular-1-2.jpg",
       ],
+      swiperInstance: null,
     };
   },
   methods: {
+    truncateAddress(address) {
+      const defaultAddress = "298 South Goran ,Khilgaon ,Dhaka-1219";
+      const fullAddress = address || defaultAddress;
+      return fullAddress.length > 50
+        ? fullAddress.substring(0, 50) + ".."
+        : fullAddress;
+    },
     initializeSlider() {
       const sliderElement = this.$refs.sliderRef;
-      if (!sliderElement || sliderElement.swiper) return;
+      if (!sliderElement) return;
+
+      // Destroy existing instance if it exists
+      if (sliderElement.swiper) {
+        sliderElement.swiper.destroy(true, true);
+      }
+
       if (!window.Swiper) {
         setTimeout(() => this.initializeSlider(), 200);
         return;
       }
+
+      // Wait for element to be visible
+      if (sliderElement.offsetParent === null) {
+        setTimeout(() => this.initializeSlider(), 200);
+        return;
+      }
+
       try {
-        new window.Swiper(sliderElement, {
+        this.swiperInstance = new window.Swiper(sliderElement, {
           loop: false,
           autoplay: false,
           autoHeight: true,
           effect: "fade",
+          observer: true,
+          observeParents: true,
           navigation: {
             nextEl: sliderElement.querySelector(".slider-next"),
             prevEl: sliderElement.querySelector(".slider-prev"),
@@ -194,8 +248,30 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      setTimeout(() => this.initializeSlider(), 100);
+      setTimeout(() => this.initializeSlider(), 300);
     });
+
+    // Listen for tab visibility changes
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.swiperInstance) {
+          setTimeout(() => this.initializeSlider(), 100);
+        }
+      });
+    });
+
+    if (this.$el) {
+      observer.observe(this.$el);
+      this._intersectionObserver = observer;
+    }
+  },
+  beforeUnmount() {
+    if (this._intersectionObserver) {
+      this._intersectionObserver.disconnect();
+    }
+    if (this.swiperInstance) {
+      this.swiperInstance.destroy(true, true);
+    }
   },
 };
 </script>
@@ -205,5 +281,57 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Skeleton Styles for Property Grid */
+.skeleton-property-grid {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-element {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-property-image {
+  height: 250px;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 80%;
+  margin-bottom: 12px;
+}
+
+.skeleton-location {
+  height: 16px;
+  width: 70%;
+  margin-bottom: 8px;
+}
+
+.skeleton-price {
+  height: 20px;
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.skeleton-button {
+  height: 36px;
+  width: 90px;
+  border-radius: 20px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 </style>

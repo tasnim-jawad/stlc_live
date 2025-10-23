@@ -27,7 +27,6 @@ class DataStoreValidation extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->validateError($validator->errors()));
         if ($this->wantsJson() || $this->ajax()) {
             throw new HttpResponseException($this->validateError($validator->errors()));
         }
@@ -46,9 +45,25 @@ class DataStoreValidation extends FormRequest
             'company' => 'required | sometimes',
             'company_location' => 'required | sometimes',
             'designation' => 'required | sometimes',
-            'image' => 'required | sometimes',
+            'image' => 'sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'feedback' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'image.required' => 'The image is required.',
+            'image.image' => 'The image must be an image file.',
+            'image.mimes' => 'The image must be a file of type: jpeg, jpg, png, gif, webp.',
+            'image.max' => 'The image must not be greater than 2MB.',
+            'image.uploaded' => 'The image must not be greater than 2MB.',
         ];
     }
 }

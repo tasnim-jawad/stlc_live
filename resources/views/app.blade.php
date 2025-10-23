@@ -38,7 +38,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="/assets/frontend/css/app.min.css" />
     <link rel="stylesheet" href="/assets/frontend/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="/assets/frontend/css/style.css" />
+    <link rel="stylesheet" href="/assets/frontend/css/style.css?v={{ rand(1, 1000) }}" />
 
     @inertiaHead
 

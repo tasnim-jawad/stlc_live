@@ -1,7 +1,7 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
@@ -16,18 +16,24 @@
   <section class="team-area-1 space">
     <div class="container">
       <div class="row gy-30 justify-content-center">
-        <template v-for="member in team.data" :key="`team-member-${member.id}`">
-          <team-single-item :member="member" />
-        </template>
-        <div class="col-xxl-12">
-          <Pagination
-            :currentPage="team.current_page || 1"
-            :totalPages="team.last_page || 1"
-            @prev="goToPage(team.current_page - 1)"
-            @next="goToPage(team.current_page + 1)"
-            @change="goToPage"
+        <!-- Skeleton loading state -->
+        <template v-if="loading && (!team.data || team.data.length === 0)">
+          <team-single-item
+            v-for="n in 8"
+            :key="`skeleton-${n}`"
+            :isLoading="true"
           />
-        </div>
+        </template>
+
+        <!-- Actual team members -->
+        <template v-else>
+          <team-single-item
+            v-for="member in team.data"
+            :key="`team-member-${member.id}`"
+            :member="member"
+            :isLoading="false"
+          />
+        </template>
       </div>
     </div>
   </section>
@@ -47,6 +53,7 @@ export default {
     Pagination,
   },
   created: function () {
+    console.log("Team page created, fetching team data...");
     this.fetch_team({ page: 1 });
   },
   methods: {
@@ -58,7 +65,15 @@ export default {
     },
   },
   computed: {
-    ...mapState(team_store, ["team"]),
+    ...mapState(team_store, ["team", "loading", "error"]),
+  },
+  watch: {
+    loading(newVal, oldVal) {
+      console.log("Team loading state changed from", oldVal, "to", newVal);
+    },
+    "team.data"(newVal, oldVal) {
+      console.log("Team data changed:", newVal?.length || 0, "members");
+    },
   },
 };
 </script>

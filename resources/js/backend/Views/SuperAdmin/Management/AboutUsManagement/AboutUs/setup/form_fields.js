@@ -52,6 +52,7 @@ export default [
     label: "Enter your images (5 images for design purpose)",
     type: "file",
     multiple: "true",
+    accept: "image/*",
     images_list: [],
   },
 
@@ -82,7 +83,7 @@ export default [
   {
     name: "description",
     label: "Enter your description",
-    type: "textarea",
+    type: "texteditor",
     value: "",
     row_col_class: "col-md-12",
   },

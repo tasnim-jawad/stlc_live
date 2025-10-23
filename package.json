@@ -5,13 +5,15 @@
     "dev": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch --sourcemap",
-    "serve": "php artisan serve --host 0.0.0.0 --port 8007",
+    "serve": "php artisan serve",
     "scss": "npx sass public/frontend/assets/scss/appstyle.scss public/frontend/assets/css/appstyle.css -w",
     "reload": "php artisan db:wipe && php artisan migrate && php artisan migrate --path=app/Modules/* && php artisan migrate --path=app/Modules/*/* && php artisan migrate --path=app/Modules/*/*/*  && php artisan migrate --path=app/Modules/*/*/*/*  && php artisan db:seed && php artisan passport:install",
     "migrate": "php artisan migrate --path=app/Modules/*/*/*",
-    "deploy:track": "node .deploy_tools/tracker.js",
+    "track": "node .deploy_tools/tracker.js",
     "deploy:project": "bash .deploy_tools/deploy_to_vps.sh",
-    "deploy:files": "bash .deploy_tools/deploy_to_vps_via_file_tracking.sh"
+    "deploy:files": "bash .deploy_tools/deploy_to_vps_via_file_tracking.sh",
+    "deploy:fix-404": "ssh -i $HOME/.ssh/id_rsa root@161.248.201.157 'cd /www/wwwroot/mydictionary.techparkit.info && bash .deploy_tools/fix_404.sh'",
+    "deploy:fix-permissions": "ssh -i $HOME/.ssh/id_rsa root@161.248.201.157 'cd /www/wwwroot/mydictionary.techparkit.info && chown -R www:www . && chmod -R 755 . && chmod -R 775 storage bootstrap/cache && echo \"✅ Permissions fixed!\"'"
   },
   "devDependencies": {
     "@popperjs/core": "^2.11.6",
@@ -36,6 +38,7 @@
     "owl.carousel": "^2.3.4",
     "pinia": "^2.1.7",
     "sweetalert2": "^11.14.4",
+    "swiper": "^12.0.2",
     "vue-marquee-text-component": "^2.0.1",
     "vue-router": "^4.2.5",
     "vue3-carousel": "^0.3.3",

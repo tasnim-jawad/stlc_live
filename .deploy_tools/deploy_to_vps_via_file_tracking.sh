@@ -3,7 +3,7 @@
 # Config
 VPS_USER="root"
 VPS_IP="161.248.201.157"
-VPS_DEST="/www/wwwroot/starlit.techparkit.org"
+VPS_DEST="/www/wwwroot/stlc.techparkit.info"
 ZIP_FILE="app.zip"
 IGNORE_FILE=".deploy_tools/.zip_ignore"
 SSH_KEY="$HOME/.ssh/id_rsa" # Change if different
@@ -27,10 +27,6 @@ if [ ! -f "$TMP_LIST" ]; then
 fi
 
 echo "📦 Uploading modified files via rsync..."
-# Always upload the deploy_setup_commands.sh script
-rsync -avz .deploy_tools/deploy_setup_commands.sh -e "ssh -i $SSH_KEY" "$VPS_USER@$VPS_IP:$VPS_DEST/.deploy_tools/"
-
-# Upload modified files via rsync
 rsync -avz --files-from="$TMP_LIST" ./ -e "ssh -i $SSH_KEY" "$VPS_USER@$VPS_IP:$VPS_DEST"
 
 rm "$TMP_LIST"

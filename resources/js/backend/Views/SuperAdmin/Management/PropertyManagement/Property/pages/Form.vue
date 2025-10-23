@@ -104,7 +104,7 @@
                           :key="i"
                           :value="icon.class"
                         >
-                          {{ icon.title }}
+                          {{ icon.title }} <i :class="icon.class"></i>
                         </option>
                       </select>
                       <div

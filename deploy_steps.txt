@@ -1,0 +1,18 @@
+
+deploy_to_vps_via_file_tracking.sh
+deploy_to_vps.sh
+## VPS_DEST er path change kore project er directory dite hobe
+
+## for the first time deploy 
+    1/ env change kore live er ta dite hove 
+    2/ php server and node server bondho kore dite hobe .
+    3/ npm run build korte hobe .
+    4/ npm run deploy:project dite hobe.
+ 
+
+## for the second time :
+    1/ kaj er shurute npm run serve, npm run dev, npm run track 
+    1/ local -e env te kaj korle obossoy live er ta dite hove 
+    2/ php server and node server bondho kore dite hobe .
+    3/ npm run build korte hobe .
+    4/ npm run deploy:files dite hobe.

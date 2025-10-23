@@ -11,12 +11,13 @@ export const store = defineStore("service_main_store", {
       total: 0,
       per_page: 6,
     },
+    single_service: null,
     loading: false,
     error: null,
   }),
 
   actions: {
-    async fetch_services({  page = 1 } = {}) {
+    async fetch_services({ page = 1 } = {}) {
       this.loading = true;
       this.error = null;
 
@@ -26,10 +27,10 @@ export const store = defineStore("service_main_store", {
           limit: 9,
         };
 
-        const response = await axios.get("our-services", { params });
-        console.log('clicked',response.data);
+        const response = await axios.get("our-services?get_all=true");
+        console.log("clicked", response.data);
 
-        let result = response?.data?.data ;
+        let result = response?.data?.data;
         if (!result.data) {
           // If data is not present, fallback to array
           result = {
@@ -47,6 +48,19 @@ export const store = defineStore("service_main_store", {
         this.loading = false;
       }
     },
+    async fetch_single_service(slug) {
+      this.loading = true;
+      this.error = null;
 
+      try {
+        const response = await axios.get(`our-services/${slug}`);
+        this.single_service = response?.data?.data;
+        console.log("single service", this.single_service);
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 });

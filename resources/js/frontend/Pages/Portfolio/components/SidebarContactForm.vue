@@ -11,7 +11,6 @@
             placeholder="Your Name"
             name="name"
             v-model="form.name"
-            required=""
           />
         </div>
         <div class="form-group">
@@ -22,7 +21,6 @@
             placeholder="Your Email"
             name="email"
             v-model="form.email"
-            required=""
           />
         </div>
         <div class="form-group">
@@ -33,7 +31,6 @@
             placeholder="Your Phone"
             name="phone_number"
             v-model="form.phone_number"
-            required=""
           />
         </div>
         <div class="form-group mb-4">
@@ -118,9 +115,6 @@ export default {
         const response = await axios.post("/contacts/store", this.form);
 
         // Show success message using SweetAlert
-        let successMsg =
-          response.data?.message || "Your message has been sent successfully!";
-        window.s_alert(successMsg, "success");
 
         // Also set the success message for template display
         this.successMessage = successMsg;
@@ -148,7 +142,6 @@ export default {
 
           // Show validation errors using SweetAlert
           let errorMessages = Object.values(this.errors).flat().join("<br>");
-          window.s_warning(errorMessages);
         } else {
           this.errorMessage = "An error occurred. Please try again.";
           window.s_error("An error occurred. Please try again.");

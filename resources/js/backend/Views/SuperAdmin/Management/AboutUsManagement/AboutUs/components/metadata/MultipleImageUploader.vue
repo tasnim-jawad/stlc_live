@@ -17,20 +17,19 @@
       />
 
       <div class="uploaded_image_preview my-2 d-flex gap-1 flex-wrap">
-        <!-- {{ component_images }} -->
-        <template v-for="(image, index) in component_images" :key="image">
-          <div class="position-relative my-1">
+        <template v-for="(image, index) in component_images" :key="index">
+          <div class="position-relative my-1" v-if="image">
             <img
-              :src="image.url ? image.url : image"
+              :src="getImageUrl(image)"
               :class="image != '' ? 'border' : ''"
               style="width: 200px; height: 80px; object-fit: contain"
               alt="image"
-              target="_black"
+              target="_blank"
               class="mx-1"
             />
             <button
-              class="btn btn-outline-warning btn-roun btn-sm"
-              :class="`id-${image.id} index-${index}`"
+              class="btn btn-outline-warning btn-round btn-sm"
+              :class="`index-${index}`"
               style="position: absolute; top: 3px; right: 7px"
               @click.prevent="remove({ field: name, index: index })"
             >
@@ -72,21 +71,39 @@ export default {
     value: null,
   }),
   watch: {
-    images: function (v) {
-      // console.log(v);
-      this.component_images = this.images;
-      if (!this.multiple) {
-        this.value = this.images;
-      }
+    images: {
+      handler: function (v) {
+        console.log("Images prop changed:", v);
+        this.component_images = Array.isArray(v) ? [...v] : [];
+        this.value = v;
+      },
+      immediate: true,
+      deep: true,
     },
   },
   created() {
+    this.component_images = Array.isArray(this.images) ? [...this.images] : [];
     this.value = this.images;
-    if (this.multiple) {
-      this.component_images = this.images;
-    }
   },
   methods: {
+    getImageUrl(image) {
+      // Handle different image formats
+      if (typeof image === "string") {
+        // If it's a base64 string, return as is
+        if (image.startsWith("data:")) {
+          return image;
+        }
+        // If it's a path, construct the full URL
+        return `/${image}`;
+      }
+      // If it's an object with url property
+      if (image && image.url) {
+        return image.url;
+      }
+      // Fallback
+      return image;
+    },
+
     preview: function () {
       let that = this;
       that.component_images = [...that.component_images];
@@ -106,25 +123,42 @@ export default {
       if (!confirmed) return;
 
       const parsedData = { field: this.name, index: data.index };
-      if (this.item.slug) {
-        const response = await axios.post(
-          `properties/proprerty-image-delete/${
-            this.item.slug
-          }?data=${JSON.stringify(parsedData)}`
-        );
-        window.s_alert(response.data.message);
+
+      // Check if item exists and has slug for server-side deletion
+      if (this.item && this.item.slug) {
+        try {
+          const response = await axios.post(
+            `about-uses/delete-multiple-images/${
+              this.item.slug
+            }?data=${JSON.stringify(parsedData)}`
+          );
+          if (response.data && response.data.message) {
+            window.s_alert(response.data.message);
+          }
+        } catch (error) {
+          console.error("Error deleting image:", error);
+        }
       }
 
+      // Remove from component_images array
       this.component_images.splice(data.index, 1);
-      const dt = new DataTransfer();
-      const input = this.$refs.input_files;
 
-      [...input.files].forEach((file, idx) => {
-        if (idx !== data.index) {
-          dt.items.add(file);
-        }
-      });
-      input.files = dt.files; // Assign the new FileList
+      // Update file input if files exist
+      if (
+        this.$refs.input_files &&
+        this.$refs.input_files.files &&
+        this.$refs.input_files.files.length > 0
+      ) {
+        const dt = new DataTransfer();
+        const input = this.$refs.input_files;
+
+        [...input.files].forEach((file, idx) => {
+          if (idx !== data.index) {
+            dt.items.add(file);
+          }
+        });
+        input.files = dt.files; // Assign the new FileList
+      }
     },
   },
   computed: {

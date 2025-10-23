@@ -58,6 +58,65 @@
 
       <side-bar-drop-down-menus
         :icon="`fa fa-plus`"
+        :menu_title="`Page Content`"
+        :menus="[
+          {
+            route_name: `AllBanner`,
+            title: `Banner`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllAboutUs`,
+            title: `About Us`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllAtAGlance`,
+            title: `At A Glance`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllOurTeam`,
+            title: `Our Team`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+
+          {
+            route_name: `AllOurService`,
+            title: `Our Service`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllTestimonial`,
+            title: `Testimonial`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+
+          {
+            route_name: `AllNewsletter`,
+            title: `Newsletter`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllContact`,
+            title: `Contact`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllWhyChooseUs`,
+            title: `Why Choose Us`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AllCustomPage`,
+            title: `Custom Page`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+        ]"
+      />
+
+      <side-bar-drop-down-menus
+        :icon="`fa fa-plus`"
         :menu_title="`Blog Management`"
         :menus="[
           {
@@ -115,64 +174,24 @@
           },
         ]"
       />
-      <side-bar-single-menu
+
+      <side-bar-drop-down-menus
         :icon="`fa fa-plus`"
-        :menu_title="`Banner`"
-        :route_name="`AllBanner`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`AboutUs`"
-        :route_name="`AllAboutUs`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`AtAGlance`"
-        :route_name="`AllAtAGlance`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`OurTeam`"
-        :route_name="`AllOurTeam`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`TodaySells`"
-        :route_name="`AllTodaySells`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`OurService`"
-        :route_name="`AllOurService`"
+        :menu_title="`Website Settings`"
+        :menus="[
+          {
+            route_name: `AdminSiteSettings`,
+            title: `Website Settings`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+          {
+            route_name: `AdminProfileSettings`,
+            title: `Admin Profile Settings`,
+            icon: `zmdi zmdi-dot-circle-alt`,
+          },
+        ]"
       />
 
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`Testimonial`"
-        :route_name="`AllTestimonial`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`CustomPage`"
-        :route_name="`AllCustomPage`"
-      />
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`Newsletter`"
-        :route_name="`AllNewsletter`"
-      />
-
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`Contact`"
-        :route_name="`AllContact`"
-      />
-
-      <side-bar-single-menu
-        :icon="`fa fa-plus`"
-        :menu_title="`WhyChooseUs`"
-        :route_name="`AllWhyChooseUs`"
-      />
       <!-- <side-bar-single-menu
         :icon="`fa fa-plus`"
         :menu_title="`SectionHeading`"
@@ -228,11 +247,3 @@ export default {
 </script>
 
 <style></style>
-<!-- <side-bar-drop-down-menus :icon="`fa fa-plus`" :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
-    :menu_title="`title Management`" :menus="[
-                {
-                    route_name: `AllUser`,
-                    title: `title`,
-                    icon: `zmdi zmdi-dot-circle-alt`,
-                },
-            ]" /> -->

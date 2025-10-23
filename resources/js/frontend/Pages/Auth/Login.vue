@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="row justify-content-center align-items-center gap-2 py-5">
+    <div class="row justify-content-center align-items-center gap-2 py-5 mt-5">
       <div class="col-md-5">
         <form @submit.prevent="LoginSubmitHandler">
           <h3>Login Here</h3>
@@ -11,6 +11,7 @@
               type="email"
               placeholder="  email"
               name="email"
+              value="superadmin@gmail.com"
             />
           </div>
           <div class="form-group password-icon">
@@ -49,43 +50,13 @@
               <span class="">Loading...</span>
             </template>
           </button>
-          <span>Dont have an account ?</span>
-          <Link href="/register" class="font-size-12 text-primary">
-            Register</Link
-          >
+
           <br />
           <Link href="/forgot-password" class="text-info"
             >Forgot Password ?</Link
           >
         </form>
       </div>
-      <!-- <div class="col-md-5">
-        <div id="userList">
-          <table
-            class="table table-dark table-striped table-hover table-bordered"
-          >
-            <thead class="sticky-top">
-              <tr>
-                <th scope="col">Email</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Super Admin</td>
-                <td>
-                  <button
-                    @click="setPassword('superadmin@gmail.com')"
-                    class="btn btn-outline-info"
-                  >
-                    Login
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div> -->
     </div>
   </Layout>
 </template>

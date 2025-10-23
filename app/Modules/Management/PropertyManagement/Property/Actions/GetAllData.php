@@ -17,7 +17,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['category'];
             $condition = [];
 
             $data = self::$model::query();
@@ -25,35 +25,21 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-                    $q->where('banner_image', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_group_id', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_category_id', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_status', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('date', 'like', '%' . $searchKey . '%');
-
+                    // $q->where('banner_image', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_group_id', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_category_id', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_status', 'like', '%' . $searchKey . '%');
                     $q->orWhere('property_name', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('property_address', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_description', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_detail', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('facts_and_features', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('gallery', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('amenities', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('floor_plan', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('property_video_url', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('map_location_url', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('date', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_description', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_detail', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('facts_and_features', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('gallery', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('amenities', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('floor_plan', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('property_video_url', 'like', '%' . $searchKey . '%');
+                    // $q->orWhere('map_location_url', 'like', '%' . $searchKey . '%');
                 });
             }
 

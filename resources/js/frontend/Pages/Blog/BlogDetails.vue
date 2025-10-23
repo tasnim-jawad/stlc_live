@@ -1,7 +1,8 @@
 <template>
   <div
     class="breadcumb-wrapper"
-    style="background-image: url('/assets/frontend/img/blog/breadcrumb-bg.jpg')"
+    data-bg-src="/assets/frontend/img/common/2.jpeg"
+    style="background-image: url('/assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
@@ -19,7 +20,11 @@
         <div class="col-xxl-8 col-lg-7">
           <div class="th-blog blog-single">
             <div class="blog-img">
-              <img class="w-100" :src="'/' + single_blog?.thumbnail_image" alt="Image" />
+              <img
+                class="w-100"
+                :src="'/' + single_blog?.thumbnail_image"
+                alt="Image"
+              />
             </div>
             <div class="blog-content">
               <div class="blog-meta">
@@ -40,7 +45,7 @@
                 {{ single_blog?.title ?? "N/A" }}
               </h2>
               <hr />
-              <p v-html="single_blog?.description"></p>
+              <div v-html="single_blog?.description"></div>
 
               <div class="share-links clearfix">
                 <div class="row justify-content-between">
@@ -173,4 +178,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+// ol{
+//   padding: 0 !important;
+// }
+</style>

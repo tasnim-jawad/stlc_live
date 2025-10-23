@@ -43,9 +43,24 @@ class DataStoreValidation extends FormRequest
     {
         return [
             'title' => 'required | sometimes',
-            'icon' => 'required | sometimes',
+            'icon' => 'required|sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'number' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'icon.required' => 'The icon is required.',
+            'icon.image' => 'The icon must be an image file.',
+            'icon.mimes' => 'The icon must be a file of type: jpeg, jpg, png, gif, webp.',
+            'icon.max' => 'The icon must not be greater than 2MB.',
         ];
     }
 }

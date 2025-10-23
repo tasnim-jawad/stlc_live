@@ -1,11 +1,11 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">Amazing Gallery</h1>
+        <h1 class="breadcumb-title mt-5">Amazing Gallery sdasd</h1>
         <ul class="breadcumb-menu">
           <li><Link href="/">Home</Link></li>
           <li>Gallery</li>
@@ -38,6 +38,7 @@
               data-wow-delay="0.5s"
             >
               <button
+                v-if="images?.data?.length"
                 data-filter="*"
                 class="th-btn tab-btn active"
                 type="button"

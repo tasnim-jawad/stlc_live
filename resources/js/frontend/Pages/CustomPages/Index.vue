@@ -15,11 +15,36 @@
   </div>
   <section class="th-blog-wrapper blog-details space-top space-extra-bottom">
     <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7">
+          <div class="title-area text-center mb-2">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> {{ custom_page_data?.title }}
+            </p>
+            <h2
+              class="sec-title mb-4 fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              {{ custom_page_data?.title }}
+            </h2>
+            <div
+              class="filter-menu style-2 indicator-active filter-menu-active mt-2 justify-content-center fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.5s"
+            ></div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xxl-12 col-lg-12">
           <div class="th-blog blog-single">
             <div class="blog-content">
-              <p v-html="custom_page_data?.description"></p>
+              <div v-html="custom_page_data?.description"></div>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
     <div
       class="download-3-bg-inner"
       :style="{
-        backgroundImage: `url(/assets/frontend/img/bg/download-bg-3.jpg)`,
+        backgroundImage: `url(/assets/frontend/img/common/3.jpeg)`,
       }"
     >
       <div class="container">
@@ -11,11 +11,11 @@
           <div class="col-lg-5 col-xl-5 col-xxl-6">
             <div class="download-3-left">
               <div class="map-icon-box">
-                <a href="property.html"
+                <Link href="portfolio"
                   ><img
                     src="assets/frontend/img/download/download-3-map.png"
                     alt="img"
-                /></a>
+                /></Link>
               </div>
               <div class="content-box">
                 <img
@@ -35,14 +35,14 @@
                     data-wow-duration="1.5s"
                     data-wow-delay="0.1s"
                   >
-                    <span class="double-line"></span> Get In Touch
+                    <span class="double-line"></span> Contact Us
                   </p>
                   <h2
                     class="sec-title fadeinup wow"
                     data-wow-duration="1.5s"
                     data-wow-delay="0.3s"
                   >
-                    Let’s Talk Your Property Goal
+                    Ready to Build Your Future with Us?
                   </h2>
                 </div>
                 <div class="row">
@@ -187,10 +187,11 @@ export default {
 
         const response = await axios.post("/contacts/store", this.form);
 
+        console.log("Form submission response:", response.data);
+
         // Show success message using SweetAlert
         let successMsg =
           response.data?.message || "Your message has been sent successfully!";
-        window.s_alert(successMsg, "success");
 
         // Also set the success message for template display
         this.successMessage = successMsg;
@@ -209,7 +210,7 @@ export default {
           message: "",
         };
 
-        console.log("Form submitted successfully:", response.data);
+        window.s_alert("Your message has been sent successfully!");
       } catch (error) {
         console.error("Form submission error:", error);
 
@@ -218,7 +219,6 @@ export default {
 
           // Show validation errors using SweetAlert
           let errorMessages = Object.values(this.errors).flat().join("<br>");
-          window.s_warning(errorMessages);
         } else {
           this.errorMessage = "An error occurred. Please try again.";
           window.s_error("An error occurred. Please try again.");

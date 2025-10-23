@@ -1,7 +1,8 @@
 <template>
   <div
     class="breadcumb-wrapper"
-    style="background-image: url('/assets/frontend/img/blog/breadcrumb-bg.jpg')"
+    data-bg-src="/assets/frontend/img/common/2.jpeg"
+    style="background-image: url('/assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
@@ -28,9 +29,11 @@
                 <div class="page-content">
                   <div class="property-meta-wrap mb-55 fadeinup wow">
                     <div class="property-meta">
-                      <Link class="property-tag" :href="`/portfolio?property_category_id=${single_property?.category?.id}`">{{
-                        single_property?.category?.name
-                      }}</Link>
+                      <Link
+                        class="property-tag"
+                        :href="`/portfolio?property_category_id=${single_property?.category?.id}`"
+                        >{{ single_property?.category?.name }}</Link
+                      >
                       <a href="javascript:void(0)"
                         ><i class="fa-solid fa-calendar-days"></i>
                         {{

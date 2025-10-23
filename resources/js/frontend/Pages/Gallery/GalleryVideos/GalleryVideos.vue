@@ -1,7 +1,7 @@
 <template>
   <div
     class="breadcumb-wrapper background-image"
-    style="background-image: url('/assets/frontend/img/bg/breadcrumb-bg.jpg')"
+    style="background-image: url('/assets/frontend/img/common/2.jpeg')"
   >
     <div class="container">
       <div class="breadcumb-content">
@@ -38,6 +38,7 @@
               data-wow-delay="0.5s"
             >
               <button
+                v-if="videos?.data?.length"
                 data-filter="*"
                 class="th-btn tab-btn active"
                 type="button"
@@ -84,7 +85,6 @@ export default {
     this.fetch_videos();
     this.fetch_video_categories();
     console.log("Gallery Videos component created");
-    
   },
   methods: {
     ...mapActions(gallery_store, [

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\AboutUsManagement\AboutUs\Controller;
+
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\GetAllData;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\DestroyData;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\GetSingleData;
@@ -10,6 +11,8 @@ use App\Modules\Management\AboutUsManagement\AboutUs\Actions\UpdateStatus;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\SoftDelete;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\RestoreData;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\ImportData;
+use App\Modules\Management\AboutUsManagement\AboutUs\Actions\DeleteMultipleImages;
+
 use App\Modules\Management\AboutUsManagement\AboutUs\Validations\BulkActionsValidation;
 use App\Modules\Management\AboutUsManagement\AboutUs\Validations\DataStoreValidation;
 use App\Modules\Management\AboutUsManagement\AboutUs\Actions\BulkActions;
@@ -19,7 +22,8 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -42,7 +46,7 @@ class Controller extends ControllersController
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-         public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -74,4 +78,9 @@ class Controller extends ControllersController
         return $data;
     }
 
+    public function DeleteMultipleImages($slug)
+    {
+        $data = DeleteMultipleImages::execute($slug);
+        return $data;
+    }
 }

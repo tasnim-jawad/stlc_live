@@ -1,8 +1,8 @@
 <template>
   <div
     class="breadcumb-wrapper"
-    data-bg-src="assets/frontend/img/bg/breadcrumb-bg.jpg"
-    style="background-image: url('assets/frontend/img/bg/breadcrumb-bg.jpg')"
+   style="background-image: url('assets/frontend/img/common/2.jpeg')"
+    
   >
     <div class="container">
       <div class="breadcumb-content">

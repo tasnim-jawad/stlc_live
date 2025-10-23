@@ -216,4 +216,166 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* Fix bottom thumbnail image sizes */
+.property-thumb-slider {
+  margin-top: 15px;
+
+  .swiper-slide {
+    width: auto !important;
+    flex-shrink: 0;
+  }
+
+  .tab-btn.property-slider-img {
+    width: 120px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 3px solid #e1e5e9;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      border-color: #007bff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Active state for Swiper thumbnails */
+  .swiper-slide-thumb-active .tab-btn.property-slider-img {
+    border-color: #007bff;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transform: translateY(-1px);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      background: #007bff;
+      border-radius: 50%;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &::before {
+      content: "✓";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 1;
+    }
+  }
+}
+
+/* Ensure main slider image proper sizing */
+.property-slider-img.propery-single-slide {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 450px;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+}
+
+/* Slider navigation buttons */
+.slider-arrow {
+  background: rgba(0, 123, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #007bff;
+    transform: scale(1.1);
+  }
+
+  i {
+    font-size: 16px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .property-thumb-slider {
+    .tab-btn.property-slider-img {
+      width: 90px;
+      height: 60px;
+    }
+  }
+
+  .property-slider-img.propery-single-slide {
+    height: 300px;
+    // img {
+    //   height: 100%;
+    // }
+  }
+
+  .slider-arrow {
+    width: 40px;
+    height: 40px;
+
+    i {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .property-thumb-slider {
+    .tab-btn.property-slider-img {
+      width: 70px;
+      height: 50px;
+    }
+  }
+
+  .property-slider-img.propery-single-slide {
+    height: 250px;
+    // img {
+    // }
+  }
+
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    i {
+      font-size: 12px;
+    }
+  }
+}
+</style>

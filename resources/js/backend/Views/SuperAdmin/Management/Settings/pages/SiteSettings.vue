@@ -189,7 +189,7 @@
 
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label"
-                        >Short Intro</label
+                        >Our Slogan</label
                       >
                       <div class="col-lg-9">
                         <textarea
@@ -357,6 +357,20 @@
                     <!-- Facebook -->
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label"
+                        >WhatsApp</label
+                      >
+                      <div class="col-lg-9">
+                        <input
+                          name="whatsapp"
+                          class="form-control"
+                          type="text"
+                          placeholder="https://facebook.com/yourpage"
+                          :value="`${get_setting_value('whatsapp')}`"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label"
                         >Facebook</label
                       >
                       <div class="col-lg-9">
@@ -385,7 +399,7 @@
                       </div>
                     </div>
                     <!-- Instagram -->
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label"
                         >Instagram</label
                       >
@@ -398,7 +412,7 @@
                           :value="`${get_setting_value('instagram')}`"
                         />
                       </div>
-                    </div>
+                    </div> -->
                     <!-- LinkedIn -->
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label"

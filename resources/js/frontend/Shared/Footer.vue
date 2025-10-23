@@ -131,12 +131,14 @@
         <div
           class="row gy-3 justify-content-lg-between justify-content-center align-items-center"
         >
-          <div class="col-lg-7">
+          <div class="col-lg-7"> 
             <p class="copyright-text">
               Copyright © {{ getFirstSettingValueByTitle("copy_right") }}. All
               Rights Reserved .
             </p>
+            <span>Developed by <a target="_blank" href="https://techparkit.info">TechPark</a></span>
           </div>
+          
           <div class="col-auto">
             <div class="footer-default-copy-right">
               <p>Social Media:</p>

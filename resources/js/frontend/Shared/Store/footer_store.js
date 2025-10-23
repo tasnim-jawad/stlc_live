@@ -31,7 +31,6 @@ export const store = defineStore("footer_main_store", {
         this.loading = false;
       }
     },
-   
 
     getSettingValuesByTitle(title) {
       if (
@@ -62,16 +61,15 @@ export const store = defineStore("footer_main_store", {
       return values.length > 0 ? values[0] : "";
     },
 
-
     async fetch_addresses() {
       this.loading = true;
       this.error = null;
       try {
-        const res = await axios.get("contact-addresses", {
+        const res = await axios.get("contacts", {
           params: {
             get_latest: 1,
             latest_limit: 3,
-          }
+          },
         });
         this.addresses = res.data;
       } catch (error) {
@@ -81,10 +79,14 @@ export const store = defineStore("footer_main_store", {
       }
     },
     firstAddressMapLink() {
-      if (this.addresses?.data && Array.isArray(this.addresses.data) && this.addresses.data.length > 0) {
-        return this.addresses.data[0].map_link || '';
+      if (
+        this.addresses?.data &&
+        Array.isArray(this.addresses.data) &&
+        this.addresses.data.length > 0
+      ) {
+        return this.addresses.data[0].map_link || "";
       }
-      return '';
+      return "";
     },
 
     async fetch_images() {
@@ -101,7 +103,9 @@ export const store = defineStore("footer_main_store", {
         let result = response?.data?.data;
         if (!result?.data?.data) {
           // If data is not present, fallback to array
-          this.images = Array.isArray(response.data.data) ? response.data.data : [];
+          this.images = Array.isArray(response.data.data)
+            ? response.data.data
+            : [];
         }
 
         this.images = result;
@@ -111,7 +115,7 @@ export const store = defineStore("footer_main_store", {
         this.loading = false;
       }
     },
-    async fetch_custom_pages(){
+    async fetch_custom_pages() {
       this.loading = true;
       this.error = null;
       try {

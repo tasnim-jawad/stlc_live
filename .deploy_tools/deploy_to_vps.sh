@@ -7,13 +7,22 @@
 # ssh-copy-id root@159.89.172.251
 
 # === Configurations ===
-# === Configurations ===
 VPS_USER="root"
 VPS_IP="161.248.201.157"
-VPS_DEST="/www/wwwroot/starlit.techparkit.org"
+VPS_DEST="/www/wwwroot/stlc.techparkit.info"
 ZIP_FILE="app.zip"
 IGNORE_FILE=".deploy_tools/.zip_ignore"
 SSH_KEY="$HOME/.ssh/id_rsa" # Change if different
+
+# === Step 0: Pre-deployment cleanup ===
+echo "🧹 Step 0: Running pre-deployment cleanup..."
+if [ -f .deploy_tools/pre_deploy_cleanup.sh ]; then
+    bash .deploy_tools/pre_deploy_cleanup.sh
+else
+    echo "⚠️ Pre-cleanup script not found, cleaning manually..."
+    rm -f bootstrap/cache/*.php 2>/dev/null
+fi
+echo
 
 # === Step 1: Create app.zip with .zip_ignore ===
 echo "🔄 Step 1: Creating $ZIP_FILE (ignoring patterns from $IGNORE_FILE)..."
