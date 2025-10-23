@@ -21,7 +21,7 @@
 
   <!-- AboutUs section -->
   <!-- AboutUs section -->
-
+  <ProjectsSlider></ProjectsSlider>
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
 
@@ -62,6 +62,8 @@
   <!-- Service section -->
   <!-- Service section -->
 
+  <ServiceSingleItemLatest />
+
   <!-- PopularProperties section -->
   <!-- PopularProperties section -->
 
@@ -83,6 +85,7 @@ import CircleText from "./components/CircleText.vue";
 import HeroSlider from "./components/HeroSlider.vue";
 import ThumbnailSlider from "./components/ThumbnailSlider.vue";
 import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
+import ProjectsSlider from "../../GlobalComponent/Slider/ProjectsSlider.vue";
 import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
 import PopularProperties from "../../GlobalComponent/PopularProperties/PopularProperties.vue";
 import MissionVisionCore from "../../GlobalComponent/MissionVisionCore/MissionVisionCore.vue";
@@ -90,6 +93,7 @@ import WhyChooseUs from "../../GlobalComponent/WhyChooseUs/WhyChooseUs.vue";
 import Testimonials from "../../GlobalComponent/Testimonials2/Testimonials2.vue";
 import Service from "../../GlobalComponent/Service/Service.vue";
 import ContactForm from "../../GlobalComponent/ContactForm/ContactForm.vue";
+import ServiceSingleItemLatest from "../../GlobalComponent/WhyChooseUs/components/ServiceSingleItemLatest.vue";
 
 export default {
   name: "HomePage",
@@ -105,6 +109,8 @@ export default {
     Service,
     ContactForm,
     ThumbnailSlider,
+    ProjectsSlider,
+    ServiceSingleItemLatest,
   },
 };
 </script>

@@ -232,7 +232,7 @@
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              Discover Our Luxury Property, with Full Amenities
+              {{ about_us?.title }}
             </h2>
             <p
               class="sec-text fadeinup wow"
