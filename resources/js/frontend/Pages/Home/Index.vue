@@ -6,7 +6,6 @@
   <!-- slider section -->
   <!-- slider section -->
 
-
   <!--ThumbnailSlider section -->
   <!--ThumbnailSlider section -->
   <ThumbnailSlider></ThumbnailSlider>
@@ -21,7 +20,7 @@
 
   <!-- AboutUs section -->
   <!-- AboutUs section -->
-  <ProjectsSlider></ProjectsSlider>
+  <!-- <ProjectsSlider></ProjectsSlider> -->
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
 
@@ -62,7 +61,7 @@
   <!-- Service section -->
   <!-- Service section -->
 
-  <ServiceSingleItemLatest />
+  <!-- <ServiceSingleItemLatest /> -->
 
   <!-- PopularProperties section -->
   <!-- PopularProperties section -->
