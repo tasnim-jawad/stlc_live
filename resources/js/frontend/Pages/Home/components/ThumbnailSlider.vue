@@ -1,5 +1,29 @@
 <template>
   <div class="thumbnail-slider-container">
+    <!-- Static Category Blocks - Always Visible -->
+    <div class="category-blocks-wrapper">
+      <div class="category-blocks">
+        <div class="category-block residential">
+          <div class="category-icon">
+            <i class="fa-solid fa-house"></i>
+          </div>
+          <h4>Residential</h4>
+        </div>
+        <div class="category-block commercial">
+          <div class="category-icon">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <h4>Commercial</h4>
+        </div>
+        <div class="category-block landowner">
+          <div class="category-icon">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+          <h4>Landowner</h4>
+        </div>
+      </div>
+    </div>
+
     <swiper
       :modules="modules"
       :slides-per-view="1"
@@ -9,7 +33,6 @@
         clickable: true,
         dynamicBullets: true,
       }"
-      :scrollbar="{ draggable: true, hide: false }"
       :parallax="true"
       :speed="1500"
       effect="fade"
@@ -46,13 +69,14 @@
           <div class="container">
             <div class="row">
               <div class="slide-text">
-                <h3 data-swiper-parallax="100">Luxury Villa</h3>
+                <h3 data-swiper-parallax="100" class="typing-heading">
+                  Luxury Villa
+                </h3>
                 <p data-swiper-parallax="200">
-                  sf property with modern amenities and stunning
-                  fdsf getFirstSetting ValueByTitle modern amenities and stunning
-                  saf dfg property modern amenities and stunning
-                  sagfdsfdsf jgh property with amenities and stunning
-                  architecture
+                  sf property with modern amenities and stunning fdsf
+                  getFirstSetting ValueByTitle modern amenities and stunning saf
+                  dfg property modern amenities and stunning sagfdsfdsf jgh
+                  property with amenities and stunning architecture
                 </p>
                 <button class="th-btn style2 pill" data-swiper-parallax="300">
                   View Details
@@ -74,7 +98,9 @@
           <div class="container">
             <div class="row">
               <div class="slide-text">
-                <h3 data-swiper-parallax="100">Luxury Villa</h3>
+                <h3 data-swiper-parallax="100" class="typing-heading">
+                  Luxury Villa
+                </h3>
                 <p data-swiper-parallax="200">
                   Beautiful property with modern amenities and stunning
                   architecture Beautiful modern amenities and stunning
@@ -256,7 +282,6 @@ import { store as header_store } from "../../../Shared/Store/header_store.js";
 import {
   Navigation,
   Pagination,
-  Scrollbar,
   A11y,
   Parallax,
   Autoplay,
@@ -270,7 +295,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
 
 // Import Swiper styles
@@ -290,15 +314,7 @@ export default {
     return {
       onSwiper,
       onSlideChange,
-      modules: [
-        Navigation,
-        Pagination,
-        Scrollbar,
-        A11y,
-        Parallax,
-        Autoplay,
-        EffectFade,
-      ],
+      modules: [Navigation, Pagination, A11y, Parallax, Autoplay, EffectFade],
     };
   },
 };
@@ -309,6 +325,131 @@ export default {
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+/* Static Category Blocks */
+.category-blocks-wrapper {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+  padding: 0 30px;
+}
+
+.category-blocks {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+
+.category-block {
+  flex: 1;
+  background: rgba(76, 63, 47, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-block:last-child {
+  border-right: none;
+}
+
+.category-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--theme-color), var(--theme-color2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-block:hover {
+  background: rgba(76, 63, 47, 0.95);
+  transform: translateY(-5px);
+}
+
+.category-block:hover::before {
+  transform: scaleX(1);
+}
+
+.category-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-block:hover .category-icon {
+  background: linear-gradient(135deg, var(--theme-color), var(--theme-color2));
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(var(--theme-color-rgb), 0.4);
+}
+
+.category-icon i {
+  font-size: 28px;
+  color: var(--white-color);
+  transition: all 0.3s ease;
+}
+
+.category-block:hover .category-icon i {
+  transform: scale(1.1);
+}
+
+.category-block h4 {
+  color: var(--white-color);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.category-block:hover h4 {
+  color: var(--theme-color);
+  transform: translateY(-2px);
+}
+
+/* Residential specific color */
+.category-block.residential:hover {
+  background: rgba(76, 63, 47, 0.98);
+}
+
+.category-block.residential:hover .category-icon {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+/* Commercial specific color */
+.category-block.commercial:hover .category-icon {
+  background: linear-gradient(135deg, #54a0ff, #00d2d3);
+}
+
+/* Landowner specific color */
+.category-block.landowner:hover .category-icon {
+  background: linear-gradient(135deg, #1dd1a1, #10ac84);
 }
 
 .thumbnail-swiper {
@@ -408,6 +549,51 @@ export default {
   margin-top: -0.2em;
   color: var(--white-color);
   line-height: 1.1;
+  animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+/* Typing heading with overlay animation */
+.typing-heading {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.typing-heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--theme-color), var(--theme-color2));
+  transform: translateY(-100%);
+  z-index: 1;
+}
+
+.swiper-slide-active .typing-heading::before {
+  animation: overlaySlideDown 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.typing-heading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--theme-color);
+  opacity: 0;
+}
+
+.swiper-slide-active .typing-heading::after {
+  animation: typingCursor 0.8s step-end 1.2s 3, fadeOut 0.3s ease 3.6s forwards;
+}
+
+.swiper-slide-active .slide-text h3 {
+  animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
+    typingReveal 1.5s steps(12) 1.2s forwards;
 }
 
 .slide-text p {
@@ -417,6 +603,21 @@ export default {
   font-family: var(--body-font);
   margin: 0 0 18px 0;
   line-height: 1.75;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.swiper-slide-active .slide-text p {
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.slide-text button {
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.swiper-slide-active .slide-text button {
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
 }
 
 .property-details {
@@ -501,39 +702,45 @@ export default {
 
 /* Pagination */
 :deep(.swiper-pagination) {
-  bottom: 20px !important;
+  bottom: 30% !important;
+  top: auto !important;
+  right: 40px !important;
+  left: auto !important;
+  width: auto !important;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 20;
 }
 
 :deep(.swiper-pagination-bullet) {
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0.7;
-  width: 12px;
-  height: 12px;
-  margin: 0 6px !important;
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  width: 14px;
+  height: 14px;
+  margin: 0 !important;
   transition: all 0.3s ease;
-  border-radius: 6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+:deep(.swiper-pagination-bullet:hover) {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.2);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 :deep(.swiper-pagination-bullet-active) {
   opacity: 1;
   background: linear-gradient(135deg, var(--theme-color), var(--theme-color2));
-  transform: scale(1.3);
-  width: 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-/* Scrollbar */
-:deep(.swiper-scrollbar) {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  height: 6px;
-}
-
-:deep(.swiper-scrollbar-drag) {
-  background: linear-gradient(135deg, var(--theme-color), var(--theme-color2));
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+  transform: scale(1.4);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6);
 }
 
 /* Responsive design */
@@ -547,13 +754,47 @@ export default {
     font-size: 60px;
     margin-bottom: 25px;
   }
-  
-
 
   .property-details {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .category-blocks {
+    max-width: 100%;
+  }
+
+  .category-block {
+    padding: 25px 15px;
+  }
+
+  .category-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .category-icon i {
+    font-size: 24px;
+  }
+
+  .category-block h4 {
+    font-size: 16px;
+  }
+
+  :deep(.swiper-pagination) {
+    right: 25px !important;
+    gap: 12px;
+  }
+
+  :deep(.swiper-pagination-bullet) {
+    width: 12px;
+    height: 12px;
+  }
+
+  :deep(.swiper-pagination-bullet-active) {
+    width: 12px;
+    height: 12px;
   }
 }
 
@@ -587,6 +828,43 @@ export default {
   :deep(.swiper-button-prev:after) {
     font-size: 16px;
   }
+
+  .category-blocks {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .category-block {
+    padding: 20px 10px;
+  }
+
+  .category-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .category-icon i {
+    font-size: 20px;
+  }
+
+  .category-block h4 {
+    font-size: 14px;
+  }
+
+  :deep(.swiper-pagination) {
+    right: 20px !important;
+    gap: 10px;
+  }
+
+  :deep(.swiper-pagination-bullet) {
+    width: 11px;
+    height: 11px;
+  }
+
+  :deep(.swiper-pagination-bullet-active) {
+    width: 11px;
+    height: 11px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -613,6 +891,53 @@ export default {
   :deep(.swiper-button-next:after),
   :deep(.swiper-button-prev:after) {
     font-size: 14px;
+  }
+
+  .category-blocks {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .category-block {
+    padding: 15px 10px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .category-block:last-child {
+    border-bottom: none;
+  }
+
+  .category-block::before {
+    height: 3px;
+  }
+
+  .category-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .category-icon i {
+    font-size: 18px;
+  }
+
+  .category-block h4 {
+    font-size: 13px;
+  }
+
+  :deep(.swiper-pagination) {
+    right: 10px !important;
+    gap: 6px;
+  }
+
+  :deep(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+  }
+
+  :deep(.swiper-pagination-bullet-active) {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -652,6 +977,58 @@ export default {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Overlay slide down animation */
+@keyframes overlaySlideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Typing reveal animation */
+@keyframes typingReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Typing cursor blink */
+@keyframes typingCursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Fade out cursor */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
   }
 }
 </style>

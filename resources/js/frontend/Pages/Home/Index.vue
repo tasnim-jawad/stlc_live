@@ -21,6 +21,7 @@
   <!-- AboutUs section -->
   <!-- AboutUs section -->
   <!-- <ProjectsSlider></ProjectsSlider> -->
+  <PropertySlider></PropertySlider>
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
 
@@ -87,6 +88,7 @@ import AboutUs from "../../GlobalComponent/AboutUs/AboutUs.vue";
 import ProjectsSlider from "../../GlobalComponent/Slider/ProjectsSlider.vue";
 import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
 import PopularProperties from "../../GlobalComponent/PopularProperties/PopularProperties.vue";
+import PropertySlider from "../../GlobalComponent/PopularProperties/PropertySlider.vue";
 import MissionVisionCore from "../../GlobalComponent/MissionVisionCore/MissionVisionCore.vue";
 import WhyChooseUs from "../../GlobalComponent/WhyChooseUs/WhyChooseUs.vue";
 import Testimonials from "../../GlobalComponent/Testimonials2/Testimonials2.vue";
@@ -110,6 +112,7 @@ export default {
     ThumbnailSlider,
     ProjectsSlider,
     ServiceSingleItemLatest,
+    PropertySlider,
   },
 };
 </script>
