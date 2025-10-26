@@ -17,7 +17,7 @@
     </div>
     <div class="container">
       <div class="row gy-40 gx-70 justify-content-center">
-        <div class="col-xl-7">
+        <div class="col-xl-5">
           <div class="img-box1 about-1">
             <!-- Skeleton Logo Section -->
             <div class="about-logo-wrap-2">
@@ -85,7 +85,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-5">
+        <div class="col-xl-7">
           <!-- Skeleton Title Area -->
           <div class="title-area text-left mb-50">
             <div class="skeleton-subtitle">
@@ -165,8 +165,62 @@
       <img src="/assets/frontend/img/icon/about-inner-shape.png" alt="img" />
     </div>
     <div class="container">
-      <div class="row gy-40 gx-70 justify-content-center">
-        <div class="col-xl-7 mx-0 px-0">
+      <div class="row gy-40 gx-70 justify-content-between">
+        <div class="col-xl-6 px-5">
+          <div class="title-area text-left mb-50 pe-5">
+            <p
+              class="sub-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.1s"
+            >
+              <span class="double-line"></span> About Us
+            </p>
+            <h2
+              class="sec-title fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.3s"
+            >
+              {{ about_us?.title }}
+            </h2>
+            <p
+              class="sec-text fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.5s"
+            >
+             <div v-html="about_us?.description?.slice(0, 100 * 6) + '...'" ></div>
+            </p>
+            <div class="about-bottom-wrap fadeinup wow">
+               <Link class="th-btn pill bg-black mb-5"
+                href="/about-us"
+                data-wow-duration="1.5s"
+                data-wow-delay="0.7s"
+              >
+                Read More
+              </Link>
+            </div>
+          </div>
+          <div class="row gy-4 gx-60 mb-4">
+            <div
+              class="col-lg-6 col-md-6 fadeinup wow"
+              v-for="(item, index) in about_us?.features"
+              :key="index"
+            >
+              <div class="about-1-item">
+                <div class="icon">
+                  <span><i :class="item?.icon"></i></span>
+                </div>
+                <div class="content">
+                  <h3 class="box-title">{{ item?.title }}</h3>
+                  <!-- <p class="box-text">
+                    {{ item?.description }}
+                  </p> -->
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+        <div class="col-xl-5 mx-0 px-0">
           <div class="img-box1 about-1 fadeinup wow justify-content-center">
             <div class="about-logo-wrap-2">
               <div class="logo-icon-wrap">
@@ -218,60 +272,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-5">
-          <div class="title-area text-left mb-50">
-            <p
-              class="sub-title fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.1s"
-            >
-              <span class="double-line"></span> About Us
-            </p>
-            <h2
-              class="sec-title fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.3s"
-            >
-              {{ about_us?.title }}
-            </h2>
-            <p
-              class="sec-text fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.5s"
-            >
-             <div v-html="about_us?.description?.slice(0, 285 * 6) + '...'" ></div>
-            </p>
-            <div class="about-bottom-wrap fadeinup wow">
-               <Link class="th-btn pill bg-black mb-5"
-                href="/about-us"
-                data-wow-duration="1.5s"
-                data-wow-delay="0.7s"
-              >
-                Read More
-              </Link>
-            </div>
-          </div>
-          <div class="row gy-4 gx-60 mb-4">
-            <div
-              class="col-lg-6 col-md-6 fadeinup wow"
-              v-for="(item, index) in about_us?.features"
-              :key="index"
-            >
-              <div class="about-1-item">
-                <div class="icon">
-                  <span><i :class="item?.icon"></i></span>
-                </div>
-                <div class="content">
-                  <h3 class="box-title">{{ item?.title }}</h3>
-                  <!-- <p class="box-text">
-                    {{ item?.description }}
-                  </p> -->
-                </div>
-              </div>
-            </div>
-          
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
